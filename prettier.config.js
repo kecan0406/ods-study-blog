@@ -2,7 +2,7 @@ const options = {
   arrowParens: 'avoid',
   singleQuote: true,
   bracketSpacing: true,
-  endOfLine: 'lf',
+  endOfLine: 'crlf',
   semi: false,
   tabWidth: 2,
   trailingComma: 'none',
