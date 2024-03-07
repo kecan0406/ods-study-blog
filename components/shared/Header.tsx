@@ -34,7 +34,7 @@ const NavLink = ({ href, children }: NavLinkProps) => {
 
 const Header = () => {
   return (
-    <header className="fixed w-full border-b backdrop-blur-sm">
+    <header className="fixed z-10 w-full border-b backdrop-blur-sm">
       <nav className="wrapper flex items-center justify-between p-2">
         <div className="mr-4 flex items-center">
           <Logo />
