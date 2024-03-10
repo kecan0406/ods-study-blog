@@ -23,7 +23,6 @@ export const fetchArticles = async (): Promise<Article[]> => {
 export const fetchArticle = async (slug: string): Promise<Article> => {
   const markdown = fs.readFileSync(`${ARTICLE_DIR}/${slug}.md`, 'utf8')
   const { data, content } = matter(markdown)
-
   return {
     name: data.slug,
     title: data.title,

@@ -1,5 +1,5 @@
-import { MDXRemote } from 'next-mdx-remote/rsc'
 import { fetchArticle } from '@/utils/api/blog'
+import CustomMdx from '@/components/custom-mdx'
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const article = await fetchArticle(params.slug)
@@ -12,8 +12,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
       >
         {article.releaseDate}
       </time>
-      <h2 className="text-4xl">{article.title}</h2>
-      <MDXRemote source={article.content} />
+      <h1 className="text-4xl">{article.title}</h1>
+      <CustomMdx source={article.content} />
     </div>
   )
 }

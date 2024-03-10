@@ -1,4 +1,4 @@
-import { Article, fetchArticles } from '@/utils/api/blog'
+import { fetchArticles } from '@/utils/api/blog'
 import {
   Card,
   CardDescription,
@@ -24,11 +24,7 @@ export default async function BlogPage() {
                   >
                     {article.releaseDate}
                   </time>
-                  <CardTitle className="text-lg">
-                    {article.title}
-                    {article.releaseDate}
-                    {article.releaseDate}
-                  </CardTitle>
+                  <CardTitle className="text-lg">{article.title}</CardTitle>
                   <CardDescription className="h-16 overflow-hidden">
                     {article.content}
                   </CardDescription>
