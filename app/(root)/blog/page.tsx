@@ -1,4 +1,4 @@
-import { Article, fetchArticles } from '@/api/blog'
+import { Article, fetchArticles } from '@/utils/api/blog'
 import {
   Card,
   CardDescription,
@@ -7,12 +7,8 @@ import {
 } from '@/components/ui/card'
 import Link from 'next/link'
 
-async function getData(): Promise<Article[]> {
-  return await fetchArticles()
-}
-
 export default async function BlogPage() {
-  const articles = await getData()
+  const articles = await fetchArticles()
 
   return (
     <div className="wrapper p-16">
@@ -28,9 +24,13 @@ export default async function BlogPage() {
                   >
                     {article.releaseDate}
                   </time>
-                  <CardTitle className="text-lg">{article.title}</CardTitle>
+                  <CardTitle className="text-lg">
+                    {article.title}
+                    {article.releaseDate}
+                    {article.releaseDate}
+                  </CardTitle>
                   <CardDescription className="h-16 overflow-hidden">
-                    {article.description}
+                    {article.content}
                   </CardDescription>
                   <div className="pointer-events-none absolute bottom-4 right-4 block h-6 w-3/5 bg-gradient-to-r from-transparent to-background" />
                 </CardHeader>

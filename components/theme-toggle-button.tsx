@@ -2,7 +2,7 @@
 
 import { useTheme } from 'next-themes'
 import { MdDarkMode, MdLightMode } from 'react-icons/md'
-import { useMounted } from '@/lib/hooks/use-mounted'
+import { useMounted } from '@/utils/hooks/use-mounted'
 import { Button } from '@/components/ui/button'
 
 const ThemeToggleButton = () => {

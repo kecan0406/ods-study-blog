@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { Article, fetchArticles } from '@/api/blog'
+import { Article, fetchArticles } from '@/utils/api/blog'
 
 async function getData(): Promise<Article[]> {
   return await fetchArticles()
@@ -47,7 +47,7 @@ export default async function Page() {
                     </time>
                     <CardTitle className="text-lg">{article.title}</CardTitle>
                     <CardDescription className="h-16 overflow-hidden">
-                      {article.description}
+                      {article.content}
                     </CardDescription>
                     <div className="pointer-events-none absolute bottom-4 right-4 block h-6 w-3/5 bg-gradient-to-r from-transparent to-background" />
                   </CardHeader>
