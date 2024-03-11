@@ -1,5 +1,6 @@
 import { fetchArticle } from '@/utils/api/blog'
 import CustomMdx from '@/components/custom-mdx'
+import { Typography } from '@/components/ui/typography'
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const article = await fetchArticle(params.slug)
@@ -12,7 +13,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       >
         {article.releaseDate}
       </time>
-      <h1 className="text-4xl">{article.title}</h1>
+      <Typography variant="h1">{article.title}</Typography>
       <CustomMdx source={article.content} />
     </div>
   )

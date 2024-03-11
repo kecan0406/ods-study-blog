@@ -1,14 +1,65 @@
 import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc'
 import { MDXComponents } from 'mdx/types'
 import Link from 'next/link'
+import { Typography } from '@/components/ui/typography'
+import Image from 'next/image'
 
 const components: MDXComponents = {
-  a: ({ children, href }) => (
-    <Link target="_blank" href={href!}>
-      {children}
-    </Link>
-  ),
-  h2: ({ children }) => <h2 className="p-2 text-xl">{children}</h2>
+  img: ({ src, alt }) => {
+    return (
+      <figure>
+        <Image src={src!} alt={alt ?? ''} height={376} width={752} />
+        {alt && (
+          <Typography variant="mutedText" as="figcaption">
+            {alt}
+          </Typography>
+        )}
+      </figure>
+    )
+  },
+  a: ({ children, href }) => {
+    return (
+      <Link
+        href={href!}
+        className="text-primary underline-offset-4 hover:underline"
+      >
+        {children}
+      </Link>
+    )
+  },
+  h1: ({ children }) => {
+    return <Typography variant="h1">{children}</Typography>
+  },
+  h2: ({ children }) => {
+    return <Typography variant="h2">{children}</Typography>
+  },
+  h3: ({ children }) => {
+    return <Typography variant="h3">{children}</Typography>
+  },
+  h4: ({ children }) => {
+    return <Typography variant="h4">{children}</Typography>
+  },
+  h5: ({ children }) => {
+    return <Typography variant="h5">{children}</Typography>
+  },
+  h6: ({ children }) => {
+    return <Typography variant="h6">{children}</Typography>
+  },
+  p: ({ children }) => {
+    return <Typography variant="p">{children}</Typography>
+  },
+  blockquote: ({ children }) => {
+    return <Typography variant="blockquote">{children}</Typography>
+  },
+  code: ({ children }) => {
+    return <Typography variant="inlineCode">{children}</Typography>
+  },
+  ul: ({ children }) => {
+    return <Typography variant="ul">{children}</Typography>
+  },
+  ol: ({ children }) => {
+    return <Typography variant="ol">{children}</Typography>
+  }
 }
 
 export default function CustomMdx({ source, ...props }: MDXRemoteProps) {
