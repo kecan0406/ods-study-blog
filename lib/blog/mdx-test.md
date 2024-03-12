@@ -28,8 +28,7 @@ inlinecode @radix-ui/react-alert-dialog
 
 hr 🔻🔻🔻
 ***
-
-![unsplash](https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=752&q=100 "unsplash")
+![unsplash](https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=752&q=100 "unsplas1h")
 
 [Link](https://mdxjs.com "mdx")
 
@@ -39,9 +38,28 @@ sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Sed egestas egestas fringilla phasellus faucibus scelerisque.
 
 ## h2 The People of the Kingdom
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
 aliqua. Amet nisl purus in mollis nunc sed id semper. Nec ullamcorper sit amet risus.
 
 ### h3 The Joke Tax
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
 aliqua. Amet nisl purus in mollis nunc sed id semper. Nec ullamcorper sit amet risus.
+
+## Table
+
+| a | b | c | d |
+|---|:--|--:|:-:|
+| a | b | c | d |
+| a | b | c | d |
+
+## Tasklist
+
+* [ ] to do
+* [x] done
+
+
+
+
+

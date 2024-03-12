@@ -2,16 +2,18 @@ import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc'
 import { MDXComponents } from 'mdx/types'
 import Link from 'next/link'
 import { Typography } from '@/components/ui/typography'
+import remarkGfm from 'remark-gfm'
+import remarkUnwrapImages from 'remark-unwrap-images'
 import Image from 'next/image'
 
 const components: MDXComponents = {
-  img: ({ src, alt }) => {
+  img: ({ src, alt, title }) => {
     return (
       <figure>
-        <Image src={src!} alt={alt ?? ''} height={376} width={752} />
-        {alt && (
+        <Image src={src!} alt={alt!} height={376} width={752} />
+        {title && (
           <Typography variant="mutedText" as="figcaption">
-            {alt}
+            {title}
           </Typography>
         )}
       </figure>
@@ -62,6 +64,17 @@ const components: MDXComponents = {
   }
 }
 
-export default function CustomMdx({ source, ...props }: MDXRemoteProps) {
-  return <MDXRemote {...props} components={components} source={source} />
+export default function ArticleMdxRemote({ source }: MDXRemoteProps) {
+  return (
+    <MDXRemote
+      options={{
+        mdxOptions: {
+          remarkPlugins: [remarkGfm, remarkUnwrapImages],
+          rehypePlugins: []
+        }
+      }}
+      components={components}
+      source={source}
+    />
+  )
 }
