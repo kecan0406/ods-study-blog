@@ -9,7 +9,11 @@ import {
 import { Article, fetchArticles } from '@/utils/api/blog'
 
 async function getData(): Promise<Article[]> {
-  return await fetchArticles()
+  const articles = await fetchArticles()
+  return articles.toSorted(
+    (a, b) =>
+      new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime()
+  )
 }
 
 export default async function Page() {
@@ -36,7 +40,7 @@ export default async function Page() {
         <div className="grid grid-cols-1 gap-4 p-2">
           {articles.map(article => {
             return (
-              <Link href={`/blog/${article.name}`} key={article.name}>
+              <Link href={`/blog/${article.slug}`} key={article.slug}>
                 <Card className="min-h-full min-w-full transition-colors hover:border-gray-400">
                   <CardHeader className="relative p-4">
                     <time

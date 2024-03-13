@@ -1,30 +1,25 @@
 import * as fs from 'node:fs'
 import { join } from 'path'
 import matter from 'gray-matter'
+import { ARTICLE_PATH, articleSlugs } from '@/utils/mdx-utils'
 
 export type Article = {
-  name: string
+  slug: string
   title: string
   content: string
   releaseDate: string
 }
 
-const ARTICLE_DIR = join(process.cwd(), 'lib/blog')
 export const fetchArticles = async (): Promise<Article[]> => {
-  const files = fs.readdirSync(ARTICLE_DIR).map(file => file.replace('.md', ''))
-  const articles = await Promise.all(files.map(slug => fetchArticle(slug)))
-
-  return articles.toSorted(
-    (a, b) =>
-      new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime()
-  )
+  return await Promise.all(articleSlugs.map(slug => fetchArticle(slug)))
 }
 
 export const fetchArticle = async (slug: string): Promise<Article> => {
-  const markdown = fs.readFileSync(`${ARTICLE_DIR}/${slug}.md`, 'utf8')
+  const markdown = fs.readFileSync(join(ARTICLE_PATH, `${slug}.md`), 'utf8')
   const { data, content } = matter(markdown)
+
   return {
-    name: data.slug,
+    slug: data.slug,
     title: data.title,
     content,
     releaseDate: data.releaseDate

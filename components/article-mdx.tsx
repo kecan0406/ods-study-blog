@@ -5,6 +5,7 @@ import { Typography } from '@/components/ui/typography'
 import remarkGfm from 'remark-gfm'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import Image from 'next/image'
+import { mdxRemoteOptions } from '@/utils/mdx-utils'
 
 const components: MDXComponents = {
   img: ({ src, alt, title }) => {
@@ -67,12 +68,7 @@ const components: MDXComponents = {
 export default function ArticleMdxRemote({ source }: MDXRemoteProps) {
   return (
     <MDXRemote
-      options={{
-        mdxOptions: {
-          remarkPlugins: [remarkGfm, remarkUnwrapImages],
-          rehypePlugins: []
-        }
-      }}
+      options={mdxRemoteOptions}
       components={components}
       source={source}
     />

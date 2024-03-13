@@ -15,7 +15,7 @@ export default async function BlogPage() {
       <div className="grid grid-cols-1 gap-4 p-2">
         {articles.map(article => {
           return (
-            <Link href={`/blog/${article.name}`} key={article.name}>
+            <Link href={`/blog/${article.slug}`} key={article.slug}>
               <Card className="min-h-full min-w-full transition-colors hover:border-gray-400">
                 <CardHeader className="relative p-4">
                   <time
