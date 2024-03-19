@@ -2,10 +2,7 @@ import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc'
 import { MDXComponents } from 'mdx/types'
 import Link from 'next/link'
 import { Typography } from '@/components/ui/typography'
-import remarkGfm from 'remark-gfm'
-import remarkUnwrapImages from 'remark-unwrap-images'
 import Image from 'next/image'
-import { mdxRemoteOptions } from '@/utils/mdx-utils'
 
 const components: MDXComponents = {
   img: ({ src, alt, title }) => {
@@ -65,12 +62,11 @@ const components: MDXComponents = {
   }
 }
 
-export default function ArticleMdxRemote({ source }: MDXRemoteProps) {
+export default function ArticleMdxRemote(props: MDXRemoteProps) {
   return (
     <MDXRemote
-      options={mdxRemoteOptions}
-      components={components}
-      source={source}
+      {...props}
+      components={{ ...components, ...(props.components || {}) }}
     />
   )
 }

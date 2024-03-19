@@ -1,27 +1,34 @@
-import * as fs from 'node:fs'
-import { join } from 'path'
-import matter from 'gray-matter'
-import { ARTICLE_PATH, articleSlugs } from '@/utils/mdx-utils'
+import {
+  articleSlugs,
+  getMarkdownFile,
+  parseContent,
+  parseFrontMatter
+} from '@/utils/md-utils'
 
-export type Article = {
+export type FrontMatterArticle = {
   slug: string
   title: string
-  content: string
   releaseDate: string
+}
+export type Article = {
+  matter: FrontMatterArticle
+  content: string
 }
 
 export const fetchArticles = async (): Promise<Article[]> => {
-  return await Promise.all(articleSlugs.map(slug => fetchArticle(slug)))
+  return await Promise.all(articleSlugs.map(slug => fetchArticle(slug, true)))
 }
 
-export const fetchArticle = async (slug: string): Promise<Article> => {
-  const markdown = fs.readFileSync(join(ARTICLE_PATH, `${slug}.md`), 'utf8')
-  const { data, content } = matter(markdown)
+export const fetchArticle = async (
+  slug: string,
+  excerpt: boolean = false
+): Promise<Article> => {
+  const { content, matter } = getMarkdown(slug, excerpt)
+  return { matter, content }
+}
 
-  return {
-    slug: data.slug,
-    title: data.title,
-    content,
-    releaseDate: data.releaseDate
-  }
+const getMarkdown = (slug: string, excerpt: boolean) => {
+  const markdown = getMarkdownFile(slug)
+  const { matter, content } = parseFrontMatter(markdown)
+  return { matter, content: parseContent(content, excerpt) }
 }
