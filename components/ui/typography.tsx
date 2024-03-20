@@ -16,8 +16,7 @@ const typographyVariants = cva('text-foreground', {
       blockquote: 'mt-6 border-l-2 pl-6 italic',
       ul: 'my-6 ml-6 list-disc [&>li]:mt-2',
       ol: 'my-6 ml-6 list-decimal [&>li]:mt-2',
-      inlineCode:
-        'relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',
+      inlineCode: 'relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',
       lead: 'text-xl text-muted-foreground',
       largeText: 'text-lg font-semibold',
       smallText: 'text-sm font-medium leading-none',
@@ -28,10 +27,7 @@ const typographyVariants = cva('text-foreground', {
 })
 
 type VariantPropType = VariantProps<typeof typographyVariants>
-const variantElementMap: Record<
-  NonNullable<VariantPropType['variant']>,
-  string
-> = {
+const variantElementMap: Record<NonNullable<VariantPropType['variant']>, string> = {
   h1: 'h1',
   h2: 'h2',
   h3: 'h3',
@@ -49,25 +45,15 @@ const variantElementMap: Record<
   ol: 'ol'
 }
 
-export interface TypographyProps
-  extends React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof typographyVariants> {
+export interface TypographyProps extends React.HTMLAttributes<HTMLElement>, VariantProps<typeof typographyVariants> {
   asChild?: boolean
   as?: string
 }
 
 const Typography = React.forwardRef<HTMLElement, TypographyProps>(
   ({ className, variant, as, asChild, ...props }, ref) => {
-    const Comp = asChild
-      ? Slot
-      : as ?? (variant ? variantElementMap[variant] : undefined) ?? 'div'
-    return (
-      <Comp
-        className={cn(typographyVariants({ variant, className }))}
-        ref={ref}
-        {...props}
-      />
-    )
+    const Comp = asChild ? Slot : as ?? (variant ? variantElementMap[variant] : undefined) ?? 'div'
+    return <Comp className={cn(typographyVariants({ variant, className }))} ref={ref} {...props} />
   }
 )
 

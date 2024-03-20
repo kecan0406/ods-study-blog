@@ -12,13 +12,13 @@ const ThemeToggleButton = () => {
   if (!mounted) return null
   return (
     <Button
-      variant="ghost"
-      size="icon"
-      className="h-10 w-10 rounded-full"
+      variant='ghost'
+      size='icon'
+      className='h-10 w-10 rounded-full'
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
     >
-      {resolvedTheme === 'dark' && <MdDarkMode className="h-6 w-6" />}
-      {resolvedTheme === 'light' && <MdLightMode className="h-6 w-6" />}
+      {resolvedTheme === 'dark' && <MdDarkMode className='h-6 w-6' />}
+      {resolvedTheme === 'light' && <MdLightMode className='h-6 w-6' />}
     </Button>
   )
 }

@@ -13,8 +13,8 @@ const ARTICLE_PATH = join(process.cwd(), 'lib/blog')
 
 export const articleSlugs = fs
   .readdirSync(ARTICLE_PATH)
-  .filter(path => MD_REGEX.test(path))
-  .map(path => path.replace(MD_REGEX, ''))
+  .filter((path) => MD_REGEX.test(path))
+  .map((path) => path.replace(MD_REGEX, ''))
 
 export const mdxRemoteOptions: MDXRemoteProps['options'] = {
   mdxOptions: {
@@ -32,7 +32,7 @@ export const parseFrontMatter = (fileContent: string) => {
   const matter = {} as FrontMatterArticle
 
   const lines = MATTER_REGEX.exec(fileContent)![1].trim().split('\n')
-  lines.forEach(line => {
+  lines.forEach((line) => {
     const [key, val] = line.split(':') as [keyof FrontMatterArticle, string]
     matter[key] = val.trim()
   })

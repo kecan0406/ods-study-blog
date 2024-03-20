@@ -7,14 +7,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const { matter, content } = await fetchArticle(params.slug)
 
   return (
-    <div className="wrapper p-16">
-      <time
-        className="text-xs text-muted-foreground"
-        dateTime={matter.releaseDate}
-      >
+    <div className='wrapper p-16'>
+      <time className='text-xs text-muted-foreground' dateTime={matter.releaseDate}>
         {matter.releaseDate}
       </time>
-      <Typography variant="h1">{matter.title}</Typography>
+      <Typography variant='h1'>{matter.title}</Typography>
       <article>
         <ArticleMdxRemote options={mdxRemoteOptions} source={content} />
       </article>

@@ -1,9 +1,4 @@
-import {
-  articleSlugs,
-  getMarkdownFile,
-  parseContent,
-  parseFrontMatter
-} from '@/utils/md-utils'
+import { articleSlugs, getMarkdownFile, parseContent, parseFrontMatter } from '@/utils/md-utils'
 
 export type FrontMatterArticle = {
   slug: string
@@ -16,13 +11,10 @@ export type Article = {
 }
 
 export const fetchArticles = async (): Promise<Article[]> => {
-  return await Promise.all(articleSlugs.map(slug => fetchArticle(slug, true)))
+  return await Promise.all(articleSlugs.map((slug) => fetchArticle(slug, true)))
 }
 
-export const fetchArticle = async (
-  slug: string,
-  excerpt: boolean = false
-): Promise<Article> => {
+export const fetchArticle = async (slug: string, excerpt: boolean = false): Promise<Article> => {
   const { content, matter } = getMarkdown(slug, excerpt)
   return { matter, content }
 }

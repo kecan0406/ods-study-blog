@@ -1,5 +1,7 @@
 const options = {
-  arrowParens: 'avoid',
+  printWidth: 120,
+  arrowParens: 'always',
+  jsxSingleQuote: true,
   singleQuote: true,
   bracketSpacing: true,
   endOfLine: 'crlf',

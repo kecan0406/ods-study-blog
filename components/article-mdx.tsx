@@ -10,7 +10,7 @@ const components: MDXComponents = {
       <figure>
         <Image src={src!} alt={alt!} height={376} width={752} />
         {title && (
-          <Typography variant="mutedText" as="figcaption">
+          <Typography variant='mutedText' as='figcaption'>
             {title}
           </Typography>
         )}
@@ -19,54 +19,46 @@ const components: MDXComponents = {
   },
   a: ({ children, href }) => {
     return (
-      <Link
-        href={href!}
-        className="text-primary underline-offset-4 hover:underline"
-      >
+      <Link href={href!} className='text-primary underline-offset-4 hover:underline'>
         {children}
       </Link>
     )
   },
   h1: ({ children }) => {
-    return <Typography variant="h1">{children}</Typography>
+    return <Typography variant='h1'>{children}</Typography>
   },
   h2: ({ children }) => {
-    return <Typography variant="h2">{children}</Typography>
+    return <Typography variant='h2'>{children}</Typography>
   },
   h3: ({ children }) => {
-    return <Typography variant="h3">{children}</Typography>
+    return <Typography variant='h3'>{children}</Typography>
   },
   h4: ({ children }) => {
-    return <Typography variant="h4">{children}</Typography>
+    return <Typography variant='h4'>{children}</Typography>
   },
   h5: ({ children }) => {
-    return <Typography variant="h5">{children}</Typography>
+    return <Typography variant='h5'>{children}</Typography>
   },
   h6: ({ children }) => {
-    return <Typography variant="h6">{children}</Typography>
+    return <Typography variant='h6'>{children}</Typography>
   },
   p: ({ children }) => {
-    return <Typography variant="p">{children}</Typography>
+    return <Typography variant='p'>{children}</Typography>
   },
   blockquote: ({ children }) => {
-    return <Typography variant="blockquote">{children}</Typography>
+    return <Typography variant='blockquote'>{children}</Typography>
   },
   code: ({ children }) => {
-    return <Typography variant="inlineCode">{children}</Typography>
+    return <Typography variant='inlineCode'>{children}</Typography>
   },
   ul: ({ children }) => {
-    return <Typography variant="ul">{children}</Typography>
+    return <Typography variant='ul'>{children}</Typography>
   },
   ol: ({ children }) => {
-    return <Typography variant="ol">{children}</Typography>
+    return <Typography variant='ol'>{children}</Typography>
   }
 }
 
 export default function ArticleMdxRemote(props: MDXRemoteProps) {
-  return (
-    <MDXRemote
-      {...props}
-      components={{ ...components, ...(props.components || {}) }}
-    />
-  )
+  return <MDXRemote {...props} components={{ ...components, ...(props.components || {}) }} />
 }
