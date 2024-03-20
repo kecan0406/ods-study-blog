@@ -1,20 +1,28 @@
 import * as React from 'react'
 
 import { cn } from '@/lib/utils'
+import { Slot } from '@radix-ui/react-slot'
 
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      'rounded-xl border bg-card text-card-foreground shadow',
-      className
-    )}
-    {...props}
-  />
-))
+export interface CardProps extends React.HTMLAttributes<HTMLElement> {
+  asChild?: boolean
+  as?: string
+}
+
+const Card = React.forwardRef<HTMLElement, CardProps>(
+  ({ className, asChild, as, ...props }, ref) => {
+    const Comp = asChild ? Slot : as ?? 'div'
+    return (
+      <Comp
+        ref={ref}
+        className={cn(
+          'rounded-xl border bg-card text-card-foreground shadow',
+          className
+        )}
+        {...props}
+      />
+    )
+  }
+)
 Card.displayName = 'Card'
 
 const CardHeader = React.forwardRef<
