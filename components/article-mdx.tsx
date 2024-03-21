@@ -3,6 +3,20 @@ import { MDXComponents } from 'mdx/types'
 import Link from 'next/link'
 import { Typography } from '@/components/ui/typography'
 import Image from 'next/image'
+import { ReactNode } from 'react'
+import MdxHeadingLink from '@/components/mdx-heading-link'
+
+type HeadingProps = { children?: ReactNode; id?: string }
+const headings = (as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6') => {
+  const Heading = ({ children, id }: HeadingProps) => (
+    <Typography id={id} variant={as}>
+      <MdxHeadingLink id={id} />
+      {children}
+    </Typography>
+  )
+  Heading.displayName = as
+  return Heading
+}
 
 const components: MDXComponents = {
   img: ({ src, alt, title }) => {
@@ -24,24 +38,12 @@ const components: MDXComponents = {
       </Link>
     )
   },
-  h1: ({ children }) => {
-    return <Typography variant='h1'>{children}</Typography>
-  },
-  h2: ({ children }) => {
-    return <Typography variant='h2'>{children}</Typography>
-  },
-  h3: ({ children }) => {
-    return <Typography variant='h3'>{children}</Typography>
-  },
-  h4: ({ children }) => {
-    return <Typography variant='h4'>{children}</Typography>
-  },
-  h5: ({ children }) => {
-    return <Typography variant='h5'>{children}</Typography>
-  },
-  h6: ({ children }) => {
-    return <Typography variant='h6'>{children}</Typography>
-  },
+  h1: headings('h1'),
+  h2: headings('h2'),
+  h3: headings('h3'),
+  h4: headings('h4'),
+  h5: headings('h5'),
+  h6: headings('h6'),
   p: ({ children }) => {
     return <Typography variant='p'>{children}</Typography>
   },

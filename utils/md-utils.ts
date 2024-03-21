@@ -5,6 +5,7 @@ import remarkUnwrapImages from 'remark-unwrap-images'
 import { MDXRemoteProps } from 'next-mdx-remote/rsc'
 import RemoveMarkdown from 'remove-markdown'
 import { FrontMatterArticle } from '@/utils/api/blog'
+import rehypeSlug from 'rehype-slug'
 
 const MD_REGEX = /\.mdx?$/
 const MATTER_REGEX = /---\s*([\s\S]*?)\s*---/
@@ -19,7 +20,7 @@ export const articleSlugs = fs
 export const mdxRemoteOptions: MDXRemoteProps['options'] = {
   mdxOptions: {
     remarkPlugins: [remarkGfm, remarkUnwrapImages],
-    rehypePlugins: []
+    rehypePlugins: [rehypeSlug]
   }
 }
 
