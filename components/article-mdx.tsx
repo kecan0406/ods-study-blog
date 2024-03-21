@@ -1,10 +1,10 @@
-import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc'
-import { MDXComponents } from 'mdx/types'
-import Link from 'next/link'
-import { Typography } from '@/components/ui/typography'
-import Image from 'next/image'
-import { ReactNode } from 'react'
 import MdxHeadingLink from '@/components/mdx-heading-link'
+import { Typography } from '@/components/ui/typography'
+import { MDXComponents } from 'mdx/types'
+import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc'
+import Image from 'next/image'
+import Link from 'next/link'
+import { ReactNode } from 'react'
 
 type HeadingProps = { children?: ReactNode; id?: string }
 const headings = (as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6') => {

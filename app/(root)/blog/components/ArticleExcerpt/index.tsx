@@ -1,7 +1,7 @@
-import Link from 'next/link'
+import ShadowEffect from '@/components/shadow-effect'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Article } from '@/utils/api/blog'
-import ShadowEffect from '@/components/shadow-effect'
+import Link from 'next/link'
 
 export default function ArticleExcerpt({ article }: { article: Article }) {
   const { matter, content } = article

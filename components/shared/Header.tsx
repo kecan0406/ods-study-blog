@@ -1,8 +1,8 @@
-import Image from 'next/image'
-import { ReactNode } from 'react'
-import Link from 'next/link'
 import ThemeToggleButton from '@/components/theme-toggle-button'
 import { Button } from '@/components/ui/button'
+import Image from 'next/image'
+import Link from 'next/link'
+import { ReactNode } from 'react'
 
 const Logo = () => {
   return (

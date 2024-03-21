@@ -1,9 +1,9 @@
 'use client'
 
+import { Button } from '@/components/ui/button'
+import { useMounted } from '@/utils/hooks/use-mounted'
 import { useTheme } from 'next-themes'
 import { MdDarkMode, MdLightMode } from 'react-icons/md'
-import { useMounted } from '@/utils/hooks/use-mounted'
-import { Button } from '@/components/ui/button'
 
 const ThemeToggleButton = () => {
   const { resolvedTheme, setTheme } = useTheme()

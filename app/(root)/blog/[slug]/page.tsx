@@ -1,6 +1,6 @@
-import { fetchArticle } from '@/utils/api/blog'
-import { Typography } from '@/components/ui/typography'
 import ArticleMdxRemote from '@/components/article-mdx'
+import { Typography } from '@/components/ui/typography'
+import { fetchArticle } from '@/utils/api/blog'
 import { mdxRemoteOptions } from '@/utils/md-utils'
 
 export default async function Page({ params }: { params: { slug: string } }) {

@@ -1,6 +1,6 @@
+import SectionTitle from '@/components/shared/SectionTitle'
 import { Article } from '@/utils/api/blog'
 import BlogArticleExcerpt from './BlogArticleExcerpt'
-import SectionTitle from '@/components/shared/SectionTitle'
 
 export default function BlogArticles({ articles }: { articles: Article[] }) {
   return (

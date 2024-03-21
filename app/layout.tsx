@@ -1,9 +1,9 @@
+import ThemeProvider from '@/components/theme-provider'
+import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
 import { M_PLUS_2 as FontSans } from 'next/font/google'
-import './globals.css'
 import { ReactNode } from 'react'
-import { cn } from '@/lib/utils'
-import ThemeProvider from '@/components/theme-provider'
+import './globals.css'
 
 const fontSans = FontSans({
   subsets: ['latin'],

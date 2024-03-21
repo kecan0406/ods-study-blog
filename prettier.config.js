@@ -8,7 +8,9 @@ const options = {
   semi: false,
   tabWidth: 2,
   trailingComma: 'none',
-  plugins: ['prettier-plugin-tailwindcss']
+  importOrderSeparation: true,
+  importOrderSortSpecifiers: true,
+  plugins: ['prettier-plugin-tailwindcss', '@trivago/prettier-plugin-sort-imports', 'prettier-plugin-organize-imports']
 }
 
 module.exports = options

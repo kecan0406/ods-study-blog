@@ -1,6 +1,6 @@
+import SectionTitle from '@/components/shared/SectionTitle'
 import { Article, fetchArticles } from '@/utils/api/blog'
 import ArticleExcerpt from './components/ArticleExcerpt'
-import SectionTitle from '@/components/shared/SectionTitle'
 
 async function getArticles(): Promise<Article[]> {
   const articles = await fetchArticles()

@@ -1,6 +1,6 @@
 import { Article, fetchArticles } from '@/utils/api/blog'
-import Profile from './components/Profile'
 import BlogArticles from './components/BlogArticles'
+import Profile from './components/Profile'
 
 async function getArticles(): Promise<Article[]> {
   const articles = await fetchArticles()

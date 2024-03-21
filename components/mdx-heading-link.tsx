@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { LinkIcon } from 'lucide-react'
+import Link from 'next/link'
 
 const MdxHeadingLink = ({ id }: { id?: string }) => {
   return (
