@@ -62,4 +62,8 @@
   .wrapper {
     @apply w-full mx-auto px-6 max-w-3xl xl:px-0;
   }
+
+  .anchor {
+    @apply -ms-5 -me-2 hidden w-7 text-muted-foreground hover:text-foreground md:inline-block
+  }
 }
