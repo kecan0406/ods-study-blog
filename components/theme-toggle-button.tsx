@@ -3,13 +3,20 @@
 import { Button } from '@/components/ui/button'
 import { useMounted } from '@/utils/hooks/use-mounted'
 import { useTheme } from 'next-themes'
-import { MdDarkMode, MdLightMode } from 'react-icons/md'
+import { MdCircle, MdDarkMode, MdLightMode } from 'react-icons/md'
 
 const ThemeToggleButton = () => {
   const { resolvedTheme, setTheme } = useTheme()
   const mounted = useMounted()
 
-  if (!mounted) return null
+  if (!mounted) {
+    return (
+      <Button variant='ghost' size='icon' className='h-10 w-10 rounded-full'>
+        <MdCircle className='h-6 w-6' />
+      </Button>
+    )
+  }
+
   return (
     <Button
       variant='ghost'
