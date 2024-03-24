@@ -60,6 +60,6 @@
 
 @layer utilities {
   .wrapper {
-    @apply w-full max-w-3xl md:px-10 lg:mx-auto xl:px-0;
+    @apply w-full mx-auto px-6 max-w-3xl xl:px-0;
   }
 }

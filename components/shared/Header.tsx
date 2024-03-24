@@ -7,7 +7,7 @@ import { ReactNode } from 'react'
 const Logo = () => {
   return (
     <Link href='/'>
-      <span className='inline-flex h-10 items-center px-2 text-lg font-bold'>
+      <span className='inline-flex h-10 items-center px-2 text-lg font-bold text-nowrap'>
         <Image src='/assets/images/logo.svg' width={32} height={32} alt='ODS Logo' className='mr-2 w-auto' />
         ODS Study
       </span>

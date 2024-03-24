@@ -13,7 +13,7 @@ export default async function BlogPage() {
   const articles = await getArticles()
 
   return (
-    <div className='wrapper p-16'>
+    <div className='wrapper pt-16'>
       <SectionTitle title='Featured Articles' />
       <ul className='grid grid-cols-1 gap-4 p-2'>
         {articles.map((article) => (

@@ -13,7 +13,7 @@ export default async function Page() {
   const articles = await getArticles()
 
   return (
-    <div className='wrapper p-16'>
+    <div className='wrapper'>
       <Profile />
       <BlogArticles articles={articles} />
     </div>
