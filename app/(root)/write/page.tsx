@@ -1,4 +1,4 @@
-import MDEditor from './components/Editor'
+import MDEditor from '@/components/Editor'
 
 export default function WritePage() {
   return (
