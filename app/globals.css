@@ -49,6 +49,20 @@
   }
 }
 
+.anchor {
+  @apply absolute w-full max-w-3xl -ms-8 text-muted-foreground no-underline invisible md:inline-block
+}
+.anchor:hover {
+  @apply visible;
+}
+.prose *:hover > .anchor {
+  @apply visible;
+}
+
+.prose > :first-child > h1 {
+  @apply mb-4
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -62,8 +76,5 @@
   .wrapper {
     @apply w-full mx-auto px-6 max-w-3xl xl:px-0;
   }
-
-  .anchor {
-    @apply -ms-5 -me-2 hidden w-7 text-muted-foreground hover:text-foreground md:inline-block
-  }
 }
+

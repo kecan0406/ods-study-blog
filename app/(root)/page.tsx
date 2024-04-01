@@ -13,7 +13,7 @@ export default async function Page() {
   const articles = await getArticles()
 
   return (
-    <div className='wrapper'>
+    <div className='wrapper py-8'>
       <Profile />
       <BlogArticles articles={articles} />
     </div>

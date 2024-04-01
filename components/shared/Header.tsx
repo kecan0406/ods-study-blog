@@ -1,7 +1,6 @@
 import { auth } from '@/app/auth'
 import ThemeToggleButton from '@/components/theme-toggle-button'
 import { Button } from '@/components/ui/button'
-import Image from 'next/image'
 import Link from 'next/link'
 import { ReactNode, Suspense } from 'react'
 
@@ -40,10 +39,7 @@ const Write = async () => {
 const Logo = () => {
   return (
     <Link href='/'>
-      <span className='inline-flex h-10 items-center px-2 text-lg font-bold text-nowrap'>
-        <Image src='/assets/images/logo.svg' width={32} height={32} alt='ODS Logo' className='mr-2 w-auto' />
-        ODS Study
-      </span>
+      <span className='inline-flex h-10 items-center px-2 text-lg font-bold text-nowrap'>ODS Study</span>
     </Link>
   )
 }

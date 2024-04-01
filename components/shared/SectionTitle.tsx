@@ -6,7 +6,7 @@ const SectionTitle = ({ title, href }: Props) => {
   if (href) {
     return (
       <Link href={href}>
-        <Button variant='link' className='mb-6 p-2'>
+        <Button variant='link' className='px-0 mb-2'>
           <h2 className='text-2xl'>{title}</h2>
         </Button>
       </Link>
@@ -14,7 +14,7 @@ const SectionTitle = ({ title, href }: Props) => {
   }
 
   return (
-    <div className='mb-6 inline-flex h-9 items-center p-2 text-sm font-medium text-primary'>
+    <div className='mb-2 inline-flex h-9 items-center text-sm font-medium text-primary'>
       <h2 className='text-2xl'>{title}</h2>
     </div>
   )

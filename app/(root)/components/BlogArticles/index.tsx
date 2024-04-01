@@ -1,14 +1,16 @@
+import ArticleExcerpt from '@/components/article-excerpt'
 import SectionTitle from '@/components/shared/SectionTitle'
 import { Article } from '@/utils/api/blog'
-import BlogArticleExcerpt from './BlogArticleExcerpt'
 
 export default function BlogArticles({ articles }: { articles: Article[] }) {
   return (
-    <section className='pt-16'>
+    <section className='py-8'>
       <SectionTitle title='Featured Articles' href='blog' />
-      <ul className='grid grid-cols-1 gap-4 p-2'>
+      <ul className='grid grid-cols-1 gap-4'>
         {articles.map((article) => (
-          <BlogArticleExcerpt article={article} key={article.matter.slug} />
+          <li key={article.matter.slug}>
+            <ArticleExcerpt article={article} />
+          </li>
         ))}
       </ul>
     </section>

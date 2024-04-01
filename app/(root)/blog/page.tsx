@@ -1,6 +1,5 @@
-import SectionTitle from '@/components/shared/SectionTitle'
+import ArticleExcerpt from '@/components/article-excerpt'
 import { Article, fetchArticles } from '@/utils/api/blog'
-import ArticleExcerpt from './components/ArticleExcerpt'
 
 async function getArticles(): Promise<Article[]> {
   const articles = await fetchArticles()
@@ -13,13 +12,16 @@ export default async function BlogPage() {
   const articles = await getArticles()
 
   return (
-    <div className='wrapper pt-16'>
-      <SectionTitle title='Featured Articles' />
-      <ul className='grid grid-cols-1 gap-4 p-2'>
-        {articles.map((article) => (
-          <ArticleExcerpt article={article} key={article.matter.slug} />
-        ))}
-      </ul>
+    <div className='wrapper'>
+      <section className='py-8'>
+        <ul className='grid grid-cols-1 gap-4'>
+          {articles.map((article) => (
+            <li key={article.matter.slug}>
+              <ArticleExcerpt article={article} />
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   )
 }

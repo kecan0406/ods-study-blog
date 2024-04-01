@@ -1,6 +1,6 @@
 export default function Profile() {
   return (
-    <section className='max-w-2xl pt-16'>
+    <section className='max-w-2xl'>
       <h1 className='scroll-m-20 text-4xl font-extrabold leading-tight tracking-tighter lg:text-5xl'>
         우리는 여기에
         <br />
