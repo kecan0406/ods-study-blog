@@ -1,4 +1,5 @@
 import { auth } from '@/app/auth'
+import { SignOutButton } from '@/components/auth-buttons'
 import ThemeToggleButton from '@/components/theme-toggle-button'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
@@ -17,7 +18,7 @@ const Header = () => {
         </div>
         <div className='relative flex'>
           <Suspense>
-            <Write />
+            <SignOut />
           </Suspense>
           <ThemeToggleButton />
         </div>
@@ -28,12 +29,12 @@ const Header = () => {
 
 export default Header
 
-const Write = async () => {
+const SignOut = async () => {
   const session = await auth()
   const allowUsers = process.env.ALLOW_USERS!.split(',')
 
   const isAllowUser = allowUsers.includes(session?.user?.email ?? '')
-  return <>{isAllowUser && <NavLink href='/write'>Write</NavLink>}</>
+  return <>{isAllowUser && <SignOutButton />}</>
 }
 
 const Logo = () => {
