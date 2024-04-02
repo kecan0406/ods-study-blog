@@ -1,6 +1,7 @@
 ---
 title: "Weekly Archive #17 | 삶의 낙"
 slug: weekly17
+writer: kecan0406
 releaseDate: 2024.03.05
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: "MDX component test"
 slug: mdx-test
+writer: kecan0406
 releaseDate: 2024.03.12
 ---
 

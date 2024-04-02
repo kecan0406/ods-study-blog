@@ -1,6 +1,7 @@
 ---
 title: "Weekly Archive #15 | 삶의 낙"
 slug: weekly15
+writer: kongchu2
 releaseDate: 2024.02.19
 ---
 

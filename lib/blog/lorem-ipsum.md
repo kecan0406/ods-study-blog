@@ -1,6 +1,7 @@
 ---
 title: Lorem Ipsum
 slug: lorem-ipsum
+writer: kecan0406
 releaseDate: 2024.03.24
 ---
 

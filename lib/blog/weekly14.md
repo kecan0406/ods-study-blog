@@ -1,6 +1,7 @@
 ---
 title: "Weekly Archive #14 | 삶의 낙"
 slug: weekly14
+writer: kecan0406
 releaseDate: 2024.02.14
 ---
 

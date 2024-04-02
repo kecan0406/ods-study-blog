@@ -3,6 +3,7 @@ import { articleSlugs, getMarkdownFile, parseContent, parseFrontMatter } from '@
 export type FrontMatterArticle = {
   slug: string
   title: string
+  writer: string
   readingTime: string
   releaseDate: string
 }
