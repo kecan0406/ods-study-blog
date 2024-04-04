@@ -1,9 +1,9 @@
 import { auth } from '@/app/auth'
 import { SignOutButton } from '@/components/auth-buttons'
+import { NavLinks } from '@/components/nav-link'
 import ThemeToggleButton from '@/components/theme-toggle-button'
-import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { ReactNode, Suspense } from 'react'
+import { Suspense } from 'react'
 
 const Header = () => {
   return (
@@ -12,10 +12,12 @@ const Header = () => {
         <div className='mr-4 flex items-center'>
           <Logo />
         </div>
-        <div className='flex flex-grow items-center gap-1'>
-          <NavLink href='/blog'>Blog</NavLink>
-          <NavLink href='/about'>About</NavLink>
-        </div>
+        <NavLinks
+          links={[
+            { href: '/blog', text: 'Blog' },
+            { href: '/about', text: 'About' }
+          ]}
+        />
         <div className='relative flex'>
           <Suspense>
             <SignOut />
@@ -42,16 +44,5 @@ const Logo = () => {
     <Link href='/'>
       <span className='inline-flex h-10 items-center px-2 text-lg font-bold text-nowrap'>ODS Study</span>
     </Link>
-  )
-}
-
-type NavLinkProps = { href: string; children: ReactNode }
-const NavLink = ({ href, children }: NavLinkProps) => {
-  return (
-    <Button variant='link' className='h-10 p-3 font-bold'>
-      <Link scroll={false} href={href}>
-        {children}
-      </Link>
-    </Button>
   )
 }
