@@ -1,4 +1,5 @@
 import { increment } from '@/app/db/actions'
+import { getPostsCount } from '@/app/db/querys'
 import ArticleMdxRemote from '@/components/article-mdx'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Separator } from '@/components/ui/separator'
@@ -53,6 +54,7 @@ const Header = ({ matter }: { matter: HeaderProps }) => {
 }
 
 const ViewCount = async ({ slug }: { slug: string }) => {
+  const views = await getPostsCount()
   increment(slug)
-  return <ViewCounter slug={slug} />
+  return <ViewCounter slug={slug} allViews={views} />
 }

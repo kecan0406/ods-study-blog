@@ -1,8 +1,8 @@
-import { getPostCount } from '@/app/db/querys'
+type ViewCounterProps = { slug: string; allViews: { slug: string; count: number }[] }
+const ViewCounter = async ({ slug, allViews }: ViewCounterProps) => {
+  const viewsForSlug = allViews && allViews.find((view) => view.slug === slug)
+  const count = Number(viewsForSlug?.count || 0)
 
-type ViewCounterProps = { slug: string }
-const ViewCounter = async ({ slug }: ViewCounterProps) => {
-  const count = await getPostCount(slug)
   return <>{count.toLocaleString()} views</>
 }
 

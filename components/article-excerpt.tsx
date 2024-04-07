@@ -1,3 +1,4 @@
+import { getPostsCount } from '@/app/db/querys'
 import ShadowEffect from '@/components/shadow-effect'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import ViewCounter from '@/components/view-counter'
@@ -31,9 +32,14 @@ const HeaderMeta = ({ matter }: { matter: FrontMatterArticle }) => {
       <span className='before:px-1 before:content-["•"]'>{readingTime} min</span>
       <span className='flex-grow text-right'>
         <Suspense>
-          <ViewCounter slug={slug} />
+          <Views slug={slug} />
         </Suspense>
       </span>
     </div>
   )
+}
+
+const Views = async ({ slug }: { slug: string }) => {
+  const views = await getPostsCount()
+  return <ViewCounter slug={slug} allViews={views} />
 }
