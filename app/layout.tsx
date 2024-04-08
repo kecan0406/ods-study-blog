@@ -1,5 +1,5 @@
-import ThemeProvider from '@/components/theme-provider'
-import { cn } from '@/lib/utils'
+import ThemeProvider from '@/app/components/theme-provider'
+import { cn } from '@/utils/utils'
 import type { Metadata } from 'next'
 import { M_PLUS_2 as FontSans } from 'next/font/google'
 import { ReactNode } from 'react'

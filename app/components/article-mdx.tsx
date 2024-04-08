@@ -1,4 +1,4 @@
-import MdxHeadingLink from '@/components/mdx-heading-link'
+import MdxHeadingLink from '@/app/components/mdx-heading-link'
 import { MDXComponents } from 'mdx/types'
 import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc'
 import Image from 'next/image'

@@ -1,9 +1,14 @@
 import { auth } from '@/app/auth'
-import { SignOutButton } from '@/components/auth-buttons'
-import { NavLinks } from '@/components/nav-link'
-import ThemeToggleButton from '@/components/theme-toggle-button'
+import { SignOutButton } from '@/app/components/auth-buttons'
+import { NavLinks } from '@/app/components/nav-link'
+import ThemeToggleButton from '@/app/components/theme-toggle-button'
 import Link from 'next/link'
 import { Suspense } from 'react'
+
+const links = [
+  { href: '/blog', text: 'Blog' },
+  { href: '/about', text: 'About' }
+]
 
 const Header = () => {
   return (
@@ -12,12 +17,7 @@ const Header = () => {
         <div className='mr-4 flex items-center'>
           <Logo />
         </div>
-        <NavLinks
-          links={[
-            { href: '/blog', text: 'Blog' },
-            { href: '/about', text: 'About' }
-          ]}
-        />
+        <NavLinks links={links} />
         <div className='relative flex'>
           <Suspense>
             <SignOut />
@@ -28,7 +28,6 @@ const Header = () => {
     </header>
   )
 }
-
 export default Header
 
 const SignOut = async () => {

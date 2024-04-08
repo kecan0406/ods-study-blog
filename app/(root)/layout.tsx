@@ -1,5 +1,5 @@
-import Footer from '@/components/shared/Footer'
-import Header from '@/components/shared/Header'
+import Footer from '@/app/components/shared/Footer'
+import Header from '@/app/components/shared/Header'
 import { ReactNode } from 'react'
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

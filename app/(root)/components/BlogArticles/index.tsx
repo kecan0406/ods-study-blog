@@ -1,5 +1,5 @@
-import ArticleExcerpt from '@/components/article-excerpt'
-import SectionTitle from '@/components/shared/SectionTitle'
+import ArticleExcerpt from '@/app/components/article-excerpt'
+import SectionTitle from '@/app/components/shared/SectionTitle'
 import { Article } from '@/utils/api/blog'
 
 export default function BlogArticles({ articles }: { articles: Article[] }) {

@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/app/components/ui/button'
 import { useMounted } from '@/utils/hooks/use-mounted'
 import { useTheme } from 'next-themes'
 import { MdCircle, MdDarkMode, MdLightMode } from 'react-icons/md'

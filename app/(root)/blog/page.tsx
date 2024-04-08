@@ -1,4 +1,4 @@
-import ArticleExcerpt from '@/components/article-excerpt'
+import ArticleExcerpt from '@/app/components/article-excerpt'
 import { Article, fetchArticles } from '@/utils/api/blog'
 
 async function getArticles(): Promise<Article[]> {

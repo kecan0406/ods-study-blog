@@ -7,7 +7,7 @@ import remarkGfm from 'remark-gfm'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import RemoveMarkdown from 'remove-markdown'
 
-const ARTICLE_PATH = join(process.cwd(), 'lib/blog')
+const ARTICLE_PATH = join(process.cwd(), 'content')
 const MD_REGEX = /\.mdx?$/
 export const articleSlugs = fs
   .readdirSync(ARTICLE_PATH)

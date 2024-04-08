@@ -1,6 +1,6 @@
 'use server'
 
-import { db } from '@/lib/kysely'
+import { db } from '@/utils/kysely'
 import { unstable_noStore as noStore } from 'next/cache'
 export const getPostsCount = async (): Promise<{ slug: string; count: number }[]> => {
   noStore()

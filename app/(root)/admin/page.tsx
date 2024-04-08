@@ -1,5 +1,5 @@
 import { auth } from '@/app/auth'
-import { SignInButton, SignOutButton } from '@/components/auth-buttons'
+import { SignInButton, SignOutButton } from '@/app/components/auth-buttons'
 
 export default async function AdminPage() {
   const session = await auth()
