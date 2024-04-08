@@ -1,5 +1,5 @@
 import BlogHeader from '@/app/blog/[slug]/blog-header'
-import ArticleMdxRemote from '@/app/components/article-mdx'
+import ArticleMdxRemote from '@/app/components/mdx'
 import { Separator } from '@/app/components/ui/separator'
 import { fetchArticle } from '@/utils/api/blog'
 import { mdxRemoteOptions } from '@/utils/md-utils'

@@ -1,10 +1,10 @@
 import { FrontMatterArticle } from '@/utils/api/blog'
-import { MDXRemoteProps } from 'next-mdx-remote/rsc'
 import fs from 'node:fs'
 import { join } from 'path'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 import remarkUnwrapImages from 'remark-unwrap-images'
+import { MDXRemoteProps } from 'remote-mdx/rsc'
 import RemoveMarkdown from 'remove-markdown'
 
 const ARTICLE_PATH = join(process.cwd(), 'content')

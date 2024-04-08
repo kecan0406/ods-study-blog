@@ -22,9 +22,8 @@
     "clsx": "^2.1.0",
     "kysely": "^0.27.3",
     "lucide-react": "^0.344.0",
-    "next": "14.1.4",
+    "next": "^14.2.0-canary.62",
     "next-auth": "5.0.0-beta.15",
-    "next-mdx-remote": "^4.4.1",
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
@@ -32,6 +31,7 @@
     "rehype-slug": "^6.0.0",
     "remark-gfm": "3.0.1",
     "remark-unwrap-images": "^4.0.0",
+    "remote-mdx": "^0.0.4",
     "remove-markdown": "^0.5.0",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7"
