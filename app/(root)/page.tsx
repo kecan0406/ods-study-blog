@@ -1,8 +1,8 @@
 import { Article, fetchArticles } from '@/utils/api/blog'
-import BlogArticles from './components/BlogArticles'
-import Profile from './components/Profile'
+import BlogArticles from './blog-articles'
+import Profile from './profile'
 
-async function getArticles(): Promise<Article[]> {
+const getArticles = async (): Promise<Article[]> => {
   const articles = await fetchArticles()
   return articles.toSorted(
     (a, b) => new Date(b.matter.releaseDate).getTime() - new Date(a.matter.releaseDate).getTime()

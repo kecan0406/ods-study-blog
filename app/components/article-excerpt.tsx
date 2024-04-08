@@ -1,12 +1,12 @@
 import ShadowEffect from '@/app/components/shadow-effect'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card'
 import ViewCounter from '@/app/components/view-counter'
-import { getPostsCount } from '@/app/db/querys'
 import { Article, FrontMatterArticle } from '@/utils/api/blog'
+import { getPostsCount } from '@/utils/db/querys'
 import Link from 'next/link'
 import { Suspense } from 'react'
 
-const ArticleExcerpt = ({ article }: { article: Article }) => {
+export default function ArticleExcerpt({ article }: { article: Article }) {
   const { matter, content } = article
 
   return (
@@ -22,7 +22,6 @@ const ArticleExcerpt = ({ article }: { article: Article }) => {
     </Link>
   )
 }
-export default ArticleExcerpt
 
 const HeaderMeta = ({ matter }: { matter: FrontMatterArticle }) => {
   const { slug, releaseDate, readingTime } = matter

@@ -1,28 +1,11 @@
-import ArticleMdxRemote from '@/app/components/article-mdx'
+import ViewCount from '@/app/blog/[slug]/view-count'
 import { Avatar, AvatarFallback, AvatarImage } from '@/app/components/ui/avatar'
-import { Separator } from '@/app/components/ui/separator'
-import ViewCounter from '@/app/components/view-counter'
-import { increment } from '@/app/db/actions'
-import { getPostsCount } from '@/app/db/querys'
-import { FrontMatterArticle, fetchArticle } from '@/utils/api/blog'
-import { mdxRemoteOptions } from '@/utils/md-utils'
+import { FrontMatterArticle } from '@/utils/api/blog'
 import Link from 'next/link'
 import { Suspense } from 'react'
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const { matter, content } = await fetchArticle(params.slug)
-
-  return (
-    <article className='wrapper py-8 prose prose-zinc md:prose-lg dark:prose-invert prose-figcaption:mt-0'>
-      <Header matter={matter} />
-      <Separator className='my-4' />
-      <ArticleMdxRemote options={mdxRemoteOptions} source={content} />
-    </article>
-  )
-}
-
-type HeaderProps = FrontMatterArticle
-const Header = ({ matter }: { matter: HeaderProps }) => {
+type BlogHeaderProps = FrontMatterArticle
+export default function BlogHeader({ matter }: { matter: BlogHeaderProps }) {
   const { title, releaseDate, readingTime, writer } = matter
   return (
     <header className='flex justify-center flex-col'>
@@ -51,10 +34,4 @@ const Header = ({ matter }: { matter: HeaderProps }) => {
       </div>
     </header>
   )
-}
-
-const ViewCount = async ({ slug }: { slug: string }) => {
-  const views = await getPostsCount()
-  increment(slug)
-  return <ViewCounter slug={slug} allViews={views} />
 }

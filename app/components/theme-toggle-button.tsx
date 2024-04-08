@@ -5,7 +5,7 @@ import { useMounted } from '@/utils/hooks/use-mounted'
 import { useTheme } from 'next-themes'
 import { MdCircle, MdDarkMode, MdLightMode } from 'react-icons/md'
 
-const ThemeToggleButton = () => {
+export default function ThemeToggleButton() {
   const { resolvedTheme, setTheme } = useTheme()
   const mounted = useMounted()
 
@@ -29,5 +29,3 @@ const ThemeToggleButton = () => {
     </Button>
   )
 }
-
-export default ThemeToggleButton

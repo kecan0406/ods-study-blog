@@ -2,7 +2,7 @@ import { Button } from '@/app/components/ui/button'
 import Link from 'next/link'
 
 type Props = { title: string; href?: string }
-const SectionTitle = ({ title, href }: Props) => {
+export default function SectionTitle({ title, href }: Props) {
   if (href) {
     return (
       <Link href={href}>
@@ -19,4 +19,3 @@ const SectionTitle = ({ title, href }: Props) => {
     </div>
   )
 }
-export default SectionTitle

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 type NavLinksProp = { links: { href: string; text: string }[] }
-export const NavLinks = (props: NavLinksProp) => {
+export default function NavLinks(props: NavLinksProp) {
   const pathName = usePathname()
 
   return (

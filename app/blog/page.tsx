@@ -1,7 +1,7 @@
 import ArticleExcerpt from '@/app/components/article-excerpt'
 import { Article, fetchArticles } from '@/utils/api/blog'
 
-async function getArticles(): Promise<Article[]> {
+const getArticles = async (): Promise<Article[]> => {
   const articles = await fetchArticles()
   return articles.toSorted(
     (a, b) => new Date(b.matter.releaseDate).getTime() - new Date(a.matter.releaseDate).getTime()

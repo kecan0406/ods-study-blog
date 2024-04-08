@@ -1,3 +1,5 @@
+import Footer from '@/app/components/shared/Footer'
+import Header from '@/app/components/shared/Header'
 import ThemeProvider from '@/app/components/theme-provider'
 import { cn } from '@/utils/utils'
 import type { Metadata } from 'next'
@@ -20,7 +22,11 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     <html lang='en' suppressHydrationWarning>
       <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
         <ThemeProvider attribute='class' defaultTheme='system' disableTransitionOnChange enableSystem>
-          {children}
+          <div className='flex h-screen flex-col'>
+            <Header />
+            <main className='flex-1 pt-16'>{children}</main>
+            <Footer />
+          </div>
         </ThemeProvider>
       </body>
     </html>
