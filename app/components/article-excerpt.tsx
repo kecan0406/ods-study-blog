@@ -29,11 +29,9 @@ const HeaderMeta = ({ matter }: { matter: FrontMatterArticle }) => {
     <div className='flex text-sm text-muted-foreground font-semibold'>
       <time dateTime={releaseDate}>{releaseDate}</time>
       <span className='before:px-1 before:content-["•"]'>{readingTime} min</span>
-      <span className='flex-grow text-right'>
-        <Suspense>
-          <Views slug={slug} />
-        </Suspense>
-      </span>
+      <Suspense fallback={<span className='flex-grow' />}>
+        <Views slug={slug} />
+      </Suspense>
     </div>
   )
 }

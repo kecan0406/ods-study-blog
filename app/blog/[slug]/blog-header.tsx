@@ -24,11 +24,9 @@ export default function BlogHeader({ matter }: { matter: BlogHeaderProps }) {
           <div className='flex text-muted-foreground mt-0.5'>
             <time dateTime={releaseDate}>{releaseDate}</time>
             <span className='before:px-1 before:content-["•"]'>{readingTime} min</span>
-            <span className='flex-grow text-right'>
-              <Suspense>
-                <ViewCount slug={matter.slug} />
-              </Suspense>
-            </span>
+            <Suspense fallback={<span className='flex-grow' />}>
+              <ViewCount slug={matter.slug} />
+            </Suspense>
           </div>
         </div>
       </div>
