@@ -1,4 +1,5 @@
 import MdxHeadingLink from '@/app/components/mdx-heading-link'
+import { slugify } from '@/utils/md-utils'
 import { MDXComponents } from 'mdx/types'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,7 +8,10 @@ import { MDXRemote, MDXRemoteProps } from 'remote-mdx/rsc'
 
 type HeadingProps = { children?: ReactNode; id?: string }
 const headings = (type: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6') => {
-  const Heading = ({ children, id }: HeadingProps) => createElement(type, { id }, [MdxHeadingLink({ id })], children)
+  const Heading = ({ children }: HeadingProps) => {
+    const id = slugify(children!.toString())
+    return createElement(type, { id }, [MdxHeadingLink({ id })], children)
+  }
   Heading.displayName = type
   return Heading
 }

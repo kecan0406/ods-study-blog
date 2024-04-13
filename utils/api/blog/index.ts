@@ -11,6 +11,11 @@ export type Article = {
   matter: FrontMatterArticle
   content: string
 }
+export type ArticleToc = {
+  depth: number
+  content: string
+  id: string
+}[]
 
 export const fetchArticles = async (): Promise<Article[]> => {
   return await Promise.all(articleSlugs.map((slug) => fetchArticle(slug, true)))

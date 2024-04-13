@@ -67,6 +67,22 @@
   margin-top: 0;
 }
 
+.toc-h2 {
+  @apply text-lg
+}
+.toc-h3 {
+  @apply text-base indent-2
+}
+.toc-h4 {
+  @apply text-sm indent-4
+}
+.toc-h5 {
+  @apply text-xs indent-6
+}
+.toc-h6 {
+  @apply text-xs indent-8
+}
+
 @layer base {
   * {
     @apply border-border;

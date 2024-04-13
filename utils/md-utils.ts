@@ -1,7 +1,6 @@
-import { FrontMatterArticle } from '@/utils/api/blog'
+import { ArticleToc, FrontMatterArticle } from '@/utils/api/blog'
 import fs from 'node:fs'
 import { join } from 'path'
-import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import { MDXRemoteProps } from 'remote-mdx/rsc'
@@ -17,10 +16,9 @@ export const articleSlugs = fs
 export const mdxRemoteOptions: MDXRemoteProps['options'] = {
   mdxOptions: {
     remarkPlugins: [remarkGfm, remarkUnwrapImages],
-    rehypePlugins: [rehypeSlug]
+    rehypePlugins: []
   }
 }
-
 export const getMarkdownFile = (slug: string): string => {
   return fs.readFileSync(join(ARTICLE_PATH, `${slug}.md`), 'utf8')
 }
@@ -39,6 +37,18 @@ export const parseFrontMatter = (fileContent: string) => {
   return { matter, content }
 }
 
+const HEADER_REGEX = /(?<flag>#{1,6})\s+(?<content>.+)/g
+export const parseToc = (content: string): ArticleToc => {
+  return Array.from(content.matchAll(HEADER_REGEX)).map(({ groups }) => {
+    const { flag, content } = groups!
+    return {
+      depth: flag.length,
+      content,
+      id: slugify(content)
+    }
+  })
+}
+
 const WORDS_PER_MINUTE = 200
 const readingTime = (context: string) => {
   const wordCount = RemoveMarkdown(context).match(/\w+/g)?.length ?? 0
@@ -50,4 +60,13 @@ export const parseContent = (content: string, excerpt: boolean) => {
   const maxChars = 200
   const text = RemoveMarkdown(content)
   return text.slice(0, maxChars).replace(' ', '\n')
+}
+
+export const slugify = (str: string) => {
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, '-and-')
+    .replace(/[^\w-]+/g, '')
+    .replace(/\-\-+/g, '-')
 }
