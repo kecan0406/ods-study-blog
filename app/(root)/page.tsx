@@ -1,4 +1,4 @@
-import { Article, fetchArticles } from '@/utils/api/blog'
+import { Article, fetchArticles } from 'utils/api/blog'
 import BlogArticles from './blog-articles'
 import Profile from './profile'
 

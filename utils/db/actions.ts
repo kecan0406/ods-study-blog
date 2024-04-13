@@ -1,6 +1,6 @@
 'use server'
-import { db } from '@/utils/db/kysely'
 import { unstable_noStore as noStore } from 'next/cache'
+import { db } from 'utils/db/kysely'
 
 export const increment = async (slug: string) => {
   noStore()

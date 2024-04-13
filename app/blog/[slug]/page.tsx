@@ -1,10 +1,10 @@
-import BlogFooter from '@/app/blog/[slug]/blog-footer'
-import BlogHeader from '@/app/blog/[slug]/blog-header'
-import Toc from '@/app/blog/[slug]/toc'
-import ArticleMdxRemote from '@/app/components/mdx'
-import { Separator } from '@/app/components/ui/separator'
-import { Article, ArticleToc, fetchArticle } from '@/utils/api/blog'
-import { mdxRemoteOptions, parseToc } from '@/utils/md-utils'
+import BlogFooter from 'app/blog/[slug]/blog-footer'
+import BlogHeader from 'app/blog/[slug]/blog-header'
+import Toc from 'app/blog/[slug]/toc'
+import ArticleMdxRemote from 'app/components/mdx'
+import { Separator } from 'app/components/ui/separator'
+import { Article, ArticleToc, fetchArticle } from 'utils/api/blog'
+import { mdxRemoteOptions, parseToc } from 'utils/md-utils'
 
 const getArticle = async (slug: string): Promise<{ article: Article; toc: ArticleToc }> => {
   const article = await fetchArticle(slug)

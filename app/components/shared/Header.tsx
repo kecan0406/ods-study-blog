@@ -1,9 +1,9 @@
-import { SignOutButton } from '@/app/components/auth-buttons'
-import NavLinks from '@/app/components/nav-link'
-import ThemeToggleButton from '@/app/components/theme-toggle-button'
-import { auth } from '@/utils/auth'
+import { SignOutButton } from 'app/components/auth-buttons'
+import NavLinks from 'app/components/nav-link'
+import ThemeToggleButton from 'app/components/theme-toggle-button'
 import Link from 'next/link'
 import { Suspense } from 'react'
+import { auth } from 'utils/auth'
 
 const links = [
   { href: '/blog', text: 'Blog' },

@@ -1,11 +1,11 @@
-import Footer from '@/app/components/shared/Footer'
-import Header from '@/app/components/shared/Header'
-import { cn } from '@/utils/utils'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import Footer from 'app/components/shared/Footer'
+import Header from 'app/components/shared/Header'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 import { M_PLUS_2 as FontSans } from 'next/font/google'
 import { ReactNode } from 'react'
+import { cn } from 'utils/utils'
 import './globals.css'
 
 const fontSans = FontSans({

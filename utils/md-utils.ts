@@ -1,10 +1,10 @@
-import { ArticleToc, FrontMatterArticle } from '@/utils/api/blog'
 import fs from 'node:fs'
 import { join } from 'path'
 import remarkGfm from 'remark-gfm'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import { MDXRemoteProps } from 'remote-mdx/rsc'
 import RemoveMarkdown from 'remove-markdown'
+import { ArticleToc, FrontMatterArticle } from 'utils/api/blog'
 
 const ARTICLE_PATH = join(process.cwd(), 'content')
 const MD_REGEX = /\.mdx?$/

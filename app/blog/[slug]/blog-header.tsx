@@ -1,8 +1,8 @@
-import ViewCount from '@/app/blog/[slug]/view-count'
-import { Avatar, AvatarFallback, AvatarImage } from '@/app/components/ui/avatar'
-import { FrontMatterArticle } from '@/utils/api/blog'
+import ViewCount from 'app/blog/[slug]/view-count'
+import { Avatar, AvatarFallback, AvatarImage } from 'app/components/ui/avatar'
 import Link from 'next/link'
 import { Suspense } from 'react'
+import { FrontMatterArticle } from 'utils/api/blog'
 
 type BlogHeaderProps = FrontMatterArticle
 export default function BlogHeader({ matter }: { matter: BlogHeaderProps }) {

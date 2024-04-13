@@ -1,5 +1,5 @@
-import ArticleExcerpt from '@/app/components/article-excerpt'
-import { Article, fetchArticles } from '@/utils/api/blog'
+import ArticleExcerpt from 'app/components/article-excerpt'
+import { Article, fetchArticles } from 'utils/api/blog'
 
 const getArticles = async (): Promise<Article[]> => {
   const articles = await fetchArticles()

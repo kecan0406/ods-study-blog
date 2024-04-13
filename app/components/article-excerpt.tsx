@@ -1,10 +1,10 @@
-import ShadowEffect from '@/app/components/shadow-effect'
-import { Card, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card'
-import ViewCounter from '@/app/components/view-counter'
-import { Article, FrontMatterArticle } from '@/utils/api/blog'
-import { getPostsCount } from '@/utils/db/querys'
+import ShadowEffect from 'app/components/shadow-effect'
+import { Card, CardDescription, CardHeader, CardTitle } from 'app/components/ui/card'
+import ViewCounter from 'app/components/view-counter'
 import Link from 'next/link'
 import { Suspense } from 'react'
+import { Article, FrontMatterArticle } from 'utils/api/blog'
+import { getPostsCount } from 'utils/db/querys'
 
 export default function ArticleExcerpt({ article }: { article: Article }) {
   const { matter, content } = article

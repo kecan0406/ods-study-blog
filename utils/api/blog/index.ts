@@ -1,4 +1,4 @@
-import { articleSlugs, getMarkdownFile, parseContent, parseFrontMatter } from '@/utils/md-utils'
+import { articleSlugs, getMarkdownFile, parseContent, parseFrontMatter } from 'utils/md-utils'
 
 export type FrontMatterArticle = {
   slug: string

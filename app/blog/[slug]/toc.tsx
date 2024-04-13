@@ -1,8 +1,8 @@
 'use client'
-import { ArticleToc } from '@/utils/api/blog'
-import { throttle } from '@/utils/utils'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { ArticleToc } from 'utils/api/blog'
+import { throttle } from 'utils/utils'
 
 export default function Toc({ toc }: { toc: ArticleToc }) {
   const [closestId, setClosestId] = useState<string>('')

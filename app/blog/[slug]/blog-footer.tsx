@@ -1,5 +1,5 @@
-import { Article, fetchArticles } from '@/utils/api/blog'
 import Link from 'next/link'
+import { Article, fetchArticles } from 'utils/api/blog'
 
 const getArticles = async (): Promise<Article[]> => {
   const articles = await fetchArticles()
