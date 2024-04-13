@@ -32,7 +32,7 @@ export default function Header() {
 const Logo = () => {
   return (
     <Link href='/'>
-      <span className='inline-flex h-10 items-center px-2 text-lg font-bold text-nowrap'>ODS Study</span>
+      <span className='inline-flex h-10 items-center text-nowrap px-2 text-lg font-bold'>ODS Study</span>
     </Link>
   )
 }

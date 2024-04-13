@@ -50,7 +50,7 @@
 }
 
 .anchor {
-  @apply absolute w-full max-w-3xl -ms-8 text-muted-foreground no-underline invisible md:inline-block
+  @apply invisible absolute -ms-8 w-full max-w-3xl text-muted-foreground no-underline md:inline-block;
 }
 .anchor:hover {
   @apply visible;
@@ -60,7 +60,7 @@
 }
 
 .prose > :first-child > h1 {
-  @apply mb-4
+  @apply mb-4;
 }
 
 .prose > h2:first-of-type {
@@ -68,19 +68,19 @@
 }
 
 .toc-h2 {
-  @apply text-lg
+  @apply text-lg;
 }
 .toc-h3 {
-  @apply text-base indent-2
+  @apply indent-2 text-base;
 }
 .toc-h4 {
-  @apply text-sm indent-4
+  @apply indent-4 text-sm;
 }
 .toc-h5 {
-  @apply text-xs indent-6
+  @apply indent-6 text-xs;
 }
 .toc-h6 {
-  @apply text-xs indent-8
+  @apply indent-8 text-xs;
 }
 
 @layer base {
@@ -94,11 +94,10 @@
 
 @layer utilities {
   .wrapper {
-    @apply w-full mx-auto px-6 max-w-3xl xl:px-0;
+    @apply mx-auto w-full max-w-3xl px-6 xl:px-0;
   }
 
   .link {
-    @apply underline-offset-4 hover:underline
+    @apply underline-offset-4 hover:underline;
   }
 }
-

@@ -6,7 +6,7 @@ export default function SectionTitle({ title, href }: Props) {
   if (href) {
     return (
       <Link href={href}>
-        <Button variant='link' className='px-0 mb-2'>
+        <Button variant='link' className='mb-2 px-0'>
           <h2 className='text-2xl'>{title}</h2>
         </Button>
       </Link>

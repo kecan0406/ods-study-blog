@@ -29,7 +29,7 @@ export default function Toc({ toc }: { toc: ArticleToc }) {
   }, [])
 
   return (
-    <aside className='pl-12 top-16 block sticky overflow-hidden'>
+    <aside className='sticky top-16 block overflow-hidden pl-12'>
       <nav className='flex flex-col gap-2'>
         {toc.map(({ depth, content, id }) => {
           const active = closestId === id ? 100 : 50

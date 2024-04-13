@@ -16,14 +16,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <article className='flex flex-wrap'>
       <div className='flex-1' />
-      <div className='wrapper py-8 prose prose-zinc md:prose-lg prose-headings:scroll-mt-16 dark:prose-invert prose-figcaption:mt-0'>
+      <div className='wrapper prose prose-zinc py-8 dark:prose-invert md:prose-lg prose-headings:scroll-mt-16 prose-figcaption:mt-0'>
         <BlogHeader matter={article.matter} />
         <Separator className='my-4' />
         <ArticleMdxRemote options={mdxRemoteOptions} source={article.content} />
         <Separator className='my-4' />
         <BlogFooter slug={article.matter.slug} />
       </div>
-      <div className='flex-1 min-w-0 pt-48'>
+      <div className='min-w-0 flex-1 pt-48'>
         <Toc toc={toc} />
       </div>
     </article>

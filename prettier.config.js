@@ -10,7 +10,7 @@ const options = {
   trailingComma: 'none',
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
-  plugins: ['prettier-plugin-tailwindcss', '@trivago/prettier-plugin-sort-imports', 'prettier-plugin-organize-imports']
+  plugins: ['@trivago/prettier-plugin-sort-imports', 'prettier-plugin-organize-imports', 'prettier-plugin-tailwindcss']
 }
 
 module.exports = options

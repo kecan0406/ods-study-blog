@@ -15,7 +15,7 @@ export default async function BlogFooter({ slug }: { slug: string }) {
   const next = articles[curIdx + 1]
 
   return (
-    <div className='grid grid-cols-2 text-center not-prose'>
+    <div className='not-prose grid grid-cols-2 text-center'>
       <div>
         <p className='font-bold'>이전 글</p>
         {prev && (
