@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 import { Article, FrontMatterArticle } from 'utils/api/blog'
 import { getPostsCount } from 'utils/db/querys'
+import { Badge } from './ui/badge'
 
 export default function ArticleExcerpt({ article }: { article: Article }) {
   const { matter, content } = article
@@ -13,6 +14,13 @@ export default function ArticleExcerpt({ article }: { article: Article }) {
     <Link href={`/blog/${matter.slug}`}>
       <Card as='article' className='group min-h-full min-w-full border-none hover:bg-accent'>
         <CardHeader className='relative p-2'>
+          <div className='flex gap-1'>
+            {matter.categories.map((category) => (
+              <Badge variant='secondary' className='before:pr-0.5 before:content-["#"]' key={category}>
+                {category}
+              </Badge>
+            ))}
+          </div>
           <CardTitle className='text-2xl'>{matter.title}</CardTitle>
           <HeaderMeta matter={matter} />
           <CardDescription className='h-10 overflow-hidden font-medium'>{content}</CardDescription>

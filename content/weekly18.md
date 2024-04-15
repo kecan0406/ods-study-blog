@@ -2,6 +2,7 @@
 title: Weekly Archive #18 | 🥷
 slug: weekly18
 writer: kang1027
+categories: weekly,life,study
 releaseDate: 2024.03.11
 ---
 

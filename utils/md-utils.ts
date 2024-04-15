@@ -25,12 +25,16 @@ export const getMarkdownFile = (slug: string): string => {
 
 const MATTER_REGEX = /---\s*([\s\S]*?)\s*---/
 export const parseFrontMatter = (fileContent: string) => {
-  const matter = {} as FrontMatterArticle
-  const lines = MATTER_REGEX.exec(fileContent)![1].trim().split('\n')
-  lines.forEach((line) => {
-    const [key, val] = line.split(':') as [keyof FrontMatterArticle, string]
-    matter[key] = val.trim()
-  })
+  const lines = MATTER_REGEX.exec(fileContent)![1]
+    .trim()
+    .split('\n')
+    .map((line) => line.split(':')) as [keyof FrontMatterArticle, string][]
+
+  const matter = lines.reduce((pre, [key, val]) => {
+    const value = val.trim()
+    key === 'categories' ? (pre[key] = value.split(',')) : (pre[key] = value)
+    return pre
+  }, {} as FrontMatterArticle)
 
   const content = fileContent.replace(MATTER_REGEX, '').trim()
   matter.readingTime = readingTime(content)

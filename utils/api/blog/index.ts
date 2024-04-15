@@ -4,6 +4,7 @@ export type FrontMatterArticle = {
   slug: string
   title: string
   writer: string
+  categories: string[]
   readingTime: string
   releaseDate: string
 }

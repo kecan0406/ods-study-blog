@@ -2,6 +2,7 @@
 title: "MDX component test"
 slug: mdx-test
 writer: kecan0406
+categories: mdx,react,next
 releaseDate: 2024.03.12
 ---
 
