@@ -6,7 +6,6 @@ import { Suspense } from 'react'
 import { Article, FrontMatterArticle } from 'utils/api/blog'
 import { getPostsCount } from 'utils/db/querys'
 import TagBadge from './tag-badge'
-import { Badge } from './ui/badge'
 
 export default function ArticleExcerpt({ article }: { article: Article }) {
   const { matter, content } = article
@@ -17,16 +16,7 @@ export default function ArticleExcerpt({ article }: { article: Article }) {
         <CardHeader className='relative p-2'>
           <div className='flex gap-1'>
             {matter.tags.map((tag) => (
-              <Suspense
-                key={tag}
-                fallback={
-                  <Badge variant='secondary' className='before:content-["#"]'>
-                    {tag}
-                  </Badge>
-                }
-              >
-                <TagBadge tag={tag} />
-              </Suspense>
+              <TagBadge tag={tag} key={tag} />
             ))}
           </div>
           <CardTitle className='text-2xl underline-offset-4 group-hover:underline'>{matter.title}</CardTitle>

@@ -1,18 +1,18 @@
 'use client'
 
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { Button } from '../components/ui/button'
 
-export default function Tags({ tags }: { tags: string[] }) {
+export default function SearchTags({ tags }: { tags: string[] }) {
   const router = useRouter()
-  const pathname = usePathname()
 
   const handleTags = (targetTag: string) => () => {
     const filteredTags = tags.filter((tag) => targetTag !== tag).join(',')
+
     if (filteredTags.length) {
-      router.push(`${pathname}?tags=${filteredTags}`, { scroll: false })
+      router.push(`/blog?tags=${filteredTags}`)
     } else {
-      router.push(pathname)
+      router.push('/blog')
       router.refresh()
     }
   }
@@ -20,7 +20,7 @@ export default function Tags({ tags }: { tags: string[] }) {
   return (
     <div className='flex justify-center gap-2 overflow-hidden py-4'>
       {tags.map((tag) => (
-        <Button variant='outline' key={tag} onClick={handleTags(tag)}>
+        <Button variant='ghost' className='before:content-["#"]' key={tag} onClick={handleTags(tag)}>
           {tag}
         </Button>
       ))}

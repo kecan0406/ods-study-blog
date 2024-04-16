@@ -1,9 +1,23 @@
 'use client'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { MouseEvent } from 'react'
+import { MouseEvent, Suspense } from 'react'
 import { Badge } from './ui/badge'
 
 export default function TagBadge({ tag }: { tag: string }) {
+  return (
+    <Suspense
+      fallback={
+        <Badge variant='secondary' className='before:content-["#"]'>
+          {tag}
+        </Badge>
+      }
+    >
+      <Tag tag={tag} />
+    </Suspense>
+  )
+}
+
+function Tag({ tag }: { tag: string }) {
   const searchParams = useSearchParams()
   const router = useRouter()
 
