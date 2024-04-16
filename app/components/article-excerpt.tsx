@@ -6,20 +6,30 @@ import { Suspense } from 'react'
 import { Article, FrontMatterArticle } from 'utils/api/blog'
 import { getPostsCount } from 'utils/db/querys'
 import TagBadge from './tag-badge'
+import { Badge } from './ui/badge'
 
 export default function ArticleExcerpt({ article }: { article: Article }) {
   const { matter, content } = article
 
   return (
     <Link href={`/blog/${matter.slug}`}>
-      <Card as='article' className='min-h-full min-w-full border-none hover:bg-accent'>
+      <Card as='article' className='group min-h-full min-w-full border-none hover:bg-accent'>
         <CardHeader className='relative p-2'>
           <div className='flex gap-1'>
             {matter.tags.map((tag) => (
-              <TagBadge tag={tag} key={tag} />
+              <Suspense
+                key={tag}
+                fallback={
+                  <Badge variant='secondary' className='before:content-["#"]'>
+                    {tag}
+                  </Badge>
+                }
+              >
+                <TagBadge tag={tag} />
+              </Suspense>
             ))}
           </div>
-          <CardTitle className='text-2xl'>{matter.title}</CardTitle>
+          <CardTitle className='text-2xl underline-offset-4 group-hover:underline'>{matter.title}</CardTitle>
           <HeaderMeta matter={matter} />
           <CardDescription className='h-10 overflow-hidden font-medium'>{content}</CardDescription>
           <ShadowEffect />
