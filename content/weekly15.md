@@ -2,7 +2,7 @@
 title: "Weekly Archive #15 | 삶의 낙"
 slug: weekly15
 writer: kongchu2
-categories: hack,life,dev
+tags: hack,life,dev
 releaseDate: 2024.02.19
 ---
 

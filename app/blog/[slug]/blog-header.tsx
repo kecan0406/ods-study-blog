@@ -7,7 +7,7 @@ import { Badge } from '../../components/ui/badge'
 
 type BlogHeaderProps = FrontMatterArticle
 export default function BlogHeader({ matter }: { matter: BlogHeaderProps }) {
-  const { title, releaseDate, readingTime, writer, categories } = matter
+  const { title, releaseDate, readingTime, writer, tags } = matter
   return (
     <header className='flex flex-col justify-center'>
       <h1>{title}</h1>
@@ -31,9 +31,9 @@ export default function BlogHeader({ matter }: { matter: BlogHeaderProps }) {
             <time dateTime={releaseDate}>{releaseDate}</time>
             <span className='before:px-1 before:content-["•"]'>{readingTime} min</span>
             <div className='flex grow justify-end gap-1'>
-              {categories.map((category) => (
-                <Badge variant='secondary' className='before:pr-0.5 before:content-["#"]' key={category}>
-                  {category}
+              {tags.map((tag) => (
+                <Badge variant='secondary' className='before:pr-0.5 before:content-["#"]' key={tag}>
+                  {tag}
                 </Badge>
               ))}
             </div>

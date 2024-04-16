@@ -2,7 +2,7 @@
 title: "Weekly Archive #16 | 삶의 낙"
 slug: weekly16
 writer: kongchu2
-categories: weekly,life,study
+tags: weekly,life,study
 releaseDate: 2024.02.27
 ---
 

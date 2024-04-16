@@ -2,7 +2,7 @@
 title: Lorem Ipsum
 slug: lorem-ipsum
 writer: kecan0406
-categories: typescript,react,test
+tags: typescript,react,test
 releaseDate: 2024.03.24
 ---
 

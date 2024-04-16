@@ -32,7 +32,7 @@ export const parseFrontMatter = (fileContent: string) => {
 
   const matter = lines.reduce((pre, [key, val]) => {
     const value = val.trim()
-    key === 'categories' ? (pre[key] = value.split(',')) : (pre[key] = value)
+    key === 'tags' ? (pre[key] = value.split(',')) : (pre[key] = value)
     return pre
   }, {} as FrontMatterArticle)
 
