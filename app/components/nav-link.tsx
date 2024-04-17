@@ -12,8 +12,9 @@ export default function NavLinks(props: NavLinksProp) {
     <div className='flex flex-grow items-center gap-1'>
       {props.links.map(({ href, text }) => {
         const isActive = pathName.startsWith(href)
+        const buttonStyle = `h-10 p-3 font-bold ${isActive ? 'underline' : ''}`
         return (
-          <Button variant='link' className={`h-10 p-3 font-bold${isActive ? 'underline' : ''}`} key={href}>
+          <Button variant='link' className={buttonStyle} key={href}>
             <Link scroll={false} href={href}>
               {text}
             </Link>

@@ -30,13 +30,6 @@ export default function BlogHeader({ matter }: { matter: BlogHeaderProps }) {
           <div className='mt-0.5 flex text-muted-foreground'>
             <time dateTime={releaseDate}>{releaseDate}</time>
             <span className='before:px-1 before:content-["•"]'>{readingTime} min</span>
-            <div className='flex grow justify-end gap-1'>
-              {tags.map((tag) => (
-                <Badge variant='secondary' className='before:pr-0.5 before:content-["#"]' key={tag}>
-                  {tag}
-                </Badge>
-              ))}
-            </div>
           </div>
         </div>
       </div>
