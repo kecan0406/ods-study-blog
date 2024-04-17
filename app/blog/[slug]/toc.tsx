@@ -33,8 +33,9 @@ export default function Toc({ toc }: { toc: ArticleToc }) {
       <nav className='flex flex-col gap-2'>
         {toc.map(({ depth, content, id }) => {
           const active = closestId === id ? 100 : 50
+          const TocStyle = `opacity-${active} toc-h${depth}`
           return (
-            <Link href={`#${id}`} key={`toc-${id}`} className={`opacity-${active}toc-h${depth}`}>
+            <Link href={`#${id}`} key={`toc-${id}`} className={TocStyle}>
               {content}
             </Link>
           )
