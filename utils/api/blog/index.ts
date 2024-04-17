@@ -5,6 +5,7 @@ export type FrontMatterArticle = {
   title: string
   writer: string
   tags: string[]
+  image: string
   readingTime: string
   releaseDate: string
 }

@@ -3,6 +3,7 @@ title: "Weekly Archive #14 | 삶의 낙"
 slug: weekly14
 writer: kecan0406
 tags: think,etc
+image: https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd
 releaseDate: 2024.02.14
 ---
 

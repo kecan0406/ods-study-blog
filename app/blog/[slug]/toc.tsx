@@ -29,18 +29,20 @@ export default function Toc({ toc }: { toc: ArticleToc }) {
   }, [])
 
   return (
-    <aside className='sticky top-16 block overflow-hidden'>
-      <nav className='flex flex-col gap-2'>
-        {toc.map(({ depth, content, id }) => {
-          const active = closestId === id ? 100 : 50
-          const TocStyle = `opacity-${active} toc-h${depth}`
-          return (
-            <Link href={`#${id}`} key={`toc-${id}`} className={TocStyle}>
-              {content}
-            </Link>
-          )
-        })}
-      </nav>
-    </aside>
+    <div className='not-prose absolute start-full hidden h-full w-full max-w-52 py-8 pl-4 xl:block'>
+      <aside className='sticky top-16 block overflow-hidden'>
+        <nav className='flex flex-col gap-2'>
+          {toc.map(({ depth, content, id }) => {
+            const active = closestId === id ? 100 : 50
+            const TocStyle = `opacity-${active} toc-h${depth}`
+            return (
+              <Link href={`#${id}`} key={`toc-${id}`} className={TocStyle}>
+                {content}
+              </Link>
+            )
+          })}
+        </nav>
+      </aside>
+    </div>
   )
 }

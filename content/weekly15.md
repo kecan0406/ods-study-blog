@@ -3,6 +3,7 @@ title: "Weekly Archive #15 | 삶의 낙"
 slug: weekly15
 writer: kongchu2
 tags: hack,life,dev
+image: https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd
 releaseDate: 2024.02.19
 ---
 

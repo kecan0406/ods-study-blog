@@ -3,6 +3,7 @@ title: "MDX component test"
 slug: mdx-test
 writer: kecan0406
 tags: mdx,react,next
+image: https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd
 releaseDate: 2024.03.12
 ---
 

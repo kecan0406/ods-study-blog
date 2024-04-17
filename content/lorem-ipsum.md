@@ -3,6 +3,7 @@ title: Lorem Ipsum
 slug: lorem-ipsum
 writer: kecan0406
 tags: typescript,react,test
+image: https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd
 releaseDate: 2024.03.24
 ---
 

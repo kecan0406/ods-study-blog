@@ -1,17 +1,18 @@
 import ViewCount from 'app/blog/[slug]/view-count'
 import { Avatar, AvatarFallback, AvatarImage } from 'app/components/ui/avatar'
+import { Badge } from 'app/components/ui/badge'
+import Image from 'next/image'
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { FrontMatterArticle } from 'utils/api/blog'
-import { Badge } from '../../components/ui/badge'
 
-type BlogHeaderProps = FrontMatterArticle
-export default function BlogHeader({ matter }: { matter: BlogHeaderProps }) {
-  const { title, releaseDate, readingTime, writer, tags } = matter
+export default function BlogHeader({ matter }: { matter: FrontMatterArticle }) {
+  const { title, releaseDate, readingTime, writer, image, tags } = matter
   return (
     <header className='flex flex-col justify-center'>
+      {image && <HeaderImage image={image} title={title} />}
       <h1 className='text-balance'>{title}</h1>
-      <div className='not-prose flex gap-4 font-semibold text-sm'>
+      <div className='not-prose mb-2 flex gap-4 font-semibold text-sm'>
         <Link href={`https://github.com/${writer}`}>
           <Avatar>
             <AvatarImage src={`https://github.com/${writer}.png`} alt={`@${writer}`} />
@@ -33,6 +34,21 @@ export default function BlogHeader({ matter }: { matter: BlogHeaderProps }) {
           </div>
         </div>
       </div>
+      <div className='my-2 flex gap-2 overflow-x-auto'>
+        {tags.map((tag) => (
+          <Badge className='before:content-["#"]' variant='secondary' key={tag}>
+            {tag}
+          </Badge>
+        ))}
+      </div>
     </header>
+  )
+}
+
+function HeaderImage({ image, title }: { image: string; title: string }) {
+  return (
+    <div className='not-prose relative my-4'>
+      <Image src={image} alt={title} width={768} height={384} sizes='768px' priority className='max-h-96 rounded-xl' />
+    </div>
   )
 }

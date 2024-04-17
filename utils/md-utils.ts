@@ -28,7 +28,7 @@ export const parseFrontMatter = (fileContent: string) => {
   const lines = MATTER_REGEX.exec(fileContent)![1]
     .trim()
     .split('\n')
-    .map((line) => line.split(':')) as [keyof FrontMatterArticle, string][]
+    .map((line) => line.split(': ')) as [keyof FrontMatterArticle, string][]
 
   const matter = lines.reduce((pre, [key, val]) => {
     const value = val.trim()

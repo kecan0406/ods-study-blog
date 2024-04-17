@@ -3,6 +3,7 @@ title: "Weekly Archive #17 | 삶의 낙"
 slug: weekly17
 writer: kecan0406
 tags: opal,rust,startup
+image: https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd
 releaseDate: 2024.03.05
 ---
 

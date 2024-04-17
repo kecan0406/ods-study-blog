@@ -3,6 +3,7 @@ title: Weekly Archive #18 | 🥷
 slug: weekly18
 writer: kang1027
 tags: weekly,life,study
+image: https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd
 releaseDate: 2024.03.11
 ---
 
