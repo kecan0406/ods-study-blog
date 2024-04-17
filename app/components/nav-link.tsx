@@ -13,7 +13,7 @@ export default function NavLinks(props: NavLinksProp) {
       {props.links.map(({ href, text }) => {
         const isActive = pathName.startsWith(href)
         return (
-          <Button variant='link' className={`h-10 p-3 font-bold ${isActive ? 'underline' : ''}`} key={href}>
+          <Button variant='link' className={`h-10 p-3 font-bold${isActive ? 'underline' : ''}`} key={href}>
             <Link scroll={false} href={href}>
               {text}
             </Link>

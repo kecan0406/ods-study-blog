@@ -14,7 +14,7 @@ export default function SectionTitle({ title, href }: Props) {
   }
 
   return (
-    <div className='mb-2 inline-flex h-9 items-center text-sm font-medium text-primary'>
+    <div className='mb-2 inline-flex h-9 items-center font-medium text-primary text-sm'>
       <h2 className='text-2xl'>{title}</h2>
     </div>
   )

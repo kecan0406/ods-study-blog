@@ -11,7 +11,7 @@ export default function BlogHeader({ matter }: { matter: BlogHeaderProps }) {
   return (
     <header className='flex flex-col justify-center'>
       <h1>{title}</h1>
-      <div className='not-prose flex gap-4 text-sm font-semibold'>
+      <div className='not-prose flex gap-4 font-semibold text-sm'>
         <Link href={`https://github.com/${writer}`}>
           <Avatar>
             <AvatarImage src={`https://github.com/${writer}.png`} alt={`@${writer}`} />

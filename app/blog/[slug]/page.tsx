@@ -16,7 +16,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <article className='flex flex-wrap'>
       <div className='flex-1' />
-      <div className='wrapper prose prose-zinc py-8 dark:prose-invert md:prose-lg prose-headings:scroll-mt-16 prose-figcaption:mt-0'>
+      <div className='wrapper prose prose-zinc dark:prose-invert md:prose-lg py-8 prose-figcaption:mt-0 prose-headings:scroll-mt-16'>
         <BlogHeader matter={article.matter} />
         <Separator className='my-4' />
         <ArticleMdxRemote options={mdxRemoteOptions} source={article.content} />

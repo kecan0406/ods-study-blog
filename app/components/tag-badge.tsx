@@ -33,7 +33,7 @@ function Tag({ tag }: { tag: string }) {
   }
 
   return (
-    <Badge variant='secondary' className='underline-offset-4 before:content-["#"] hover:underline' onClick={handleTag}>
+    <Badge variant='secondary' className='underline-offset-4 hover:underline before:content-["#"]' onClick={handleTag}>
       {tag}
     </Badge>
   )

@@ -34,7 +34,7 @@ export default function Toc({ toc }: { toc: ArticleToc }) {
         {toc.map(({ depth, content, id }) => {
           const active = closestId === id ? 100 : 50
           return (
-            <Link href={`#${id}`} key={`toc-${id}`} className={`opacity-${active} toc-h${depth}`}>
+            <Link href={`#${id}`} key={`toc-${id}`} className={`opacity-${active}toc-h${depth}`}>
               {content}
             </Link>
           )

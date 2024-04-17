@@ -32,7 +32,7 @@ export default function ArticleExcerpt({ article }: { article: Article }) {
 const HeaderMeta = ({ matter }: { matter: FrontMatterArticle }) => {
   const { slug, releaseDate, readingTime } = matter
   return (
-    <div className='flex text-sm font-semibold text-muted-foreground'>
+    <div className='flex font-semibold text-muted-foreground text-sm'>
       <time dateTime={releaseDate}>{releaseDate}</time>
       <span className='before:px-1 before:content-["•"]'>{readingTime} min</span>
       <Suspense fallback={<span className='flex-grow' />}>
