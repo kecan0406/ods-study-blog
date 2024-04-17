@@ -10,7 +10,7 @@ export default function BlogHeader({ matter }: { matter: BlogHeaderProps }) {
   const { title, releaseDate, readingTime, writer, tags } = matter
   return (
     <header className='flex flex-col justify-center'>
-      <h1>{title}</h1>
+      <h1 className='text-balance'>{title}</h1>
       <div className='not-prose flex gap-4 font-semibold text-sm'>
         <Link href={`https://github.com/${writer}`}>
           <Avatar>

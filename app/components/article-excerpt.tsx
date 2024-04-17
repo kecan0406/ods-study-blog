@@ -19,7 +19,9 @@ export default function ArticleExcerpt({ article }: { article: Article }) {
               <TagBadge tag={tag} key={tag} />
             ))}
           </div>
-          <CardTitle className='text-2xl underline-offset-4 group-hover:underline'>{matter.title}</CardTitle>
+          <CardTitle className='text-balance text-2xl underline-offset-4 group-hover:underline'>
+            {matter.title}
+          </CardTitle>
           <HeaderMeta matter={matter} />
           <CardDescription className='h-10 overflow-hidden font-medium'>{content}</CardDescription>
           <ShadowEffect />
