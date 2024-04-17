@@ -14,18 +14,15 @@ const getArticle = async (slug: string): Promise<{ article: Article; toc: Articl
 export default async function Page({ params }: { params: { slug: string } }) {
   const { article, toc } = await getArticle(params.slug)
   return (
-    <article className='flex flex-wrap'>
-      <div className='hidden flex-1 xl:block' />
-      <div className='wrapper prose prose-zinc dark:prose-invert md:prose-lg py-8 prose-figcaption:mt-0 prose-headings:scroll-mt-16'>
-        <BlogHeader matter={article.matter} />
-        <Separator className='my-4' />
-        <ArticleMdxRemote options={mdxRemoteOptions} source={article.content} />
-        <Separator className='my-4' />
-        <BlogFooter slug={article.matter.slug} />
-      </div>
-      <div className='hidden min-w-0 flex-1 pt-48 xl:block'>
+    <article className='wrapper prose prose-zinc dark:prose-invert md:prose-lg relative py-8 prose-figcaption:mt-0 prose-headings:scroll-mt-16'>
+      <div className='not-prose absolute start-full hidden h-full w-full max-w-52 py-8 pl-4 2xl:block'>
         <Toc toc={toc} />
       </div>
+      <BlogHeader matter={article.matter} />
+      <Separator className='my-4' />
+      <ArticleMdxRemote options={mdxRemoteOptions} source={article.content} />
+      <Separator className='my-4' />
+      <BlogFooter slug={article.matter.slug} />
     </article>
   )
 }
