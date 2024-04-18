@@ -5,7 +5,6 @@ import { useTheme } from 'next-themes'
 import { useState } from 'react'
 import { MdDarkMode, MdFlashlightOff, MdFlashlightOn, MdLightMode } from 'react-icons/md'
 import { useFlashlight } from 'utils/hooks/use-flashlight'
-import { useMounted } from 'utils/hooks/use-mounted'
 
 export default function ThemeToggleButton() {
   const { resolvedTheme, setTheme } = useTheme()
@@ -21,7 +20,6 @@ export default function ThemeToggleButton() {
   }
 
   const flashlightRef = useFlashlight(isFL)
-  if (!useMounted()) return null
   return (
     <>
       <Button variant='ghost' size='icon' className='h-10 w-10 rounded-full' onClick={handleTheme}>
