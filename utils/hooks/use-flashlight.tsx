@@ -20,11 +20,9 @@ export const useFlashlight = (isFL: boolean): RefObject<HTMLDivElement> => {
     const { x, y } = flashlight.getBoundingClientRect()
     lightMove(x, y)
 
-    flashlight.style.setProperty('visibility', 'visible')
     window.addEventListener('mousemove', mouseMove)
     window.addEventListener('touchmove', touchMove)
     return () => {
-      flashlight.style.setProperty('visibility', 'hidden')
       window.removeEventListener('mousemove', mouseMove)
       window.removeEventListener('touchmove', touchMove)
     }

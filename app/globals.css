@@ -84,7 +84,6 @@
 }
 
 #flashlight {
-  visibility: hidden;
   --Xpos: 0;
   --Ypos: 0;
 }
