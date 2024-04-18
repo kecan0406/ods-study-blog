@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from 'app/components/ui/button'
+import { clsx } from 'clsx'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -11,10 +12,9 @@ export default function NavLinks(props: NavLinksProp) {
   return (
     <div className='flex flex-grow items-center gap-1'>
       {props.links.map(({ href, text }) => {
-        const isActive = pathName.startsWith(href)
-        const buttonStyle = `h-10 p-3 font-bold ${isActive ? 'underline' : ''}`
+        const underline = pathName.startsWith(href)
         return (
-          <Button variant='link' className={buttonStyle} key={href}>
+          <Button variant='link' className={clsx('h-10 p-3 font-bold', { underline })} key={href}>
             <Link scroll={false} href={href}>
               {text}
             </Link>
