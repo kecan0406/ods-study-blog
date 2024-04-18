@@ -84,9 +84,8 @@
 }
 
 #flashlight {
-  display: none;
-  --Xpos: 50vw;
-  --Ypos: 50vh;
+  --Xpos: 0;
+  --Ypos: 0;
 }
 
 #flashlight:before {
@@ -121,5 +120,9 @@
 
   .link {
     @apply underline-offset-4 hover:underline;
+  }
+
+  .theme-icon {
+    @apply h-6 w-6;
   }
 }
