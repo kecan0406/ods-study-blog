@@ -104,6 +104,14 @@
   );
 }
 
+::view-transition-new(root),
+::view-transition-old(root) {
+  animation: none;
+  mix-blend-mode: normal;
+  display: block;
+}
+
+
 @layer base {
   * {
     @apply border-border;
