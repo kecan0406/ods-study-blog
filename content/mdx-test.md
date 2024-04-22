@@ -7,15 +7,23 @@ image: https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd
 releaseDate: 2024.03.12
 ---
 
-# h1 Taxing Laughter: The Joke Tax Chronicles
-
 ## h2 The People of the Kingdom
+Lorem ipsum dolor sit amet,
+consectetur adipiscing elit,
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Sed egestas egestas fringilla phasellus faucibus scelerisque.
 
 ### h3 The Joke Tax
+Lorem ipsum dolor sit amet,
+consectetur adipiscing elit,
 
 #### h4 People stopped telling jokes
+Lorem ipsum dolor sit amet,
+consectetur adipiscing elit,
 
 ##### h5 Jokester's Revolt
+Lorem ipsum dolor sit amet,
+consectetur adipiscing elit,
 
 ###### h6 The People's Rebellion
 
@@ -40,12 +48,12 @@ consectetur adipiscing elit,
 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Sed egestas egestas fringilla phasellus faucibus scelerisque.
 
-## h2 The People of the Kingdom
+## h2 The People of the Kingdom2
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
 aliqua. Amet nisl purus in mollis nunc sed id semper. Nec ullamcorper sit amet risus.
 
-### h3 The Joke Tax
+### h3 The Joke Tax2
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
 aliqua. Amet nisl purus in mollis nunc sed id semper. Nec ullamcorper sit amet risus.
