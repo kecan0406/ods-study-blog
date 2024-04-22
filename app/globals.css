@@ -83,6 +83,11 @@
   @apply indent-8 text-xs;
 }
 
+.shadow-effect::before {
+  content: "";
+  @apply pointer-events-none absolute right-2 bottom-1 block h-6 w-3/5 bg-gradient-to-r from-transparent to-background group-hover:to-accent
+}
+
 #flashlight {
   --Xpos: 0;
   --Ypos: 0;

@@ -1,4 +1,3 @@
-import ShadowEffect from 'app/components/shadow-effect'
 import { Card, CardDescription, CardHeader, CardTitle } from 'app/components/ui/card'
 import ViewCounter from 'app/components/view-counter'
 import Link from 'next/link'
@@ -23,8 +22,7 @@ export default function ArticleExcerpt({ article }: { article: Article }) {
             {matter.title}
           </CardTitle>
           <HeaderMeta matter={matter} />
-          <CardDescription className='h-10 overflow-hidden font-medium'>{content}</CardDescription>
-          <ShadowEffect />
+          <CardDescription className='h-10 overflow-hidden font-medium shadow-effect'>{content}</CardDescription>
         </CardHeader>
       </Card>
     </Link>
