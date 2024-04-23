@@ -1,13 +1,12 @@
 import fs from 'node:fs'
 import { join } from 'path'
-import remarkGfm from 'remark-gfm'
+import { MDXRemoteProps } from 'next-mdx-remote/rsc'
 import remarkUnwrapImages from 'remark-unwrap-images'
-import { MDXRemoteProps } from 'remote-mdx/rsc'
 import RemoveMarkdown from 'remove-markdown'
 import { ArticleToc, FrontMatterArticle } from 'utils/api/blog'
 
 const ARTICLE_PATH = join(process.cwd(), 'content')
-const MD_REGEX = /\.mdx?$/
+const MD_REGEX = /\.mdx$/
 export const articleSlugs = fs
   .readdirSync(ARTICLE_PATH)
   .filter((path) => MD_REGEX.test(path))
@@ -15,12 +14,12 @@ export const articleSlugs = fs
 
 export const mdxRemoteOptions: MDXRemoteProps['options'] = {
   mdxOptions: {
-    remarkPlugins: [remarkGfm, remarkUnwrapImages],
+    remarkPlugins: [remarkUnwrapImages],
     rehypePlugins: []
   }
 }
 export const getMarkdownFile = (slug: string): string => {
-  return fs.readFileSync(join(ARTICLE_PATH, `${slug}.md`), 'utf8')
+  return fs.readFileSync(join(ARTICLE_PATH, `${slug}.mdx`), 'utf8')
 }
 
 const MATTER_REGEX = /---\s*([\s\S]*?)\s*---/
