@@ -22,7 +22,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang='en' suppressHydrationWarning>
       <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
-        <ThemeProvider attribute='class' defaultTheme='system' disableTransitionOnChange enableSystem>
+        <ThemeProvider attribute='class' defaultTheme='dark' disableTransitionOnChange enableSystem>
           <div className='flex h-screen flex-col'>
             <Header />
             <main className='flex-1 pt-16'>{children}</main>
