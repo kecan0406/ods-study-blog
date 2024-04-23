@@ -26,7 +26,7 @@ export default function Toc({ toc }: { toc: ArticleToc }) {
   }, [])
 
   return (
-    <div className='not-prose absolute start-full hidden h-full w-full max-w-52 py-8 pl-4 xl:block'>
+    <div className='not-prose absolute start-full hidden h-full w-full max-w-52 py-20 pl-4 xl:block'>
       <aside className='sticky top-16 block overflow-hidden'>
         <nav className='flex flex-col gap-2'>
           {toc.map(({ depth, content, id }) => {

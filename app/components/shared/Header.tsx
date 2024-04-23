@@ -1,9 +1,6 @@
-import { SignOutButton } from 'app/components/auth-buttons'
 import NavLinks from 'app/components/nav-link'
 import ThemeToggleButton from 'app/components/theme-toggle-button'
 import Link from 'next/link'
-import { Suspense } from 'react'
-import { auth } from 'utils/auth'
 
 const links = [
   { href: '/blog', text: 'Blog' },
@@ -19,9 +16,6 @@ export default function Header() {
         </div>
         <NavLinks links={links} />
         <div className='relative flex'>
-          <Suspense>
-            <SignOut />
-          </Suspense>
           <ThemeToggleButton />
         </div>
       </nav>
@@ -29,18 +23,10 @@ export default function Header() {
   )
 }
 
-const Logo = () => {
+function Logo() {
   return (
     <Link href='/'>
       <span className='inline-flex h-10 items-center text-nowrap px-2 font-bold text-lg'>ODS Study</span>
     </Link>
   )
-}
-
-const SignOut = async () => {
-  const session = await auth()
-  const allowUsers = process.env.ALLOW_USERS!.split(',')
-
-  const isAllowUser = allowUsers.includes(session?.user?.email ?? '')
-  return <>{isAllowUser && <SignOutButton />}</>
 }
