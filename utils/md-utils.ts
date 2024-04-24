@@ -65,11 +65,12 @@ export const parseContent = (content: string, excerpt: boolean) => {
   return text.slice(0, maxChars).replace(' ', '\n')
 }
 
+// https://github.com/leerob/leerob.io/blob/main/app/components/mdx.tsx#L121 에서 참고했습니다.
 export const slugify = (str: string) => {
   return str
     .toLowerCase()
     .trim()
     .replace(/&/g, '-and-')
-    .replace(/[^\w-]+/g, '')
+    .replace(/[^\w\p{Script=Hangul}-]+/gu, '') // -를 제외한 모든 단어가 아닌 문자 제거
     .replace(/\-\-+/g, '-')
 }
