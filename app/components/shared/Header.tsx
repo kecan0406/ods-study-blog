@@ -26,7 +26,7 @@ export default function Header() {
 function Logo() {
   return (
     <Link href='/'>
-      <span className='inline-flex h-10 items-center text-nowrap px-2 font-bold text-lg'>ODS Study</span>
+      <span className='notranslate inline-flex h-10 items-center text-nowrap px-2 font-bold text-lg'>ODS Study</span>
     </Link>
   )
 }
