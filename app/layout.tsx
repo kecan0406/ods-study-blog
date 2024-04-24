@@ -3,13 +3,14 @@ import Footer from 'app/components/shared/Footer'
 import Header from 'app/components/shared/Header'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
-import { M_PLUS_2 as FontSans } from 'next/font/google'
+import localFont from 'next/font/local'
 import { ReactNode } from 'react'
 import { cn } from 'utils/utils'
 import './globals.css'
 
-const fontSans = FontSans({
-  subsets: ['latin'],
+const fontSans = localFont({
+  src: '../public/fonts/PretendardVariable.woff2',
+  weight: '45 920',
   variable: '--font-sans'
 })
 
