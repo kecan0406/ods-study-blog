@@ -4,7 +4,7 @@ import Giscus from '@giscus/react'
 import { useTheme } from 'next-themes'
 
 export default function Comments() {
-  const { theme } = useTheme()
+  const { resolvedTheme } = useTheme()
   return (
     <Giscus
       id='comment'
@@ -13,7 +13,7 @@ export default function Comments() {
       category='Comments'
       categoryId='DIC_kwDOLcAF6s4Ce2Db'
       mapping='pathname'
-      theme={`${theme}_high_contrast`}
+      theme={`${resolvedTheme}_high_contrast`}
       emitMetadata='0'
       reactionsEnabled='0'
       lang='ko'

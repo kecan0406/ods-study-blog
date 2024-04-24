@@ -1,24 +1,17 @@
 'use client'
 
-import { RefObject, useEffect, useRef } from 'react'
+import { RefObject, useCallback, useEffect, useRef } from 'react'
 
-export const useFlashlight = (isFL: boolean): RefObject<HTMLDivElement> => {
+type MoveFn = (x: number, y: number) => void
+type UseFlashlightProps = (isFL: boolean) => { flashlightRef: RefObject<HTMLDivElement>; moveLight: MoveFn }
+
+export const useFlashlight: UseFlashlightProps = (isFL) => {
   const flashlightRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!isFL) return
-    const flashlight = flashlightRef.current!
-
-    const mouseMove = (e: MouseEvent) => lightMove(e.clientX, e.clientY)
-    const touchMove = (e: TouchEvent) => lightMove(e.touches[0].clientX, e.touches[0].clientY)
-
-    const lightMove = (x: number, y: number) => {
-      flashlight.style.setProperty('--Xpos', `${x}px`)
-      flashlight.style.setProperty('--Ypos', `${y}px`)
-    }
-
-    const { x, y } = flashlight.getBoundingClientRect()
-    lightMove(x, y)
+    const mouseMove = (e: MouseEvent) => moveLight(e.x, e.y)
+    const touchMove = (e: TouchEvent) => moveLight(e.touches[0].clientX, e.touches[0].clientY)
 
     window.addEventListener('mousemove', mouseMove)
     window.addEventListener('touchmove', touchMove)
@@ -28,5 +21,11 @@ export const useFlashlight = (isFL: boolean): RefObject<HTMLDivElement> => {
     }
   }, [isFL])
 
-  return flashlightRef
+  const moveLight: MoveFn = useCallback((x, y) => {
+    const flashlight = flashlightRef.current!
+    flashlight.style.setProperty('--Xpos', `${x}px`)
+    flashlight.style.setProperty('--Ypos', `${y}px`)
+  }, [])
+
+  return { flashlightRef, moveLight }
 }
