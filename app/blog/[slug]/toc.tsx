@@ -1,44 +1,81 @@
 'use client'
+import { clsx } from 'clsx'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { ArticleToc } from 'utils/api/blog'
+import { ArticleContent } from 'utils/api/blog'
 
-export default function Toc({ toc }: { toc: ArticleToc }) {
+type TocContent = { id: string; y: number }
+export default function Toc({ toc }: { toc: ArticleContent[] }) {
+  const [parentClosestId, setParentClosestId] = useState<string>('')
   const [closestId, setClosestId] = useState<string>('')
 
   useEffect(() => {
-    const proseHeadingEls = Array.from<HTMLHeadingElement>(
-      document.querySelector('.prose')!.querySelectorAll('h2, h3, h4, h5, h6')
-    )
+    const parseChildren = (toc: ArticleContent[]): TocContent[] =>
+      toc.flatMap(({ id, children }) => [{ id, y: document.getElementById(id)!.offsetTop }, ...parseChildren(children)])
+    const tocInfo = toc.map(({ id, children }) => ({
+      id,
+      y: document.getElementById(id)!.offsetTop,
+      children: parseChildren(children)
+    }))
 
-    const handleClosestId = () => {
-      const top = window.scrollY
-      const heading = proseHeadingEls.reduce((preEl, curEl) =>
-        Math.abs(curEl.offsetTop - top) < Math.abs(preEl.offsetTop - top) ? curEl : preEl
-      )
-      setClosestId(heading.id)
+    const findClosestId = (toc: TocContent[]) => toc.findLast((content) => content.y - 114 < window.scrollY)?.id ?? ''
+    const handleClosestIdx = () => {
+      const closestId = findClosestId(tocInfo)
+      setParentClosestId(closestId)
+      const childrenToc = tocInfo.find((info) => info.id === closestId)?.children
+      childrenToc && setClosestId(findClosestId(childrenToc))
     }
 
-    window.addEventListener('scroll', handleClosestId)
-    return () => {
-      window.removeEventListener('scroll', handleClosestId)
-    }
+    window.addEventListener('scroll', handleClosestIdx)
+    return () => window.removeEventListener('scroll', handleClosestIdx)
   }, [])
 
   return (
-    <div className='not-prose absolute start-full hidden h-full w-full max-w-52 py-20 pl-4 xl:block'>
-      <aside className='sticky top-16 block overflow-hidden'>
-        <nav className='flex flex-col gap-2'>
-          {toc.map(({ depth, content, id }) => {
-            const tocStyle = `opacity-${closestId === id ? 100 : 50} toc-h${depth}`
+    <aside className='not-prose absolute start-full mx-4 hidden h-full min-w-56 py-20 xl:block'>
+      <nav className='sticky top-20 overflow-hidden'>
+        <ul className='nav-anchor truncate text-muted-foreground' anchor={`toc-${parentClosestId}`}>
+          {toc.map(({ children, content, id }) => {
             return (
-              <Link href={`#${id}`} key={`toc-${id}`} className={tocStyle}>
-                {content}
-              </Link>
+              <li className='ps-2' id={`toc-${id}`} key={`toc-${id}`}>
+                <Link
+                  href={`#${id}`}
+                  className={clsx(
+                    'p-2 text-lg hover:font-bold hover:text-foreground',
+                    parentClosestId === id && 'font-bold text-foreground'
+                  )}
+                >
+                  {content}
+                </Link>
+                <TocHeader toc={children} closestId={closestId} />
+              </li>
             )
           })}
-        </nav>
-      </aside>
-    </div>
+        </ul>
+      </nav>
+    </aside>
+  )
+}
+
+function TocHeader({ toc, closestId }: { toc: ArticleContent[]; closestId: string }) {
+  if (!toc.length) return
+  return (
+    <ul>
+      {toc.map(({ content, id, children }) => {
+        return (
+          <li className='ps-2' key={`toc-${id}`}>
+            <Link
+              href={`#${id}`}
+              className={clsx(
+                'p-2 text-base hover:font-semibold hover:text-foreground',
+                closestId === id && 'font-semibold text-foreground'
+              )}
+            >
+              {content}
+            </Link>
+            <TocHeader toc={children} closestId={closestId} />
+          </li>
+        )
+      })}
+    </ul>
   )
 }

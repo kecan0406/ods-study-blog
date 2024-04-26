@@ -67,29 +67,27 @@
   margin-top: 0;
 }
 
-.toc-h2 {
-  @apply text-lg;
-}
-.toc-h3 {
-  @apply indent-2 text-base;
-}
-.toc-h4 {
-  @apply indent-4 text-sm;
-}
-.toc-h5 {
-  @apply indent-6 text-xs;
-}
-.toc-h6 {
-  @apply indent-8 text-xs;
-}
-
 .shadow-effect {
   position: relative;
 }
-.shadow-effect::before {
+.shadow-effect::after {
   content: "";
   @apply pointer-events-none absolute right-0 bottom-0 block h-6 w-3/5 bg-gradient-to-r from-transparent to-background group-hover:to-accent
 }
+
+.nav-anchor::after {
+    content: "";
+    transition: inset 180ms;
+    @apply bg-muted pointer-events-none absolute -z-10 border-l-4 border-foreground
+}
+
+@supports(anchor-name: --anchor) {
+    .nav-anchor::after {
+        position-anchor: var(--anchor, toc-0);
+        inset: anchor(top) anchor(right) anchor(bottom) anchor(left);
+    }
+}
+
 
 #flashlight {
   --Xpos: 0;

@@ -13,11 +13,12 @@ export type Article = {
   matter: FrontMatterArticle
   content: string
 }
-export type ArticleToc = {
+export type ArticleContent = {
+  id: string
   depth: number
   content: string
-  id: string
-}[]
+  children: ArticleContent[]
+}
 
 export const fetchArticles = async (): Promise<Article[]> => {
   return await Promise.all(articleSlugs.map((slug) => fetchArticle(slug, true)))
