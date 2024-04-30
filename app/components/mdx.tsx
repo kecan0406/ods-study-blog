@@ -1,9 +1,9 @@
 import MdxHeadingLink from 'app/components/mdx-heading-link'
 import { MDXComponents } from 'mdx/types'
+import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ReactNode, createElement } from 'react'
-import { MDXRemote, MDXRemoteProps } from 'remote-mdx/rsc'
 import { slugify } from 'utils/md-utils'
 
 type HeadingProps = { children?: ReactNode; id?: string }

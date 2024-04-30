@@ -83,13 +83,21 @@
   @apply indent-8 text-xs;
 }
 
+.shadow-effect {
+  position: relative;
+}
+.shadow-effect::before {
+  content: "";
+  @apply pointer-events-none absolute right-0 bottom-0 block h-6 w-3/5 bg-gradient-to-r from-transparent to-background group-hover:to-accent
+}
+
 #flashlight {
   --Xpos: 0;
   --Ypos: 0;
 }
 
 #flashlight:before {
-  content: "";
+  content: '';
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -97,10 +105,9 @@
   left: 0;
   pointer-events: none;
   background: radial-gradient(
-          circle 12em at var(--Xpos, 50vw) var(--Ypos, 50vh),
-          rgba(0, 0, 0, 0),
-          rgba(0, 0, 0, 0.2),
-          rgba(0, 0, 0, 1)
+          circle 12em at var(--Xpos) var(--Ypos),
+          transparent 50%,
+          currentColor
   );
 }
 

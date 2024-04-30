@@ -2,25 +2,22 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { ArticleToc } from 'utils/api/blog'
-import { throttle } from 'utils/utils'
 
 export default function Toc({ toc }: { toc: ArticleToc }) {
   const [closestId, setClosestId] = useState<string>('')
 
   useEffect(() => {
-    const prose = document.querySelector('.prose')!
-    const headings = Array.from<HTMLElement>(prose.querySelectorAll('h2, h3, h4, h5, h6')).map((heading) => ({
-      id: heading.id,
-      top: heading.offsetTop
-    }))
+    const proseHeadingEls = Array.from<HTMLHeadingElement>(
+      document.querySelector('.prose')!.querySelectorAll('h2, h3, h4, h5, h6')
+    )
 
-    const handleClosestId = throttle(() => {
-      const proseTop = Math.abs(prose.getBoundingClientRect().top - 128)
-      const closestId = headings.reduce((pre, cur) => {
-        return Math.abs(cur.top - proseTop) < Math.abs(pre.top - proseTop) ? cur : pre
-      }, headings[0]).id
-      setClosestId(closestId)
-    }, 150)
+    const handleClosestId = () => {
+      const top = window.scrollY
+      const heading = proseHeadingEls.reduce((preEl, curEl) =>
+        Math.abs(curEl.offsetTop - top) < Math.abs(preEl.offsetTop - top) ? curEl : preEl
+      )
+      setClosestId(heading.id)
+    }
 
     window.addEventListener('scroll', handleClosestId)
     return () => {
@@ -29,14 +26,13 @@ export default function Toc({ toc }: { toc: ArticleToc }) {
   }, [])
 
   return (
-    <div className='not-prose absolute start-full hidden h-full w-full max-w-52 py-8 pl-4 xl:block'>
+    <div className='not-prose absolute start-full hidden h-full w-full max-w-52 py-20 pl-4 xl:block'>
       <aside className='sticky top-16 block overflow-hidden'>
         <nav className='flex flex-col gap-2'>
           {toc.map(({ depth, content, id }) => {
-            const active = closestId === id ? 100 : 50
-            const TocStyle = `opacity-${active} toc-h${depth}`
+            const tocStyle = `opacity-${closestId === id ? 100 : 50} toc-h${depth}`
             return (
-              <Link href={`#${id}`} key={`toc-${id}`} className={TocStyle}>
+              <Link href={`#${id}`} key={`toc-${id}`} className={tocStyle}>
                 {content}
               </Link>
             )

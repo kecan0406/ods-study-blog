@@ -1,4 +1,3 @@
-import ShadowEffect from 'app/components/shadow-effect'
 import { Card, CardDescription, CardHeader, CardTitle } from 'app/components/ui/card'
 import ViewCounter from 'app/components/view-counter'
 import Link from 'next/link'
@@ -13,7 +12,7 @@ export default function ArticleExcerpt({ article }: { article: Article }) {
   return (
     <Link href={`/blog/${matter.slug}`}>
       <Card as='article' className='group min-h-full min-w-full border-none hover:bg-accent'>
-        <CardHeader className='relative p-2'>
+        <CardHeader className='p-2'>
           <div className='flex gap-1'>
             {matter.tags.map((tag) => (
               <TagBadge tag={tag} key={tag} />
@@ -23,15 +22,14 @@ export default function ArticleExcerpt({ article }: { article: Article }) {
             {matter.title}
           </CardTitle>
           <HeaderMeta matter={matter} />
-          <CardDescription className='h-10 overflow-hidden font-medium'>{content}</CardDescription>
-          <ShadowEffect />
+          <CardDescription className='h-10 overflow-hidden font-medium shadow-effect'>{content}</CardDescription>
         </CardHeader>
       </Card>
     </Link>
   )
 }
 
-const HeaderMeta = ({ matter }: { matter: FrontMatterArticle }) => {
+function HeaderMeta({ matter }: { matter: FrontMatterArticle }) {
   const { slug, releaseDate, readingTime } = matter
   return (
     <div className='flex font-semibold text-muted-foreground text-sm'>
@@ -44,7 +42,7 @@ const HeaderMeta = ({ matter }: { matter: FrontMatterArticle }) => {
   )
 }
 
-const Views = async ({ slug }: { slug: string }) => {
+async function Views({ slug }: { slug: string }) {
   const views = await getPostsCount()
   return <ViewCounter slug={slug} allViews={views} />
 }

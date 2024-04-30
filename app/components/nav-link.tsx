@@ -1,7 +1,6 @@
 'use client'
 
-import { Button } from 'app/components/ui/button'
-import { clsx } from 'clsx'
+import { buttonVariants } from 'app/components/ui/button'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -14,11 +13,14 @@ export default function NavLinks(props: NavLinksProp) {
       {props.links.map(({ href, text }) => {
         const underline = pathName.startsWith(href)
         return (
-          <Button variant='link' className={clsx('h-10 p-3 font-bold', { underline })} key={href}>
-            <Link scroll={false} href={href}>
-              {text}
-            </Link>
-          </Button>
+          <Link
+            className={buttonVariants({ variant: 'link', className: { underline } })}
+            scroll={false}
+            href={href}
+            key={href}
+          >
+            {text}
+          </Link>
         )
       })}
     </div>

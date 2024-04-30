@@ -6,7 +6,7 @@ export default function Footer() {
       <div className='wrapper flex min-h-64 flex-col items-center justify-around'>
         <Link href='/'>
           <div className='flex flex-col items-center'>
-            <span className='font-semibold text-lg'>ODS Study</span>
+            <span className='notranslate font-semibold text-lg'>ODS Study</span>
           </div>
         </Link>
       </div>
