@@ -3,7 +3,7 @@ import { join } from 'path'
 import { MDXRemoteProps } from 'next-mdx-remote/rsc'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import RemoveMarkdown from 'remove-markdown'
-import { ArticleToc, FrontMatterArticle } from 'utils/api/blog'
+import { ArticleContent, FrontMatterArticle } from 'utils/api/blog'
 
 const ARTICLE_PATH = join(process.cwd(), 'content')
 const MD_REGEX = /\.mdx$/
@@ -41,15 +41,25 @@ export const parseFrontMatter = (fileContent: string) => {
 }
 
 const HEADER_REGEX = /(?<flag>#{1,6})\s+(?<content>.+)/g
-export const parseToc = (content: string): ArticleToc => {
-  return Array.from(content.matchAll(HEADER_REGEX)).map(({ groups }) => {
-    const { flag, content } = groups!
-    return {
-      depth: flag.length,
-      content,
-      id: slugify(content)
-    }
+export const parseTOC = (content: string): ArticleContent[] => {
+  const articleToc: ArticleContent[] = Array.from(content.matchAll(HEADER_REGEX)).map(({ groups }) => ({
+    id: slugify(groups!.content),
+    depth: groups!.flag.length,
+    content: groups!.content,
+    children: []
+  }))
+  return parseChildren(articleToc)
+}
+const parseChildren = (toc: ArticleContent[]): ArticleContent[] => {
+  toc.forEach((articleTitle, i) => {
+    if (articleTitle.depth > toc[i + 1]?.depth) return
+    const nextToc = toc.splice(
+      i + 1,
+      toc.slice(i + 1).findIndex((sliceToc) => articleTitle.depth >= sliceToc.depth)
+    )
+    articleTitle.children = parseChildren(nextToc)
   })
+  return toc
 }
 
 const WORDS_PER_MINUTE = 200
