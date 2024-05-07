@@ -1,6 +1,7 @@
 import fs from 'node:fs'
 import { join } from 'path'
 import { MDXRemoteProps } from 'next-mdx-remote/rsc'
+import rehypePrettyCode from 'rehype-pretty-code'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import RemoveMarkdown from 'remove-markdown'
 import { ArticleContent, FrontMatterArticle } from 'utils/api/blog'
@@ -15,7 +16,17 @@ export const articleSlugs = fs
 export const mdxRemoteOptions: MDXRemoteProps['options'] = {
   mdxOptions: {
     remarkPlugins: [remarkUnwrapImages],
-    rehypePlugins: []
+    rehypePlugins: [
+      [
+        rehypePrettyCode,
+        {
+          theme: {
+            dark: 'one-dark-pro',
+            light: 'one-light'
+          }
+        } as import('rehype-pretty-code').Options
+      ]
+    ]
   }
 }
 export const getMarkdownFile = (slug: string): string => {

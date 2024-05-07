@@ -3,39 +3,31 @@ import { MDXComponents } from 'mdx/types'
 import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ReactNode, createElement } from 'react'
+import { AnchorHTMLAttributes, DetailedHTMLProps, HTMLAttributes, ImgHTMLAttributes, createElement } from 'react'
 import { slugify } from 'utils/md-utils'
 
-type HeadingProps = { children?: ReactNode; id?: string }
-const headings = (type: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6') => {
-  const Heading = ({ children }: HeadingProps) => {
+const a = ({ children, ...props }: DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>) => (
+  <Link {...props} href={props.href!}>
+    {children}
+  </Link>
+)
+
+const img = ({ title, src, alt }: DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>) => (
+  <figure>
+    <Image src={src!} alt={alt!} height={376} width={768} title={title} />
+    <figcaption>{title}</figcaption>
+  </figure>
+)
+
+const headings =
+  (type: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6') =>
+  ({ children }: DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>) => {
     const id = slugify(children!.toString())
     return createElement(type, { id }, [MdxHeadingLink({ id })], children)
   }
-  Heading.displayName = type
-  return Heading
-}
-
 const components: MDXComponents = {
-  img: ({ src, alt, title, ...props }) => {
-    if (!title) {
-      return <Image src={src!} alt={alt!} height={376} width={768} />
-    }
-
-    return (
-      <figure>
-        <Image src={src!} alt={alt!} height={376} width={768} title={title} />
-        <figcaption>{title}</figcaption>
-      </figure>
-    )
-  },
-  a: ({ children, ...props }) => {
-    return (
-      <Link {...props} href={props.href!}>
-        {children}
-      </Link>
-    )
-  },
+  img,
+  a,
   h1: headings('h1'),
   h2: headings('h2'),
   h3: headings('h3'),

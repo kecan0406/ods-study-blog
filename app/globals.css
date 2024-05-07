@@ -67,6 +67,29 @@
   margin-top: 0;
 }
 
+.prose {
+    pre {
+        overflow-x: auto;
+        padding: 1rem 0;
+    }
+    pre [data-line] {
+        padding: 0 1rem;
+    }
+    pre[data-theme*=" "],
+    pre[data-theme*=" "] span {
+        color: var(--shiki-light);
+        background-color: var(--shiki-light-bg);
+    }
+}
+.dark .prose {
+    pre[data-theme*=" "],
+    pre[data-theme*=" "] span {
+        color: var(--shiki-dark);
+        background-color: var(--shiki-dark-bg);
+  }
+}
+
+
 .shadow-effect {
   position: relative;
 }
@@ -78,7 +101,7 @@
 .nav-anchor::after {
     content: "";
     transition: inset 180ms;
-    @apply pointer-events-none absolute -z-10 border-x-2 border-foreground rounded
+    @apply pointer-events-none absolute -z-10 border-l-2 border-foreground
 }
 
 @supports(anchor-name: --anchor) {
