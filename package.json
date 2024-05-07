@@ -34,7 +34,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.7.0",
+    "@biomejs/biome": "1.7.3",
     "@tailwindcss/typography": "^0.5.13",
     "@types/dom-view-transitions": "^1.0.4",
     "@types/node": "^20.12.8",

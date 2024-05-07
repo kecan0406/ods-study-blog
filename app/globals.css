@@ -52,9 +52,11 @@
 .anchor {
   @apply invisible absolute -ms-8 w-full max-w-3xl text-muted-foreground no-underline md:inline-block;
 }
+
 .anchor:hover {
   @apply visible;
 }
+
 .prose *:hover > .anchor {
   @apply visible;
 }
@@ -68,24 +70,27 @@
 }
 
 .prose {
-    pre {
-        overflow-x: auto;
-        padding: 1rem 0;
-    }
-    pre [data-line] {
-        padding: 0 1rem;
-    }
-    pre[data-theme*=" "],
-    pre[data-theme*=" "] span {
-        color: var(--shiki-light);
-        background-color: var(--shiki-light-bg);
-    }
+  pre {
+    overflow-x: auto;
+    padding: 1rem 0;
+  }
+
+  pre [data-line] {
+    padding: 0 1rem;
+  }
+
+  pre[data-theme*=" "],
+  pre[data-theme*=" "] span {
+    color: var(--shiki-light);
+    background-color: var(--shiki-light-bg);
+  }
 }
+
 .dark .prose {
-    pre[data-theme*=" "],
-    pre[data-theme*=" "] span {
-        color: var(--shiki-dark);
-        background-color: var(--shiki-dark-bg);
+  pre[data-theme*=" "],
+  pre[data-theme*=" "] span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
   }
 }
 
@@ -93,22 +98,23 @@
 .shadow-effect {
   position: relative;
 }
+
 .shadow-effect::after {
   content: "";
   @apply pointer-events-none absolute right-0 bottom-0 block h-6 w-3/5 bg-gradient-to-r from-transparent to-background group-hover:to-accent
 }
 
 .nav-anchor::after {
-    content: "";
-    transition: inset 180ms;
-    @apply pointer-events-none absolute -z-10 border-l-2 border-foreground
+  content: "";
+  transition: inset 180ms;
+  @apply pointer-events-none absolute -z-10 border-l-2 border-foreground
 }
 
-@supports(anchor-name: --anchor) {
-    .nav-anchor::after {
-        position-anchor: var(--anchor, toc-0);
-        inset: anchor(top) anchor(right) anchor(bottom) anchor(left);
-    }
+@supports (anchor-name: --anchor) {
+  .nav-anchor::after {
+    position-anchor: var(--anchor, toc-0);
+    inset: anchor(top) anchor(right) anchor(bottom) anchor(left);
+  }
 }
 
 
@@ -126,9 +132,9 @@
   left: 0;
   pointer-events: none;
   background: radial-gradient(
-          circle 12em at var(--Xpos) var(--Ypos),
-          transparent 50%,
-          currentColor
+      circle 12em at var(--Xpos) var(--Ypos),
+      transparent 50%,
+      currentColor
   );
 }
 
@@ -144,6 +150,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
