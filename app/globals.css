@@ -104,15 +104,26 @@
   @apply pointer-events-none absolute right-0 bottom-0 block h-6 w-3/5 bg-gradient-to-r from-transparent to-background group-hover:to-accent
 }
 
-.nav-anchor::after {
+.toc-anchor::after {
   content: "";
   transition: inset 180ms;
   @apply pointer-events-none absolute -z-10 border-l-2 border-foreground
 }
 
+.nav-anchor::after {
+  content: "";
+  transition: all 180ms;
+  @apply pointer-events-none absolute -z-10 border-b border-foreground
+}
+
 @supports (anchor-name: --anchor) {
-  .nav-anchor::after {
+  .toc-anchor::after {
     position-anchor: var(--anchor, toc-0);
+    inset: anchor(top) anchor(right) anchor(bottom) anchor(left);
+  }
+
+  .nav-anchor::after {
+    position-anchor: var(--anchor);
     inset: anchor(top) anchor(right) anchor(bottom) anchor(left);
   }
 }

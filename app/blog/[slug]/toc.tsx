@@ -33,7 +33,7 @@ export default function Toc({ toc }: { toc: ArticleContent[] }) {
   return (
     <aside className='not-prose absolute start-full mx-4 hidden h-full min-w-56 py-20 xl:block'>
       <nav className='sticky top-20 overflow-hidden'>
-        <ul className='nav-anchor truncate text-muted-foreground' anchor={`toc-${parentClosestId}`}>
+        <ul className='toc-anchor truncate text-muted-foreground' anchor={`toc-${parentClosestId}`}>
           {toc.map(({ children, content, id }) => {
             return (
               <li className='ps-2' id={`toc-${id}`} key={`toc-${id}`}>
