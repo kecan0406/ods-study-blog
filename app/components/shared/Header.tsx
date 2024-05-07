@@ -3,14 +3,14 @@ import ThemeToggleButton from 'app/components/theme-toggle-button'
 import Link from 'next/link'
 
 const links = [
-  { href: '/blog', text: 'Blog' },
-  { href: '/about', text: 'About' }
+  { href: 'blog', text: 'Blog' },
+  { href: 'about', text: 'About' }
 ]
 
 export default function Header() {
   return (
-    <header className='fixed z-10 w-full border-b backdrop-blur-sm'>
-      <nav className='wrapper flex items-center justify-between p-2'>
+    <header className='fixed z-10 w-full border-foreground border-b bg-background shadow-inner'>
+      <nav className='nav-shadow wrapper relative flex items-center justify-between p-2'>
         <div className='mr-4 flex items-center'>
           <Logo />
         </div>
