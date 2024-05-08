@@ -22,7 +22,7 @@ export default function ArticleExcerpt({ article }: { article: Article }) {
             {matter.title}
           </CardTitle>
           <HeaderMeta matter={matter} />
-          <CardDescription className='h-10 overflow-hidden font-medium shadow-effect'>{content}</CardDescription>
+          <CardDescription className='h-10 overflow-hidden font-medium'>{content}</CardDescription>
         </CardHeader>
       </Card>
     </Link>
