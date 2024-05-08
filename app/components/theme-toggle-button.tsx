@@ -3,7 +3,7 @@
 import { Button } from 'app/components/ui/button'
 import { clsx } from 'clsx'
 import { useTheme } from 'next-themes'
-import { MouseEvent, useEffect, useState } from 'react'
+import { MouseEvent, useState } from 'react'
 import { MdDarkMode, MdFlashlightOff, MdFlashlightOn, MdLightMode } from 'react-icons/md'
 import { useFlashlight } from 'utils/hooks/use-flashlight'
 
@@ -32,11 +32,8 @@ export default function ThemeToggleButton() {
       : switchTheme()
     setCount(isFL ? 0 : count + 1)
   }
-  const { flashlightRef, moveLight } = useFlashlight(isFL)
 
-  const [isMounted, setIsMounted] = useState<boolean>(false)
-  useEffect(() => setIsMounted(true), [])
-  if (!isMounted) return
+  const { flashlightRef, moveLight } = useFlashlight(isFL)
   return (
     <>
       <Button variant='ghost' size='icon' className='h-10 w-10 rounded-full' onClick={handleTheme}>

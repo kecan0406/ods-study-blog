@@ -1,12 +1,11 @@
 import NavLinks from 'app/components/nav-link'
-import ThemeToggleButton from 'app/components/theme-toggle-button'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
 const links = [
   { href: 'blog', text: 'Blog' },
   { href: 'about', text: 'About' }
 ]
-
 export default function Header() {
   return (
     <header className='fixed z-10 w-full border-foreground border-b bg-background shadow-inner'>
@@ -30,3 +29,5 @@ function Logo() {
     </Link>
   )
 }
+
+const ThemeToggleButton = dynamic(() => import('app/components/theme-toggle-button'), { ssr: false })
