@@ -9,7 +9,7 @@ const links = [
 export default function Header() {
   return (
     <header className='fixed z-10 w-full border-foreground border-b bg-background shadow-inner'>
-      <nav className='nav-shadow wrapper relative flex items-center justify-between p-2'>
+      <nav className='wrapper relative flex items-center justify-between p-2'>
         <div className='mr-4 flex items-center'>
           <Logo />
         </div>

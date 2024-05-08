@@ -6,17 +6,14 @@ import { usePathname } from 'next/navigation'
 
 type NavLinksProp = { links: { href: string; text: string }[] }
 export default function NavLinks(props: NavLinksProp) {
-  const pathName = usePathname().split('/')[1]
+  const anchor = usePathname().split('/')[1]
 
   return (
-    <div className='nav-anchor flex flex-grow items-center gap-1' anchor={pathName}>
+    <div className='nav-anchor flex flex-grow items-center gap-1' anchor={anchor}>
       {props.links.map(({ href, text }) => (
         <Link
           id={href}
-          className={buttonVariants({
-            variant: 'link',
-            className: 'decoration-1 underline-offset-8'
-          })}
+          className={buttonVariants({ variant: 'link', className: 'decoration-1' })}
           scroll={false}
           href={`/${href}`}
           key={href}

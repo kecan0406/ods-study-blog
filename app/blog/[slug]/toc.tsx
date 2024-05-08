@@ -1,6 +1,5 @@
 'use client'
 import { clsx } from 'clsx'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { ArticleContent } from 'utils/api/blog'
 
@@ -37,7 +36,7 @@ export default function Toc({ toc }: { toc: ArticleContent[] }) {
           {toc.map(({ children, content, id }) => {
             return (
               <li className='ps-2' id={`toc-${id}`} key={`toc-${id}`}>
-                <Link
+                <a
                   href={`#${id}`}
                   className={clsx(
                     'p-2 text-lg hover:font-bold hover:text-foreground',
@@ -45,7 +44,7 @@ export default function Toc({ toc }: { toc: ArticleContent[] }) {
                   )}
                 >
                   {content}
-                </Link>
+                </a>
                 <TocHeader toc={children} closestId={closestId} />
               </li>
             )
@@ -63,7 +62,7 @@ function TocHeader({ toc, closestId }: { toc: ArticleContent[]; closestId: strin
       {toc.map(({ content, id, children }) => {
         return (
           <li className='ps-2' key={`toc-${id}`}>
-            <Link
+            <a
               href={`#${id}`}
               className={clsx(
                 'p-2 text-base hover:font-semibold hover:text-foreground',
@@ -71,7 +70,7 @@ function TocHeader({ toc, closestId }: { toc: ArticleContent[]; closestId: strin
               )}
             >
               {content}
-            </Link>
+            </a>
             <TocHeader toc={children} closestId={closestId} />
           </li>
         )

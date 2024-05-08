@@ -112,13 +112,7 @@
 
 .nav-anchor::after {
   content: "";
-  transition: inset 125ms;
-  @apply pointer-events-none absolute -z-10 border-b border-foreground my-1 mx-4
-}
-
-.nav-shadow::after {
-  content: "";
-  @apply w-full h-2 absolute pointer-events-none bottom-0 bg-gradient-to-t from-60% from-background -mx-2 my-px
+  @apply pointer-events-none absolute -z-10 border-b border-foreground my-2 mx-4
 }
 
 @supports (anchor-name: --anchor) {
@@ -127,9 +121,19 @@
     inset: anchor(top) anchor(right) anchor(bottom) anchor(left);
   }
 
+  :root:has(.nav-anchor:not([anchor=''])) {
+    --active: 1;
+  }
+
   .nav-anchor::after {
     position-anchor: var(--anchor);
-    inset: anchor(top) anchor(right) anchor(bottom) anchor(left);
+    opacity: var(--active, 0);
+    transition: all 125ms;
+    inset:
+      anchor(top)
+      anchor(right)
+      anchor(bottom)
+      anchor(left);
   }
 }
 
