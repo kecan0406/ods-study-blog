@@ -11,18 +11,16 @@ export default function ArticleExcerpt({ article }: { article: Article }) {
 
   return (
     <Link href={`/blog/${matter.slug}`}>
-      <Card as='article' className='group min-h-full min-w-full border-none hover:bg-accent'>
-        <CardHeader className='p-2'>
+      <Card as='article' className='group h-full w-full border-none hover:bg-accent'>
+        <CardHeader>
           <div className='flex gap-1'>
             {matter.tags.map((tag) => (
               <TagBadge tag={tag} key={tag} />
             ))}
           </div>
-          <CardTitle className='text-balance text-2xl underline-offset-4 group-hover:underline'>
-            {matter.title}
-          </CardTitle>
+          <CardTitle className='text-2xl group-hover:underline'>{matter.title}</CardTitle>
           <HeaderMeta matter={matter} />
-          <CardDescription className='h-10 overflow-hidden font-medium'>{content}</CardDescription>
+          <CardDescription className='h-10 overflow-hidden'>{content}</CardDescription>
         </CardHeader>
       </Card>
     </Link>

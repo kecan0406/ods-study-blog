@@ -16,9 +16,9 @@ export default async function BlogPage({ searchParams }: { searchParams: { tags?
     <div className='wrapper'>
       <section className='py-8'>
         <SearchTags tags={tags} />
-        <ul className='grid grid-cols-1 gap-4'>
+        <ul>
           {articles.map((article) => (
-            <li key={article.matter.slug}>
+            <li className='mb-4' key={article.matter.slug}>
               <ArticleExcerpt article={article} />
             </li>
           ))}
