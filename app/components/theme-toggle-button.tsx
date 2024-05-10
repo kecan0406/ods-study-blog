@@ -36,7 +36,13 @@ export default function ThemeToggleButton() {
   const { flashlightRef, moveLight } = useFlashlight(isFL)
   return (
     <>
-      <Button variant='ghost' size='icon' className='h-10 w-10 rounded-full' onClick={handleTheme}>
+      <Button
+        aria-label='theme-btn'
+        variant='ghost'
+        size='icon'
+        className='h-10 w-10 rounded-full'
+        onClick={handleTheme}
+      >
         {isPrevFL ? (
           isFL ? (
             <MdFlashlightOff className='theme-icon' />
