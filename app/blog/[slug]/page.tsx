@@ -2,8 +2,14 @@ import BlogFooter from 'app/blog/[slug]/blog-footer'
 import BlogHeader from 'app/blog/[slug]/blog-header'
 import Toc from 'app/blog/[slug]/toc'
 import ArticleMdxRemote from 'app/components/mdx'
-import { Article, fetchArticle } from 'utils/api/blog'
+import { Article, fetchArticle, fetchArticles } from 'utils/api/blog'
 import { mdxRemoteOptions, parseTOC } from 'utils/md-utils'
+
+export const dynamicParams = false
+export async function generateStaticParams() {
+  const articles = await fetchArticles()
+  return articles.map((article) => ({ slug: article.matter.slug }))
+}
 
 const getArticle = async (slug: string): Promise<Article> => await fetchArticle(slug)
 
