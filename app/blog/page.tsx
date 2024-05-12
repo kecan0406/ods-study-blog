@@ -1,29 +1,24 @@
 import ArticleExcerpt from 'app/components/article-excerpt'
 import { Article, fetchArticles } from 'utils/api/blog'
-import SearchTags from './search-tags'
 
-const getArticles = async (tags: string[]): Promise<Article[]> => {
+const getArticles = async (): Promise<Article[]> => {
   const articles = await fetchArticles()
-  return articles
-    .filter((a) => tags.every((tag) => a.matter.tags.includes(tag)))
-    .toSorted((a, b) => new Date(b.matter.releaseDate).getTime() - new Date(a.matter.releaseDate).getTime())
+  return articles.toSorted(
+    (a, b) => new Date(b.matter.releaseDate).getTime() - new Date(a.matter.releaseDate).getTime()
+  )
 }
 
-export default async function BlogPage({ searchParams }: { searchParams: { tags?: string } }) {
-  const tags = searchParams.tags ? searchParams.tags.split(',') : []
-  const articles = await getArticles(tags)
+export default async function BlogPage() {
+  const articles = await getArticles()
   return (
-    <div className='wrapper'>
-      <section className='py-8'>
-        <SearchTags tags={tags} />
-        <ul>
-          {articles.map((article) => (
-            <li className='mb-4' key={article.matter.slug}>
-              <ArticleExcerpt article={article} />
-            </li>
-          ))}
-        </ul>
-      </section>
-    </div>
+    <article className='wrapper py-8'>
+      <ul>
+        {articles.map((article) => (
+          <li className='mb-4' key={article.matter.slug}>
+            <ArticleExcerpt article={article} />
+          </li>
+        ))}
+      </ul>
+    </article>
   )
 }

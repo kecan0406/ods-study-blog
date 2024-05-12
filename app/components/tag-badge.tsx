@@ -1,4 +1,5 @@
 'use client'
+
 import { useRouter, useSearchParams } from 'next/navigation'
 import { MouseEvent, Suspense } from 'react'
 import { Badge } from './ui/badge'
@@ -28,7 +29,7 @@ function Tag({ tag }: { tag: string }) {
     e.preventDefault()
     e.stopPropagation()
     if (!searchTags.includes(tag)) {
-      router.push(`/blog?tags=${searchTags.concat(tag).join(',')}`)
+      router.push(`?tags=${searchTags.concat(tag).join(',')}`)
     }
   }
 

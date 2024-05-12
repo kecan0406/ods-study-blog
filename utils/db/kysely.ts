@@ -7,8 +7,14 @@ interface PostsTable {
   count: number
 }
 
+interface UsersTable {
+  id: Generated<number>
+  username: string
+}
+
 export interface Database {
   posts: PostsTable
+  users: UsersTable
 }
 
 export const db = createKysely<Database>()

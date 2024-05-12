@@ -28,7 +28,7 @@ async function NavPost({ slug }: { slug: string }) {
       <div>
         <p className='font-bold'>이전 글</p>
         {prev && (
-          <Link className='p-3 opacity-50 hover:opacity-100' href={`/blog/${prev.matter.slug}`}>
+          <Link className='p-3 opacity-50 hover:opacity-100' href={`/@${prev.matter.writer}/${prev.matter.slug}`}>
             {prev.matter.title}
           </Link>
         )}
@@ -36,7 +36,7 @@ async function NavPost({ slug }: { slug: string }) {
       <div>
         <p className='font-bold'>다음 글</p>
         {next && (
-          <Link className='p-3 opacity-50 hover:opacity-100' href={`/blog/${next.matter.slug}`}>
+          <Link className='p-3 opacity-50 hover:opacity-100' href={`/@${next.matter.writer}/${next.matter.slug}`}>
             {next.matter.title}
           </Link>
         )}

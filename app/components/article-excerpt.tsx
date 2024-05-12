@@ -10,7 +10,7 @@ export default function ArticleExcerpt({ article }: { article: Article }) {
   const { matter, content } = article
 
   return (
-    <Link href={`/blog/${matter.slug}`}>
+    <Link href={`/@${matter.writer}/${matter.slug}`}>
       <Card as='article' className='group h-full w-full border-none hover:bg-accent'>
         <CardHeader>
           <div className='flex gap-1'>

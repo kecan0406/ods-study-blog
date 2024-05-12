@@ -1,10 +1,10 @@
-import ViewCount from 'app/blog/[slug]/view-count'
 import { Avatar, AvatarFallback, AvatarImage } from 'app/components/ui/avatar'
 import { Badge } from 'app/components/ui/badge'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { FrontMatterArticle } from 'utils/api/blog'
+import ViewCount from './view-count'
 
 export default function BlogHeader({ matter }: { matter: FrontMatterArticle }) {
   const { title, releaseDate, readingTime, writer, image, tags } = matter
