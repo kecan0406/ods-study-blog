@@ -1,16 +1,16 @@
 import { Card, CardDescription, CardHeader, CardTitle } from 'app/components/ui/card'
 import ViewCounter from 'app/components/view-counter'
-import Link from 'next/link'
 import { Suspense } from 'react'
 import { Post, PostMatter } from 'utils/api/post'
 import { getPostsCount } from 'utils/db/querys'
+import PostLink from './shared/post-link'
 import TagBadge from './tag-badge'
 
 export default function PostExcerpt({ post }: { post: Post }) {
   const { matter, content } = post
 
   return (
-    <Link href={`/@${matter.writer}/${matter.slug}`}>
+    <PostLink writer={post.matter.writer} slug={post.matter.slug}>
       <Card as='article' className='group h-full w-full border-none hover:bg-accent'>
         <CardHeader>
           <div className='flex gap-1'>
@@ -23,7 +23,7 @@ export default function PostExcerpt({ post }: { post: Post }) {
           <CardDescription className='h-10 overflow-hidden'>{content}</CardDescription>
         </CardHeader>
       </Card>
-    </Link>
+    </PostLink>
   )
 }
 

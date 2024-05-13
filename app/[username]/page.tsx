@@ -16,7 +16,8 @@ const getPosts = async (username: string): Promise<Post[]> => {
 }
 
 export default async function UserPage({ params: { username } }: { params: { username: string } }) {
-  const posts = await getPosts(username.replace('%40', ''))
+  const posts = await getPosts(decodeURIComponent(username).replace('@', ''))
+
   return (
     <article className='wrapper py-8'>
       <ul>
