@@ -4,17 +4,6 @@ const nextConfig = {
     ppr: true
   },
   transpilePackages: ['next-mdx-remote'],
-  async headers() {
-    return [
-      {
-        source: '/api/theme/(.*)',
-        headers: [
-          { key: 'Access-Control-Allow-Origin', value: 'https://giscus.app' },
-          { key: 'Access-Control-Allow-Private-Network', value: 'true' }
-        ]
-      }
-    ]
-  },
   images: {
     remotePatterns: [
       {

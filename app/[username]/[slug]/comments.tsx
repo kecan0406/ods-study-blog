@@ -13,7 +13,7 @@ export default function Comments() {
       category='Comments'
       categoryId='DIC_kwDOLcAF6s4Ce2Db'
       mapping='pathname'
-      theme={`${process.env.NEXT_PUBLIC_API_URL}/theme/${resolvedTheme}.css`}
+      theme={`${process.env.NEXT_PUBLIC_URL}/themes/${resolvedTheme}.css`}
       emitMetadata='0'
       reactionsEnabled='0'
       lang='ko'
