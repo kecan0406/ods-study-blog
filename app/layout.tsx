@@ -1,6 +1,6 @@
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import Footer from 'app/components/shared/Footer'
-import Header from 'app/components/shared/Header'
+import Footer from 'app/components/shared/footer'
+import Header from 'app/components/shared/header'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 import localFont from 'next/font/local'

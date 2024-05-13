@@ -3,10 +3,10 @@ import { Badge } from 'app/components/ui/badge'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Suspense } from 'react'
-import { FrontMatterArticle } from 'utils/api/blog'
+import { PostMatter } from 'utils/api/post'
 import ViewCount from './view-count'
 
-export default function BlogHeader({ matter }: { matter: FrontMatterArticle }) {
+export default function PostHeader({ matter }: { matter: PostMatter }) {
   const { title, releaseDate, readingTime, writer, image, tags } = matter
   return (
     <header className='flex flex-col justify-center'>

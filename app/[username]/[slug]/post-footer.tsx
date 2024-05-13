@@ -1,15 +1,13 @@
 import Link from 'next/link'
-import { Article, fetchArticles } from 'utils/api/blog'
+import { Post, fetchPosts } from 'utils/api/post'
 import Comments from './comments'
 
-const getArticles = async (): Promise<Article[]> => {
-  const articles = await fetchArticles()
-  return articles.toSorted(
-    (a, b) => new Date(b.matter.releaseDate).getTime() - new Date(a.matter.releaseDate).getTime()
-  )
+const getPosts = async (): Promise<Post[]> => {
+  const posts = await fetchPosts()
+  return posts.toSorted((a, b) => new Date(b.matter.releaseDate).getTime() - new Date(a.matter.releaseDate).getTime())
 }
 
-export default async function BlogFooter({ slug }: { slug: string }) {
+export default async function PostFooter({ slug }: { slug: string }) {
   return (
     <div className='not-prose'>
       <NavPost slug={slug} />
@@ -19,10 +17,10 @@ export default async function BlogFooter({ slug }: { slug: string }) {
 }
 
 async function NavPost({ slug }: { slug: string }) {
-  const articles = await getArticles()
-  const curIdx = articles.findIndex((article) => article.matter.slug === slug)
-  const prev = articles[curIdx - 1]
-  const next = articles[curIdx + 1]
+  const posts = await getPosts()
+  const curIdx = posts.findIndex((post) => post.matter.slug === slug)
+  const prev = posts[curIdx - 1]
+  const next = posts[curIdx + 1]
   return (
     <div className='grid grid-cols-2 py-4 text-center'>
       <div>

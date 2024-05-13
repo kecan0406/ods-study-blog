@@ -2,12 +2,12 @@ import { Card, CardDescription, CardHeader, CardTitle } from 'app/components/ui/
 import ViewCounter from 'app/components/view-counter'
 import Link from 'next/link'
 import { Suspense } from 'react'
-import { Article, FrontMatterArticle } from 'utils/api/blog'
+import { Post, PostMatter } from 'utils/api/post'
 import { getPostsCount } from 'utils/db/querys'
 import TagBadge from './tag-badge'
 
-export default function ArticleExcerpt({ article }: { article: Article }) {
-  const { matter, content } = article
+export default function PostExcerpt({ post }: { post: Post }) {
+  const { matter, content } = post
 
   return (
     <Link href={`/@${matter.writer}/${matter.slug}`}>
@@ -27,7 +27,7 @@ export default function ArticleExcerpt({ article }: { article: Article }) {
   )
 }
 
-function HeaderMeta({ matter }: { matter: FrontMatterArticle }) {
+function HeaderMeta({ matter }: { matter: PostMatter }) {
   const { slug, releaseDate, readingTime } = matter
   return (
     <div className='flex font-semibold text-muted-foreground text-sm'>

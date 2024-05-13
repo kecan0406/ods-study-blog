@@ -4,12 +4,12 @@ import { MDXRemoteProps } from 'next-mdx-remote/rsc'
 import rehypePrettyCode from 'rehype-pretty-code'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import RemoveMarkdown from 'remove-markdown'
-import { ArticleContent, FrontMatterArticle } from 'utils/api/blog'
+import { PostContent, PostMatter } from 'utils/api/post'
 
-const ARTICLE_PATH = join(process.cwd(), 'content')
+const POST_PATH = join(process.cwd(), 'posts')
 const MD_REGEX = /\.mdx$/
-export const articleSlugs = fs
-  .readdirSync(ARTICLE_PATH)
+export const POST_SLUGS = fs
+  .readdirSync(POST_PATH)
   .filter((path) => MD_REGEX.test(path))
   .map((path) => path.replace(MD_REGEX, ''))
 
@@ -30,21 +30,21 @@ export const mdxRemoteOptions: MDXRemoteProps['options'] = {
   }
 }
 export const getMarkdownFile = (slug: string): string => {
-  return fs.readFileSync(join(ARTICLE_PATH, `${slug}.mdx`), 'utf8')
+  return fs.readFileSync(join(POST_PATH, `${slug}.mdx`), 'utf8')
 }
 
 const MATTER_REGEX = /---\s*([\s\S]*?)\s*---/
-export const parseFrontMatter = (fileContent: string) => {
+export const parseMatter = (fileContent: string) => {
   const lines = MATTER_REGEX.exec(fileContent)![1]
     .trim()
     .split('\n')
-    .map((line) => line.split(': ')) as [keyof FrontMatterArticle, string][]
+    .map((line) => line.split(': ')) as [keyof PostMatter, string][]
 
   const matter = lines.reduce((pre, [key, val]) => {
     const value = val.trim()
     key === 'tags' ? (pre[key] = value.split(',')) : (pre[key] = value)
     return pre
-  }, {} as FrontMatterArticle)
+  }, {} as PostMatter)
 
   const content = fileContent.replace(MATTER_REGEX, '').trim()
   matter.readingTime = readingTime(content)
@@ -52,23 +52,23 @@ export const parseFrontMatter = (fileContent: string) => {
 }
 
 const HEADER_REGEX = /(?<flag>#{1,6})\s+(?<content>.+)/g
-export const parseTOC = (content: string): ArticleContent[] => {
-  const articleToc: ArticleContent[] = Array.from(content.matchAll(HEADER_REGEX)).map(({ groups }) => ({
+export const parseTOC = (content: string): PostContent[] => {
+  const toc: PostContent[] = Array.from(content.matchAll(HEADER_REGEX)).map(({ groups }) => ({
     id: slugify(groups!.content),
     depth: groups!.flag.length,
     content: groups!.content,
     children: []
   }))
-  return parseChildren(articleToc)
+  return parseTocChildren(toc)
 }
-const parseChildren = (toc: ArticleContent[]): ArticleContent[] => {
-  toc.forEach((articleTitle, i) => {
-    if (articleTitle.depth > toc[i + 1]?.depth) return
+const parseTocChildren = (toc: PostContent[]): PostContent[] => {
+  toc.forEach((postContent, i) => {
+    if (postContent.depth > toc[i + 1]?.depth) return
     const nextToc = toc.splice(
       i + 1,
-      toc.slice(i + 1).findIndex((sliceToc) => articleTitle.depth >= sliceToc.depth)
+      toc.slice(i + 1).findIndex((sliceToc) => postContent.depth >= sliceToc.depth)
     )
-    articleTitle.children = parseChildren(nextToc)
+    postContent.children = parseTocChildren(nextToc)
   })
   return toc
 }

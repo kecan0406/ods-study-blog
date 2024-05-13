@@ -1,15 +1,15 @@
 'use client'
 import { clsx } from 'clsx'
 import { useEffect, useState } from 'react'
-import { ArticleContent } from 'utils/api/blog'
+import { PostContent } from 'utils/api/post'
 
 type TocContent = { id: string; y: number }
-export default function Toc({ toc }: { toc: ArticleContent[] }) {
+export default function Toc({ toc }: { toc: PostContent[] }) {
   const [parentClosestId, setParentClosestId] = useState<string>('')
   const [closestId, setClosestId] = useState<string>('')
 
   useEffect(() => {
-    const parseChildren = (toc: ArticleContent[]): TocContent[] =>
+    const parseChildren = (toc: PostContent[]): TocContent[] =>
       toc.flatMap(({ id, children }) => [{ id, y: document.getElementById(id)!.offsetTop }, ...parseChildren(children)])
     const tocInfo = toc.map(({ id, children }) => ({
       id,
@@ -55,7 +55,7 @@ export default function Toc({ toc }: { toc: ArticleContent[] }) {
   )
 }
 
-function TocHeader({ toc, closestId }: { toc: ArticleContent[]; closestId: string }) {
+function TocHeader({ toc, closestId }: { toc: PostContent[]; closestId: string }) {
   if (!toc.length) return
   return (
     <ul>

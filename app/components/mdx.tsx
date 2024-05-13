@@ -36,6 +36,6 @@ const components: MDXComponents = {
   h6: headings('h6')
 }
 
-export default function ArticleMdxRemote(props: MDXRemoteProps) {
+export default function PostMdxRemote(props: MDXRemoteProps) {
   return <MDXRemote {...props} components={{ ...components, ...(props.components || {}) }} />
 }

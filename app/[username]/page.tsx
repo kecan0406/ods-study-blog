@@ -1,5 +1,5 @@
-import ArticleExcerpt from 'app/components/article-excerpt'
-import { Article, fetchArticles } from 'utils/api/blog'
+import PostExcerpt from 'app/components/post-excerpt'
+import { Post, fetchPosts } from 'utils/api/post'
 import { getUsers } from 'utils/db/querys'
 
 export const dynamicParams = false
@@ -8,21 +8,21 @@ export async function generateStaticParams() {
   return users.map(({ username }) => ({ username: `@${username}` }))
 }
 
-const getArticles = async (username: string): Promise<Article[]> => {
-  const articles = await fetchArticles()
-  return articles
-    .filter((article) => article.matter.writer === username)
+const getPosts = async (username: string): Promise<Post[]> => {
+  const posts = await fetchPosts()
+  return posts
+    .filter((post) => post.matter.writer === username)
     .toSorted((a, b) => new Date(b.matter.releaseDate).getTime() - new Date(a.matter.releaseDate).getTime())
 }
 
 export default async function UserPage({ params: { username } }: { params: { username: string } }) {
-  const articles = await getArticles(username.replace('%40', ''))
+  const posts = await getPosts(username.replace('%40', ''))
   return (
     <article className='wrapper py-8'>
       <ul>
-        {articles.map((article) => (
-          <li className='mb-4' key={article.matter.slug}>
-            <ArticleExcerpt article={article} />
+        {posts.map((post) => (
+          <li className='mb-4' key={post.matter.slug}>
+            <PostExcerpt post={post} />
           </li>
         ))}
       </ul>

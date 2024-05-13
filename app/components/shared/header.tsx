@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
 const links = [
-  { href: 'blog', text: 'Blog' },
+  { href: 'writing', text: 'Writing' },
   { href: 'about', text: 'About' }
 ]
 export default function Header() {
