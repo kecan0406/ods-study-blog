@@ -1,7 +1,7 @@
+import PostLink from 'app/components/shared/post-link'
 import { Avatar, AvatarFallback, AvatarImage } from 'app/components/ui/avatar'
 import { Badge } from 'app/components/ui/badge'
 import Image from 'next/image'
-import Link from 'next/link'
 import { Suspense } from 'react'
 import { PostMatter } from 'utils/api/post'
 import ViewCount from './view-count'
@@ -13,17 +13,17 @@ export default function PostHeader({ matter }: { matter: PostMatter }) {
       {image && <HeaderImage image={image} title={title} />}
       <h1 className='text-balance'>{title}</h1>
       <div className='not-prose mb-2 flex gap-4 font-semibold text-sm'>
-        <Link href={`https://github.com/${writer}`}>
+        <PostLink writer={writer}>
           <Avatar>
             <AvatarImage src={`https://github.com/${writer}.png`} alt={`@${writer}`} />
             <AvatarFallback>{writer}</AvatarFallback>
           </Avatar>
-        </Link>
+        </PostLink>
         <div className='w-full flex-col'>
           <div className='flex'>
-            <Link className='link' href={`https://github.com/${writer}`}>
+            <PostLink className='link' writer={writer}>
               {writer}
-            </Link>
+            </PostLink>
             <Suspense fallback={<span className='flex-grow' />}>
               <ViewCount slug={matter.slug} />
             </Suspense>

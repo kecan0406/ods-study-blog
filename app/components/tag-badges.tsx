@@ -4,17 +4,22 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { MouseEvent, Suspense } from 'react'
 import { Badge } from './ui/badge'
 
-export default function TagBadge({ tag }: { tag: string }) {
+export default function TagBadges({ tags }: { tags: string[] }) {
   return (
-    <Suspense
-      fallback={
-        <Badge variant='secondary' className='before:content-["#"]'>
-          {tag}
-        </Badge>
-      }
-    >
-      <Tag tag={tag} />
-    </Suspense>
+    <div className='flex justify-end gap-1 p-1'>
+      {tags.map((tag) => (
+        <Suspense
+          key={tag}
+          fallback={
+            <Badge variant='secondary' className='before:content-["#"]'>
+              {tags}
+            </Badge>
+          }
+        >
+          <Tag tag={tag} />
+        </Suspense>
+      ))}
+    </div>
   )
 }
 

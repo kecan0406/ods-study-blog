@@ -4,35 +4,39 @@ import { Suspense } from 'react'
 import { Post, PostMatter } from 'utils/api/post'
 import { getPostsCount } from 'utils/db/querys'
 import PostLink from './shared/post-link'
-import TagBadge from './tag-badge'
+import TagBadges from './tag-badges'
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 
 export default function PostExcerpt({ post }: { post: Post }) {
   const { matter, content } = post
 
   return (
-    <PostLink writer={post.matter.writer} slug={post.matter.slug}>
-      <Card as='article' className='group h-full w-full border-none hover:bg-accent'>
-        <CardHeader>
-          <div className='flex gap-1'>
-            {matter.tags.map((tag) => (
-              <TagBadge tag={tag} key={tag} />
-            ))}
-          </div>
+    <Card as='article' className='h-full w-full border-none hover:bg-accent'>
+      <CardHeader>
+        <HeaderMeta matter={matter} />
+        <PostLink className='group' writer={matter.writer} slug={matter.slug}>
           <CardTitle className='text-2xl group-hover:underline'>{matter.title}</CardTitle>
-          <HeaderMeta matter={matter} />
           <CardDescription className='h-10 overflow-hidden'>{content}</CardDescription>
-        </CardHeader>
-      </Card>
-    </PostLink>
+        </PostLink>
+        <TagBadges tags={matter.tags} />
+      </CardHeader>
+    </Card>
   )
 }
 
-function HeaderMeta({ matter }: { matter: PostMatter }) {
-  const { slug, releaseDate, readingTime } = matter
+function HeaderMeta({ matter: { writer, releaseDate, slug } }: { matter: PostMatter }) {
   return (
-    <div className='flex font-semibold text-muted-foreground text-sm'>
-      <time dateTime={releaseDate}>{releaseDate}</time>
-      <span className='before:px-1 before:content-["•"]'>{readingTime} min</span>
+    <div className='flex items-center gap-1 font-semibold text-muted-foreground text-sm'>
+      <PostLink className='link flex items-center' writer={writer}>
+        <Avatar className='h-7 w-7'>
+          <AvatarImage src={`https://github.com/${writer}.png`} alt={writer} />
+          <AvatarFallback>{writer}</AvatarFallback>
+        </Avatar>
+        <span className='ml-2 text-foreground'>{writer}</span>
+      </PostLink>
+      <time className='before:pr-1 before:content-["|"]' dateTime={releaseDate}>
+        {releaseDate}
+      </time>
       <Suspense fallback={<span className='flex-grow' />}>
         <Views slug={slug} />
       </Suspense>
