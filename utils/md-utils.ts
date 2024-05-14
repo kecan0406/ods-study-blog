@@ -59,16 +59,15 @@ export const parseTOC = (content: string): PostContent[] => {
     content: groups!.content,
     children: []
   }))
-  return parseTocChildren(toc)
+  return parseContentChildren(toc)
 }
-const parseTocChildren = (toc: PostContent[]): PostContent[] => {
-  toc.forEach((postContent, i) => {
-    if (postContent.depth > toc[i + 1]?.depth) return
-    const nextToc = toc.splice(
-      i + 1,
-      toc.slice(i + 1).findIndex((sliceToc) => postContent.depth >= sliceToc.depth)
-    )
-    postContent.children = parseTocChildren(nextToc)
+const parseContentChildren = (toc: PostContent[]): PostContent[] => {
+  toc.forEach((content, i) => {
+    if (content.depth > toc[i + 1]?.depth) return
+
+    const idx = toc.slice(i + 1).findIndex((sliceContent) => content.depth >= sliceContent.depth)
+    const deleteCount = idx === -1 ? Infinity : idx
+    content.children = parseContentChildren(toc.splice(i + 1, deleteCount))
   })
   return toc
 }
