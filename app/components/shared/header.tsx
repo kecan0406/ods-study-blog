@@ -1,11 +1,7 @@
-import NavLinks from 'app/components/nav-link'
+import HeaderNavigation from 'app/components/header-navigation'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
-const links = [
-  { href: 'writing', text: 'Writing' },
-  { href: 'about', text: 'About' }
-]
 export default function Header() {
   return (
     <header className='fixed z-10 w-full border-foreground border-b bg-background shadow-inner'>
@@ -13,7 +9,7 @@ export default function Header() {
         <div className='mr-4 flex items-center'>
           <Logo />
         </div>
-        <NavLinks links={links} />
+        <HeaderNavigation />
         <div className='relative flex'>
           <ThemeToggleButton />
         </div>
