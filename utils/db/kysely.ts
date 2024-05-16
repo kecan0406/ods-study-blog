@@ -10,6 +10,7 @@ interface PostsTable {
 interface UsersTable {
   id: Generated<number>
   username: string
+  intro: string
 }
 
 export interface Database {

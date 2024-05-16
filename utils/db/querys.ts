@@ -8,6 +8,6 @@ export const getPostsCount = async (): Promise<{ slug: string; count: number }[]
   return await db.selectFrom('posts').select(['slug', 'count']).execute()
 }
 
-export const getUsers = async (): Promise<{ username: string }[]> => {
-  return await db.selectFrom('users').select('users.username').execute()
+export const getUsers = async (): Promise<{ username: string; intro: string }[]> => {
+  return await db.selectFrom('users').select(['username', 'intro']).execute()
 }

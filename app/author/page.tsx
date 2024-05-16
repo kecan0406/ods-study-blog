@@ -13,9 +13,9 @@ export default async function AuthorPage() {
   return (
     <div className='wrapper py-8'>
       <ul>
-        {users.map(({ username }) => (
+        {users.map(({ username, intro }) => (
           <li key={username} className='mb-4'>
-            <AuthorCard username={username} />
+            <AuthorCard username={username} intro={intro} />
           </li>
         ))}
       </ul>
@@ -29,7 +29,7 @@ const getPosts = async (username: string): Promise<Post[]> => {
     .filter((post) => post.matter.writer === username)
     .toSorted((a, b) => new Date(b.matter.releaseDate).getTime() - new Date(a.matter.releaseDate).getTime())
 }
-async function AuthorCard({ username }: { username: string }) {
+async function AuthorCard({ username, intro }: { username: string; intro: string }) {
   const posts = await getPosts(username)
   return (
     <Card className='md:flex'>
@@ -39,7 +39,7 @@ async function AuthorCard({ username }: { username: string }) {
           <AvatarFallback>{username}</AvatarFallback>
         </Avatar>
         <CardTitle className='pb-1'>{username}</CardTitle>
-        <CardDescription className='overflow-hidden'>안녕하세요</CardDescription>
+        <CardDescription className='overflow-hidden'>{intro}</CardDescription>
       </CardHeader>
       <CardContent className='my-4 h-40 w-full'>
         <ScrollArea>
