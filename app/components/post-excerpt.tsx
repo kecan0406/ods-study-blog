@@ -29,7 +29,7 @@ function HeaderMeta({ matter: { writer, releaseDate, slug } }: { matter: PostMat
     <div className='flex items-center gap-1 font-semibold text-muted-foreground text-sm'>
       <PostLink className='link flex items-center' writer={writer}>
         <Avatar className='h-7 w-7'>
-          <AvatarImage src={`https://github.com/${writer}.png`} alt={writer} />
+          <AvatarImage src={`https://github.com/${writer}.png?size=28`} alt={writer} />
           <AvatarFallback>{writer}</AvatarFallback>
         </Avatar>
         <span className='ml-2 text-foreground'>{writer}</span>

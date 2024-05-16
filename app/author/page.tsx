@@ -35,7 +35,7 @@ async function AuthorCard({ username }: { username: string }) {
     <Card className='md:flex'>
       <CardHeader className='my-auto min-w-40 items-center border-r md:w-auto'>
         <Avatar className='h-16 w-16 border'>
-          <AvatarImage src={`https://github.com/${username}.png`} alt={username} />
+          <AvatarImage src={`https://github.com/${username}.png?size=64`} alt={username} />
           <AvatarFallback>{username}</AvatarFallback>
         </Avatar>
         <CardTitle className='pb-1'>{username}</CardTitle>

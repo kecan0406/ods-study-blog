@@ -15,7 +15,7 @@ export default function PostHeader({ matter }: { matter: PostMatter }) {
       <div className='not-prose mb-2 flex gap-4 font-semibold text-sm'>
         <PostLink writer={writer}>
           <Avatar>
-            <AvatarImage src={`https://github.com/${writer}.png`} alt={`@${writer}`} />
+            <AvatarImage src={`https://github.com/${writer}.png?size=40`} alt={`@${writer}`} />
             <AvatarFallback>{writer}</AvatarFallback>
           </Avatar>
         </PostLink>
