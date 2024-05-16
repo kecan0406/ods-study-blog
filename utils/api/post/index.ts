@@ -1,4 +1,4 @@
-import { POST_SLUGS, getMarkdownFile, parseContent, parseMatter } from 'utils/md-utils'
+import { POST_SLUGS, getMarkdownFile, parseMarkdown } from 'utils/md-utils'
 
 export type PostMatter = {
   slug: string
@@ -6,7 +6,6 @@ export type PostMatter = {
   writer: string
   tags: string[]
   image: string
-  readingTime: string
   releaseDate: string
 }
 export type Post = {
@@ -20,17 +19,14 @@ export type PostContent = {
   children: PostContent[]
 }
 
-export const fetchPosts = async (): Promise<Post[]> => {
-  return await Promise.all(POST_SLUGS.map((slug) => fetchPost(slug, true)))
-}
+export const fetchPosts = async (): Promise<Post[]> => await Promise.all(POST_SLUGS.map((slug) => fetchPost(slug)))
 
-export const fetchPost = async (slug: string, excerpt: boolean = false): Promise<Post> => {
-  const { content, matter } = getMarkdown(slug, excerpt)
+export const fetchPost = async (slug: string): Promise<Post> => {
+  const { content, matter } = getMarkdown(slug)
   return { matter, content }
 }
 
-const getMarkdown = (slug: string, excerpt: boolean) => {
-  const markdown = getMarkdownFile(slug)
-  const { matter, content } = parseMatter(markdown)
-  return { matter, content: parseContent(content, excerpt) }
+const getMarkdown = (slug: string) => {
+  const mdFile = getMarkdownFile(slug)
+  return parseMarkdown(mdFile)
 }

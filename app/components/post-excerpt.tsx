@@ -3,6 +3,7 @@ import ViewCounter from 'app/components/view-counter'
 import { Suspense } from 'react'
 import { Post, PostMatter } from 'utils/api/post'
 import { getPostsCount } from 'utils/db/querys'
+import { truncate } from '../../utils/utils'
 import PostLink from './shared/post-link'
 import TagBadges from './tag-badges'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
@@ -16,7 +17,7 @@ export default function PostExcerpt({ post }: { post: Post }) {
         <HeaderMeta matter={matter} />
         <PostLink className='group' writer={matter.writer} slug={matter.slug}>
           <CardTitle className='text-2xl group-hover:underline'>{matter.title}</CardTitle>
-          <CardDescription className='h-10 overflow-hidden'>{content}</CardDescription>
+          <CardDescription className='h-10 overflow-hidden'>{truncate(content)}</CardDescription>
         </PostLink>
         <TagBadges tags={matter.tags} />
       </CardHeader>

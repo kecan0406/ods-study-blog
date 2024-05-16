@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from 'clsx'
+import RemoveMarkdown from 'remove-markdown'
 import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
@@ -14,3 +15,5 @@ export const throttle = (func: Function, delay: number) => {
     func(...args)
   }
 }
+
+export const truncate = (content: string) => RemoveMarkdown(content).slice(0, 200).replace(' ', '\n')

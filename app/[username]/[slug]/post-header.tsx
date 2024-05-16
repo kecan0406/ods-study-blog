@@ -7,7 +7,7 @@ import { PostMatter } from 'utils/api/post'
 import ViewCount from './view-count'
 
 export default function PostHeader({ matter }: { matter: PostMatter }) {
-  const { title, releaseDate, readingTime, writer, image, tags } = matter
+  const { title, releaseDate, writer, image, tags } = matter
   return (
     <header className='flex flex-col justify-center'>
       {image && <HeaderImage image={image} title={title} />}
@@ -30,7 +30,6 @@ export default function PostHeader({ matter }: { matter: PostMatter }) {
           </div>
           <div className='mt-0.5 flex text-muted-foreground'>
             <time dateTime={releaseDate}>{releaseDate}</time>
-            <span className='before:px-1 before:content-["•"]'>{readingTime} min</span>
           </div>
         </div>
       </div>

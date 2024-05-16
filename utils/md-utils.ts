@@ -29,45 +29,44 @@ export const mdxRemoteOptions: MDXRemoteProps['options'] = {
     ]
   }
 }
-export const getMarkdownFile = (slug: string): string => {
-  return fs.readFileSync(join(POST_PATH, `${slug}.mdx`), 'utf8')
-}
+export const getMarkdownFile = (slug: string) => fs.readFileSync(join(POST_PATH, `${slug}.mdx`), 'utf8')
 
 const MATTER_REGEX = /---\s*([\s\S]*?)\s*---/
-export const parseMatter = (fileContent: string) => {
-  const lines = MATTER_REGEX.exec(fileContent)![1]
+export const parseMarkdown = (mdFile: string) => {
+  const matter = getMatter(mdFile)
+  const content = removeMatter(mdFile)
+  return { matter, content }
+}
+const getMatter = (mdFile: string) => {
+  const lines = MATTER_REGEX.exec(mdFile)![1]
     .trim()
     .split('\n')
     .map((line) => line.split(': ')) as [keyof PostMatter, string][]
-
-  const matter = lines.reduce((pre, [key, val]) => {
+  return lines.reduce((pre, [key, val]) => {
     const value = val.trim()
     key === 'tags' ? (pre[key] = value.split(',')) : (pre[key] = value)
     return pre
   }, {} as PostMatter)
-
-  const content = fileContent.replace(MATTER_REGEX, '').trim()
-  matter.readingTime = readingTime(content)
-  return { matter, content }
 }
+const removeMatter = (content: string) => content.replace(MATTER_REGEX, '')
 
 const HEADER_REGEX = /(?<flag>#{1,6})\s+(?<content>.+)/g
-export const parseTOC = (content: string): PostContent[] => {
+export const generateTOC = (content: string): PostContent[] => {
   const toc: PostContent[] = Array.from(content.matchAll(HEADER_REGEX)).map(({ groups }) => ({
     id: slugify(groups!.content),
     depth: groups!.flag.length,
     content: groups!.content,
     children: []
   }))
-  return parseContentChildren(toc)
+  return buildTOCStructure(toc)
 }
-const parseContentChildren = (toc: PostContent[]): PostContent[] => {
+const buildTOCStructure = (toc: PostContent[]): PostContent[] => {
   toc.forEach((content, i) => {
     if (content.depth > toc[i + 1]?.depth) return
 
     const idx = toc.slice(i + 1).findIndex((sliceContent) => content.depth >= sliceContent.depth)
     const deleteCount = idx === -1 ? Infinity : idx
-    content.children = parseContentChildren(toc.splice(i + 1, deleteCount))
+    content.children = buildTOCStructure(toc.splice(i + 1, deleteCount))
   })
   return toc
 }
@@ -76,13 +75,6 @@ const WORDS_PER_MINUTE = 200
 const readingTime = (context: string) => {
   const wordCount = RemoveMarkdown(context).match(/\w+/g)?.length ?? 0
   return Math.ceil(wordCount / WORDS_PER_MINUTE).toString()
-}
-
-export const parseContent = (content: string, excerpt: boolean) => {
-  if (!excerpt) return content
-  const maxChars = 200
-  const text = RemoveMarkdown(content)
-  return text.slice(0, maxChars).replace(' ', '\n')
 }
 
 // https://github.com/leerob/leerob.io/blob/main/app/components/mdx.tsx#L121 에서 참고했습니다.
