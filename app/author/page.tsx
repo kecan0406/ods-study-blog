@@ -6,7 +6,7 @@ import { ScrollArea } from 'app/components/ui/scroll-area'
 import ViewCounter from 'app/components/view-counter'
 import { MdArticle } from 'react-icons/md'
 import { Post, fetchPosts } from 'utils/api/post'
-import { getPostsCount, getUsers } from 'utils/db/querys'
+import { getPostViews, getUsers } from 'utils/db/querys'
 
 export default async function AuthorPage() {
   const users = await getUsers()
@@ -27,7 +27,7 @@ const getPosts = async (username: string): Promise<Post[]> => {
   const posts = await fetchPosts()
   return posts
     .filter((post) => post.matter.writer === username)
-    .toSorted((a, b) => new Date(b.matter.releaseDate).getTime() - new Date(a.matter.releaseDate).getTime())
+    .toSorted((a, b) => new Date(b.matter.created_at).getTime() - new Date(a.matter.created_at).getTime())
 }
 async function AuthorCard({ username, intro }: { username: string; intro: string }) {
   const posts = await getPosts(username)
@@ -63,6 +63,6 @@ async function AuthorCard({ username, intro }: { username: string; intro: string
 }
 
 async function Views({ slug }: { slug: string }) {
-  const views = await getPostsCount()
+  const views = await getPostViews()
   return <ViewCounter slug={slug} allViews={views} />
 }

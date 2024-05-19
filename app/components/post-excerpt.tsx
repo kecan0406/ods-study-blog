@@ -2,7 +2,7 @@ import { Card, CardDescription, CardHeader, CardTitle } from 'app/components/ui/
 import ViewCounter from 'app/components/view-counter'
 import { Suspense } from 'react'
 import { Post, PostMatter } from 'utils/api/post'
-import { getPostsCount } from 'utils/db/querys'
+import { getPostViews } from 'utils/db/querys'
 import { truncate } from '../../utils/utils'
 import PostLink from './shared/post-link'
 import TagBadges from './tag-badges'
@@ -25,7 +25,7 @@ export default function PostExcerpt({ post }: { post: Post }) {
   )
 }
 
-function HeaderMeta({ matter: { writer, releaseDate, slug } }: { matter: PostMatter }) {
+function HeaderMeta({ matter: { writer, created_at, slug } }: { matter: PostMatter }) {
   return (
     <div className='flex items-center gap-1 font-semibold text-muted-foreground text-sm'>
       <PostLink className='link flex items-center' writer={writer}>
@@ -35,8 +35,8 @@ function HeaderMeta({ matter: { writer, releaseDate, slug } }: { matter: PostMat
         </Avatar>
         <span className='ml-2 text-foreground'>{writer}</span>
       </PostLink>
-      <time className='before:pr-1 before:content-["|"]' dateTime={releaseDate}>
-        {releaseDate}
+      <time className='before:pr-1 before:content-["|"]' dateTime={created_at.toString()}>
+        {new Intl.DateTimeFormat('en-us').format(created_at)}
       </time>
       <Suspense fallback={<span className='flex-grow' />}>
         <Views slug={slug} />
@@ -46,6 +46,6 @@ function HeaderMeta({ matter: { writer, releaseDate, slug } }: { matter: PostMat
 }
 
 async function Views({ slug }: { slug: string }) {
-  const views = await getPostsCount()
+  const views = await getPostViews()
   return <ViewCounter slug={slug} allViews={views} />
 }

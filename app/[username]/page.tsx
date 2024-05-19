@@ -12,7 +12,7 @@ const getPosts = async (username: string): Promise<Post[]> => {
   const posts = await fetchPosts()
   return posts
     .filter((post) => post.matter.writer === username)
-    .toSorted((a, b) => new Date(b.matter.releaseDate).getTime() - new Date(a.matter.releaseDate).getTime())
+    .toSorted((a, b) => b.matter.created_at.getTime() - a.matter.created_at.getTime())
 }
 
 export default async function UserPage({ params: { username } }: { params: { username: string } }) {

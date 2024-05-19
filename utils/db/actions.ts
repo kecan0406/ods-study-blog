@@ -6,12 +6,8 @@ export const incrementView = async (slug: string) => {
   noStore()
 
   await db
-    .insertInto('posts')
-    .values({ slug, count: 1 })
-    .onConflict((oc) =>
-      oc.column('slug').doUpdateSet({
-        count: (eb) => eb('posts.count', '+', 1)
-      })
-    )
+    .updateTable('posts')
+    .set('views', (eb) => eb('views', '+', 1))
+    .where('slug', '=', slug)
     .execute()
 }

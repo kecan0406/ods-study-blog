@@ -3,8 +3,7 @@ import { join } from 'path'
 import { MDXRemoteProps } from 'next-mdx-remote/rsc'
 import rehypePrettyCode from 'rehype-pretty-code'
 import remarkUnwrapImages from 'remark-unwrap-images'
-import RemoveMarkdown from 'remove-markdown'
-import { PostContent, PostMatter } from 'utils/api/post'
+import { PostContent } from 'utils/api/post'
 
 const POST_PATH = join(process.cwd(), 'posts')
 const MD_REGEX = /\.mdx$/
@@ -31,25 +30,6 @@ export const mdxRemoteOptions: MDXRemoteProps['options'] = {
 }
 export const getMarkdownFile = (slug: string) => fs.readFileSync(join(POST_PATH, `${slug}.mdx`), 'utf8')
 
-const MATTER_REGEX = /---\s*([\s\S]*?)\s*---/
-export const parseMarkdown = (mdFile: string) => {
-  const matter = getMatter(mdFile)
-  const content = removeMatter(mdFile)
-  return { matter, content }
-}
-const getMatter = (mdFile: string) => {
-  const lines = MATTER_REGEX.exec(mdFile)![1]
-    .trim()
-    .split('\n')
-    .map((line) => line.split(': ')) as [keyof PostMatter, string][]
-  return lines.reduce((pre, [key, val]) => {
-    const value = val.trim()
-    key === 'tags' ? (pre[key] = value.split(',')) : (pre[key] = value)
-    return pre
-  }, {} as PostMatter)
-}
-const removeMatter = (content: string) => content.replace(MATTER_REGEX, '')
-
 const HEADER_REGEX = /(?<flag>#{1,6})\s+(?<content>.+)/g
 export const generateTOC = (content: string): PostContent[] => {
   const toc: PostContent[] = Array.from(content.matchAll(HEADER_REGEX)).map(({ groups }) => ({
@@ -69,12 +49,6 @@ const buildTOCStructure = (toc: PostContent[]): PostContent[] => {
     content.children = buildTOCStructure(toc.splice(i + 1, deleteCount))
   })
   return toc
-}
-
-const WORDS_PER_MINUTE = 200
-const readingTime = (context: string) => {
-  const wordCount = RemoveMarkdown(context).match(/\w+/g)?.length ?? 0
-  return Math.ceil(wordCount / WORDS_PER_MINUTE).toString()
 }
 
 // https://github.com/leerob/leerob.io/blob/main/app/components/mdx.tsx#L121 에서 참고했습니다.

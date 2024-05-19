@@ -1,12 +1,17 @@
 import { createKysely } from '@vercel/postgres-kysely'
 import { Generated } from 'kysely'
 
-interface PostsTable {
+export interface PostsTable {
   id: Generated<number>
+  title: string
   slug: string
-  count: number
+  writer: string
+  tags: string[]
+  banner_url: string
+  views: number
+  created_at: Date
+  updated_at: string
 }
-
 interface UsersTable {
   id: Generated<number>
   username: string

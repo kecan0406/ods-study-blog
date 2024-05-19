@@ -4,7 +4,7 @@ import Comments from './comments'
 
 const getPosts = async (): Promise<Post[]> => {
   const posts = await fetchPosts()
-  return posts.toSorted((a, b) => new Date(b.matter.releaseDate).getTime() - new Date(a.matter.releaseDate).getTime())
+  return posts.toSorted((a, b) => b.matter.created_at.getTime() - a.matter.created_at.getTime())
 }
 
 export default async function PostFooter({ slug }: { slug: string }) {

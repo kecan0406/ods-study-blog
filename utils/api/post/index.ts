@@ -1,13 +1,8 @@
-import { POST_SLUGS, getMarkdownFile, parseMarkdown } from 'utils/md-utils'
+import { PostsTable } from 'utils/db/kysely'
+import { getPostMetadata } from 'utils/db/querys'
+import { POST_SLUGS, getMarkdownFile } from 'utils/md-utils'
 
-export type PostMatter = {
-  slug: string
-  title: string
-  writer: string
-  tags: string[]
-  image: string
-  releaseDate: string
-}
+export type PostMatter = Omit<PostsTable, 'id'>
 export type Post = {
   matter: PostMatter
   content: string
@@ -22,11 +17,5 @@ export type PostContent = {
 export const fetchPosts = async (): Promise<Post[]> => await Promise.all(POST_SLUGS.map((slug) => fetchPost(slug)))
 
 export const fetchPost = async (slug: string): Promise<Post> => {
-  const { content, matter } = getMarkdown(slug)
-  return { matter, content }
-}
-
-const getMarkdown = (slug: string) => {
-  const mdFile = getMarkdownFile(slug)
-  return parseMarkdown(mdFile)
+  return { matter: await getPostMetadata(slug), content: getMarkdownFile(slug) }
 }

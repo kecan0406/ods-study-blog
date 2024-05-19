@@ -7,10 +7,10 @@ import { PostMatter } from 'utils/api/post'
 import ViewCount from './view-count'
 
 export default function PostHeader({ matter }: { matter: PostMatter }) {
-  const { title, releaseDate, writer, image, tags } = matter
+  const { title, created_at, writer, banner_url, tags } = matter
   return (
     <header className='flex flex-col justify-center'>
-      {image && <HeaderImage image={image} title={title} />}
+      {banner_url && <HeaderImage image={banner_url} title={title} />}
       <h1 className='text-balance'>{title}</h1>
       <div className='not-prose mb-2 flex gap-4 font-semibold text-sm'>
         <PostLink writer={writer}>
@@ -29,7 +29,7 @@ export default function PostHeader({ matter }: { matter: PostMatter }) {
             </Suspense>
           </div>
           <div className='mt-0.5 flex text-muted-foreground'>
-            <time dateTime={releaseDate}>{releaseDate}</time>
+            <time dateTime={created_at.toString()}>{new Intl.DateTimeFormat('en-us').format(created_at)}</time>
           </div>
         </div>
       </div>
