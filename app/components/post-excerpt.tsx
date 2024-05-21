@@ -5,21 +5,18 @@ import { Post, PostMatter } from 'utils/api/post'
 import { getPostsCount } from 'utils/db/querys'
 import { truncate } from 'utils/utils'
 import PostLink from './shared/post-link'
-import TagBadges from './tag-badges'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 
 export default function PostExcerpt({ post }: { post: Post }) {
   const { matter, content } = post
 
   return (
-    <Card as='article' className='h-full w-full border-none hover:bg-accent'>
+    <Card as='article' className='group relative h-36 overflow-hidden border-none hover:bg-accent'>
+      <PostLink className='absolute inset-0 size-full' writer={matter.writer} slug={matter.slug} />
       <CardHeader>
         <HeaderMeta matter={matter} />
-        <PostLink className='group' writer={matter.writer} slug={matter.slug}>
-          <CardTitle className='text-2xl group-hover:underline'>{matter.title}</CardTitle>
-          <CardDescription className='h-10 overflow-hidden'>{truncate(content)}</CardDescription>
-        </PostLink>
-        <TagBadges tags={matter.tags} />
+        <CardTitle className='text-2xl group-hover:underline'>{matter.title}</CardTitle>
+        <CardDescription>{truncate(content)}</CardDescription>
       </CardHeader>
     </Card>
   )
@@ -28,7 +25,7 @@ export default function PostExcerpt({ post }: { post: Post }) {
 function HeaderMeta({ matter: { writer, releaseDate, slug } }: { matter: PostMatter }) {
   return (
     <div className='flex items-center gap-1 font-semibold text-muted-foreground text-sm'>
-      <PostLink className='link flex items-center' writer={writer}>
+      <PostLink className='link z-10 flex items-center' writer={writer}>
         <Avatar className='h-7 w-7'>
           <AvatarImage src={`https://github.com/${writer}.png?size=28`} alt={writer} />
           <AvatarFallback>{writer}</AvatarFallback>
