@@ -2,9 +2,8 @@ import { createKysely } from '@vercel/postgres-kysely'
 import { Generated } from 'kysely'
 
 interface PostsTable {
-  id: Generated<number>
   slug: string
-  count: number
+  views: number
 }
 
 interface UsersTable {

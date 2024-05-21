@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    ppr: true
-  },
+  experimental: { ppr: true },
+  logging: { fetches: { fullUrl: true } },
   transpilePackages: ['next-mdx-remote'],
   images: {
     remotePatterns: [

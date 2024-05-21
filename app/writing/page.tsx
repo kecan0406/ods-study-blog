@@ -1,4 +1,4 @@
-import PostExcerpt from 'app/components/post-excerpt'
+import PostExcerpt, { preloadPostsCount } from 'app/components/post-excerpt'
 import { Post, fetchPosts } from 'utils/api/post'
 
 const getPosts = async (): Promise<Post[]> => {
@@ -7,7 +7,9 @@ const getPosts = async (): Promise<Post[]> => {
 }
 
 export default async function WritingPage() {
+  preloadPostsCount()
   const posts = await getPosts()
+
   return (
     <article className='wrapper py-8'>
       <ul>

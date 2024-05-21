@@ -7,10 +7,10 @@ export const incrementView = async (slug: string) => {
 
   await db
     .insertInto('posts')
-    .values({ slug, count: 1 })
+    .values({ slug, views: 1 })
     .onConflict((oc) =>
       oc.column('slug').doUpdateSet({
-        count: (eb) => eb('posts.count', '+', 1)
+        views: (eb) => eb('posts.views', '+', 1)
       })
     )
     .execute()

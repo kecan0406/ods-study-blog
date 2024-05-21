@@ -1,4 +1,4 @@
-import PostExcerpt from 'app/components/post-excerpt'
+import PostExcerpt, { preloadPostsCount } from 'app/components/post-excerpt'
 import { Post, fetchPosts } from 'utils/api/post'
 import { getUsers } from 'utils/db/querys'
 
@@ -16,6 +16,7 @@ const getPosts = async (username: string): Promise<Post[]> => {
 }
 
 export default async function UserPage({ params: { username } }: { params: { username: string } }) {
+  preloadPostsCount()
   const posts = await getPosts(decodeURIComponent(username).replace('@', ''))
 
   return (

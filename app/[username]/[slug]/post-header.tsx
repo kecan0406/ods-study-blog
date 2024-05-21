@@ -1,13 +1,16 @@
 import PostLink from 'app/components/shared/post-link'
 import { Avatar, AvatarFallback, AvatarImage } from 'app/components/ui/avatar'
 import { Badge } from 'app/components/ui/badge'
+import ViewCounter from 'app/components/view-counter'
 import Image from 'next/image'
-import { Suspense } from 'react'
+import { Suspense, cache } from 'react'
 import { PostMatter } from 'utils/api/post'
-import ViewCount from './view-count'
+import { incrementView } from 'utils/db/actions'
+import { getPostsCount } from 'utils/db/querys'
 
 export default function PostHeader({ matter }: { matter: PostMatter }) {
   const { title, releaseDate, writer, image, tags } = matter
+
   return (
     <header className='flex flex-col justify-center'>
       {image && <HeaderImage image={image} title={title} />}
@@ -50,4 +53,13 @@ function HeaderImage({ image, title }: { image: string; title: string }) {
       <Image src={image} alt={title} width={768} height={384} sizes='768px' priority className='max-h-96 rounded-xl' />
     </div>
   )
+}
+
+export const preloadPostCount = () => void getPostsCount()
+const increment = cache(incrementView)
+
+async function ViewCount({ slug }: { slug: string }) {
+  const views = await getPostsCount()
+  increment(slug)
+  return <ViewCounter slug={slug} allViews={views} />
 }

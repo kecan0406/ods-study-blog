@@ -3,7 +3,7 @@ import ViewCounter from 'app/components/view-counter'
 import { Suspense } from 'react'
 import { Post, PostMatter } from 'utils/api/post'
 import { getPostsCount } from 'utils/db/querys'
-import { truncate } from '../../utils/utils'
+import { truncate } from 'utils/utils'
 import PostLink from './shared/post-link'
 import TagBadges from './tag-badges'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
@@ -44,6 +44,8 @@ function HeaderMeta({ matter: { writer, releaseDate, slug } }: { matter: PostMat
     </div>
   )
 }
+
+export const preloadPostsCount = () => void getPostsCount()
 
 async function Views({ slug }: { slug: string }) {
   const views = await getPostsCount()
