@@ -21,6 +21,7 @@ async function NavPost({ slug }: { slug: string }) {
   const curIdx = posts.findIndex((post) => post.matter.slug === slug)
   const prev = posts[curIdx - 1]
   const next = posts[curIdx + 1]
+
   return (
     <div className='grid grid-cols-2 py-4 text-center'>
       <div>

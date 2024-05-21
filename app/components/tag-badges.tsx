@@ -12,7 +12,7 @@ export default function TagBadges({ tags }: { tags: string[] }) {
           key={tag}
           fallback={
             <Badge variant='secondary' className='before:content-["#"]'>
-              {tags}
+              {tag}
             </Badge>
           }
         >
