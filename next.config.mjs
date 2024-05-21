@@ -12,6 +12,19 @@ const nextConfig = {
       }
     ],
     deviceSizes: [640, 768, 1024, 1280, 1536]
+  },
+  headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on'
+          }
+        ]
+      }
+    ]
   }
 }
 
