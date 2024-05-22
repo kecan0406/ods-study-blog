@@ -1,18 +1,10 @@
+import './globals.css'
 import Footer from 'app/components/shared/footer'
 import Header from 'app/components/shared/header'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
-import localFont from 'next/font/local'
 import { ReactNode } from 'react'
-import { cn } from 'utils/utils'
-import './globals.css'
-
-const fontSans = localFont({
-  src: '../public/fonts/PretendardVariable.woff2',
-  weight: '45 920',
-  variable: '--font-sans',
-  display: 'swap'
-})
+import { PreloadResources } from './preload-resources'
 
 export const metadata: Metadata = {
   title: 'ODS STUDY',
@@ -22,7 +14,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
+      <PreloadResources />
+      <body className='min-h-screen bg-background font-sans antialiased'>
         <ThemeProvider attribute='class' defaultTheme='dark' disableTransitionOnChange enableSystem>
           <div className='flex h-screen flex-col'>
             <Header />
