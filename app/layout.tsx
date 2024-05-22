@@ -1,4 +1,3 @@
-import { SpeedInsights } from '@vercel/speed-insights/next'
 import Footer from 'app/components/shared/footer'
 import Header from 'app/components/shared/header'
 import type { Metadata } from 'next'
@@ -11,7 +10,8 @@ import './globals.css'
 const fontSans = localFont({
   src: '../public/fonts/PretendardVariable.woff2',
   weight: '45 920',
-  variable: '--font-sans'
+  variable: '--font-sans',
+  display: 'swap'
 })
 
 export const metadata: Metadata = {
@@ -30,7 +30,6 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
             <Footer />
           </div>
         </ThemeProvider>
-        <SpeedInsights />
       </body>
     </html>
   )
