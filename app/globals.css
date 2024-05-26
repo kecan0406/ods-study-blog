@@ -104,36 +104,33 @@
   @apply pointer-events-none absolute right-0 bottom-0 block h-6 w-3/5 bg-gradient-to-r from-transparent to-background group-hover:to-accent
 }
 
-.toc-anchor::after {
-  content: "";
-  transition: inset 180ms;
-  @apply pointer-events-none absolute -z-10 border-l-2 border-foreground
-}
 
-.nav-anchor::after {
-  content: "";
-  @apply pointer-events-none absolute -z-10 border-b border-foreground my-2 mx-4
-}
-
-@supports (anchor-name: --anchor) {
+@supports (anchor-name: --a) {
   .toc-anchor::after {
+    content: "";
+    transition: inset 180ms;
     position-anchor: var(--anchor);
     inset: anchor(top) anchor(right) anchor(bottom) anchor(left);
+    @apply pointer-events-none absolute -z-10 border-l-2 border-foreground
   }
 
-  :root:has(.nav-anchor:not([anchor=''])) {
+  .nav-anchor:not([anchor='']) {
     --active: 1;
   }
 
   .nav-anchor::after {
+    content: "";
+    position: fixed;
+    pointer-events: none;
+    z-index: -1;
     position-anchor: var(--anchor);
     opacity: var(--active, 0);
-    transition: all 125ms;
-    inset:
-      anchor(top)
-      anchor(right)
-      anchor(bottom)
-      anchor(left);
+    left: calc(anchor(left) + 1.25rem);
+    top: anchor(top);
+    width: calc(anchor-size(width) - 2.5rem);
+    height: anchor-size(height);
+    transition: all 0.18s allow-discrete;
+    border-bottom: 2px solid white;
   }
 }
 

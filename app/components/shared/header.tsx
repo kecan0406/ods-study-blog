@@ -5,7 +5,7 @@ import Link from 'next/link'
 export default function Header() {
   return (
     <header className='fixed z-10 w-full border-foreground border-b bg-background shadow-inner'>
-      <nav className='wrapper relative flex items-center justify-between p-2'>
+      <div className='wrapper relative flex items-center justify-between p-2'>
         <div className='mr-4 flex items-center'>
           <Logo />
         </div>
@@ -13,7 +13,7 @@ export default function Header() {
         <div className='relative flex'>
           <ThemeToggleButton />
         </div>
-      </nav>
+      </div>
     </header>
   )
 }

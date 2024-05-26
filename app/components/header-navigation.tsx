@@ -1,6 +1,4 @@
 'use client'
-
-import { buttonVariants } from 'app/components/ui/button'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -14,18 +12,19 @@ export default function HeaderNavigation() {
   const anchor = usePathname().split('/')[1]
 
   return (
-    <div className='nav-anchor flex flex-grow items-center gap-1' anchor={anchor}>
-      {LINKS.map(({ href, text }) => (
-        <Link
-          id={href}
-          className={buttonVariants({ variant: 'link', className: 'decoration-1' })}
-          scroll={false}
-          href={`/${href}`}
-          key={href}
-        >
-          {text}
-        </Link>
-      ))}
-    </div>
+    <nav
+      className='nav-anchor grow items-center gap-1 overflow-x-auto'
+      anchor={anchor.startsWith('@') ? 'author' : anchor}
+    >
+      <ul className='flex font-medium text-primary text-sm'>
+        {LINKS.map(({ href, text }) => (
+          <li key={href}>
+            <Link id={href} className='inline-block h-9 px-4 py-2' scroll={false} href={`/${href}`}>
+              {text}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   )
 }
