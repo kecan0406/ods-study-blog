@@ -1,14 +1,12 @@
-import { Button } from 'app/components/ui/button'
+import { buttonVariants } from 'app/components/ui/button'
 import Link from 'next/link'
 
 type Props = { title: string; href?: string }
 export default function SectionTitle({ title, href }: Props) {
   if (href) {
     return (
-      <Link href={href}>
-        <Button variant='link' className='mb-2 px-0'>
-          <h2 className='text-2xl'>{title}</h2>
-        </Button>
+      <Link href={href} className={buttonVariants({ variant: 'link', className: 'mb-2' })}>
+        <h2 className='text-2xl'>{title}</h2>
       </Link>
     )
   }

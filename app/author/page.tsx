@@ -29,6 +29,7 @@ const getPosts = async (username: string): Promise<Post[]> => {
     .filter((post) => post.matter.writer === username)
     .toSorted((a, b) => new Date(b.matter.releaseDate).getTime() - new Date(a.matter.releaseDate).getTime())
 }
+
 async function AuthorCard({ username, intro }: { username: string; intro: string }) {
   const posts = await getPosts(username)
   return (

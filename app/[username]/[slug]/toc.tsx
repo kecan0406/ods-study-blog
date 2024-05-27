@@ -31,7 +31,7 @@ export default function Toc({ toc }: { toc: PostContent[] }) {
 
   return (
     <aside className='not-prose absolute start-full mx-4 hidden h-full min-w-56 py-20 xl:block'>
-      <nav className='sticky top-20 overflow-hidden'>
+      <nav className='sticky top-20 max-h-[80vh] overflow-y-auto overflow-x-hidden'>
         <ul className='toc-anchor truncate text-muted-foreground' anchor={`toc-${parentClosestId}`}>
           {toc.map(({ children, content, id }) => {
             return (
