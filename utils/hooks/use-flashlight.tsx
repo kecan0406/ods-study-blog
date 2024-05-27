@@ -9,7 +9,6 @@ export const useFlashlight: UseFlashlightProps = (isFL) => {
   const flashlightRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!isFL) return
     const mouseMove = (e: MouseEvent) => moveLight(e.x, e.y)
     const touchMove = (e: TouchEvent) => moveLight(e.touches[0].clientX, e.touches[0].clientY)
 
@@ -23,8 +22,8 @@ export const useFlashlight: UseFlashlightProps = (isFL) => {
 
   const moveLight: MoveFn = useCallback((x, y) => {
     const flashlight = flashlightRef.current!
-    flashlight.style.setProperty('--Xpos', `${x}px`)
-    flashlight.style.setProperty('--Ypos', `${y}px`)
+    flashlight.style.setProperty('--x', `${x}px`)
+    flashlight.style.setProperty('--y', `${y}px`)
   }, [])
 
   return { flashlightRef, moveLight }

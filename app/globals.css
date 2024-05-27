@@ -117,7 +117,6 @@
   .nav-anchor:not([anchor='']) {
     --active: 1;
   }
-
   .nav-anchor::after {
     content: "";
     position: fixed;
@@ -134,27 +133,6 @@
   }
 }
 
-
-#flashlight {
-  --Xpos: 0;
-  --Ypos: 0;
-}
-
-#flashlight:before {
-  content: '';
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  background: radial-gradient(
-      circle 12em at var(--Xpos) var(--Ypos),
-      transparent 50%,
-      currentColor
-  );
-}
-
 ::view-transition-new(root),
 ::view-transition-old(root) {
   animation: none;
@@ -162,6 +140,20 @@
   display: block;
 }
 
+.flashlight {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 30rem;
+  height: 30rem;
+  z-index: 30;
+  pointer-events: none;
+  translate:
+      calc(var(--x) + -50%)
+      calc(var(--y) + -50%);
+  outline: 9999px solid currentColor;
+  background: content-box radial-gradient(transparent 25%, currentColor 50%);
+}
 
 @layer base {
   * {

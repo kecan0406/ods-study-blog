@@ -55,7 +55,7 @@ export default function ThemeToggleButton() {
           <MdLightMode className='theme-icon' />
         )}
       </Button>
-      <div id='flashlight' className={clsx({ hidden: !isFL })} ref={flashlightRef} />
+      <div ref={flashlightRef} className={clsx('flashlight', { hidden: !isFL })} />
     </>
   )
 }
