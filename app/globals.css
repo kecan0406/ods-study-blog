@@ -49,112 +49,6 @@
   }
 }
 
-.anchor {
-  @apply invisible absolute -ms-8 w-full max-w-3xl text-muted-foreground no-underline md:inline-block;
-}
-
-.anchor:hover {
-  @apply visible;
-}
-
-.prose *:hover > .anchor {
-  @apply visible;
-}
-
-.prose > :first-child > h1 {
-  @apply mb-4;
-}
-
-.prose > h2:first-of-type {
-  margin-top: 0;
-}
-
-.prose {
-  pre {
-    overflow-x: auto;
-    padding: 1rem 0;
-  }
-
-  pre [data-line] {
-    padding: 0 1rem;
-  }
-
-  pre[data-theme*=" "],
-  pre[data-theme*=" "] span {
-    color: var(--shiki-light);
-    background-color: var(--shiki-light-bg);
-  }
-}
-
-.dark .prose {
-  pre[data-theme*=" "],
-  pre[data-theme*=" "] span {
-    color: var(--shiki-dark);
-    background-color: var(--shiki-dark-bg);
-  }
-}
-
-
-.shadow-effect {
-  position: relative;
-}
-
-.shadow-effect::after {
-  content: "";
-  @apply pointer-events-none absolute right-0 bottom-0 block h-6 w-3/5 bg-gradient-to-r from-transparent to-background group-hover:to-accent
-}
-
-
-@supports (anchor-name: --a) {
-  .toc-anchor::after {
-    content: "";
-    transition: inset 180ms;
-    position-anchor: var(--anchor);
-    inset: anchor(top) anchor(right) anchor(bottom) anchor(left);
-    @apply pointer-events-none absolute -z-10 border-l-2 border-foreground
-  }
-
-  .nav-anchor:not([anchor='']) {
-    --active: 1;
-  }
-  .nav-anchor::after {
-    content: "";
-    position: fixed;
-    pointer-events: none;
-    z-index: -1;
-    position-anchor: var(--anchor);
-    opacity: var(--active, 0);
-    left: calc(anchor(left) + 1.25rem);
-    top: anchor(top);
-    width: calc(anchor-size(width) - 2.5rem);
-    height: anchor-size(height);
-    transition: all 0.18s allow-discrete;
-    border-bottom: 2px solid white;
-  }
-}
-
-::view-transition-new(root),
-::view-transition-old(root) {
-  animation: none;
-  mix-blend-mode: normal;
-  display: block;
-}
-
-.flashlight {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 30rem;
-  height: 30rem;
-  z-index: 30;
-  pointer-events: none;
-  translate:
-      calc(var(--x) + -50%)
-      calc(var(--y) + -50%);
-  outline: 9999px solid currentColor;
-  background: content-box radial-gradient(transparent 25%, currentColor 50%);
-}
-
 @layer base {
   * {
     @apply border-border;
@@ -177,4 +71,82 @@
   .theme-icon {
     @apply h-6 w-6;
   }
+
+  .shadow-effect::after {
+    @apply content-[''] pointer-events-none absolute right-0 bottom-0 block h-6 w-3/5 bg-gradient-to-r from-transparent to-background group-hover:to-accent
+  }
+}
+
+.anchor {
+  @apply invisible absolute -ms-8 w-full max-w-3xl text-muted-foreground no-underline md:inline-block hover:visible;
+}
+
+.prose *:hover > .anchor {
+  @apply visible;
+}
+
+.prose > :first-child > h1 {
+  @apply mb-4;
+}
+
+.prose > h2:first-of-type {
+  @apply mt-0
+}
+
+.prose {
+  pre {
+    @apply overflow-x-auto py-4 px-0;
+  }
+
+  pre [data-line] {
+    @apply py-0 px-4;
+  }
+
+  pre[data-theme*=' '],
+  pre[data-theme*=' '] span {
+    @apply text-[--shiki-light] bg-[--shiki-light-bg];
+  }
+}
+
+.dark .prose {
+  pre[data-theme*=' '],
+  pre[data-theme*=' '] span {
+    @apply text-[--shiki-dark] bg-[--shiki-dark-bg];
+  }
+}
+
+.flashlight {
+  @apply fixed top-0 left-0 w-[30rem] h-[30rem] z-30 pointer-events-none outline-[9999px] outline-current outline;
+  background: radial-gradient(transparent 35%, currentColor 65%);
+  translate:
+      calc(var(--x) - 50%)
+      calc(var(--y) - 50%);
+}
+
+@supports (anchor-name: --a) {
+  .toc-anchor::after {
+    @apply pointer-events-none absolute -z-10 border-l-2 border-foreground content-[''];
+    transition: inset 1.8s;
+    position-anchor: var(--anchor);
+    inset: anchor(top) anchor(right) anchor(bottom) anchor(left);
+  }
+
+  .nav-anchor:not([anchor='']) {
+    --active: 1;
+  }
+
+  .nav-anchor::after {
+    @apply content-[''] fixed pointer-events-none -z-10 border-b-2 border-b-current opacity-[--active,0];
+    position-anchor: var(--anchor);
+    left: calc(anchor(left) + 1.25rem);
+    top: anchor(top);
+    width: calc(anchor-size(width) - 2.5rem);
+    height: anchor-size(height);
+    transition: all 0.18s allow-discrete;
+  }
+}
+
+::view-transition-new(root),
+::view-transition-old(root) {
+  @apply animate-none mix-blend-normal block;
 }

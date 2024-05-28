@@ -11,12 +11,12 @@ export default function PostExcerpt({ post }: { post: Post }) {
   const { matter, content } = post
 
   return (
-    <Card as='article' className='group relative h-36 overflow-hidden border-none hover:bg-accent'>
+    <Card as='article' className='group relative h-36 border-none hover:bg-accent'>
       <PostLink className='absolute inset-0 size-full' writer={matter.writer} slug={matter.slug} />
       <CardHeader>
         <HeaderMeta matter={matter} />
         <CardTitle className='text-2xl group-hover:underline'>{matter.title}</CardTitle>
-        <CardDescription>{truncate(content)}</CardDescription>
+        <CardDescription className='m-2 line-clamp-3'>{truncate(content)}</CardDescription>
       </CardHeader>
     </Card>
   )
