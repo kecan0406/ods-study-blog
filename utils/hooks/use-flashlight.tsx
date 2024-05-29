@@ -3,12 +3,13 @@
 import { RefObject, useCallback, useEffect, useRef } from 'react'
 
 type MoveFn = (x: number, y: number) => void
-type UseFlashlightProps = (isFL: boolean) => { flashlightRef: RefObject<HTMLDivElement>; moveLight: MoveFn }
+type UseFlashlightProps = (isFL: boolean) => { flashlightRef: RefObject<HTMLDivElement | null>; moveLight: MoveFn }
 
 export const useFlashlight: UseFlashlightProps = (isFL) => {
-  const flashlightRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null)
+  const flashlightRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    if (!isFL) return
     const mouseMove = (e: MouseEvent) => moveLight(e.x, e.y)
     const touchMove = (e: TouchEvent) => moveLight(e.touches[0].clientX, e.touches[0].clientY)
 

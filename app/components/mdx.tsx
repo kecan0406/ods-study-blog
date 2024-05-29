@@ -2,14 +2,13 @@ import MdxHeadingLink from 'app/components/mdx-heading-link'
 import { MDXComponents } from 'mdx/types'
 import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc'
 import Image from 'next/image'
-import Link from 'next/link'
 import { AnchorHTMLAttributes, DetailedHTMLProps, HTMLAttributes, ImgHTMLAttributes, createElement } from 'react'
 import { slugify } from 'utils/md-utils'
 
 const a = ({ children, ...props }: DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>) => (
-  <Link {...props} href={props.href!}>
+  <a {...props} href={props.href!}>
     {children}
-  </Link>
+  </a>
 )
 
 const img = ({ title, src, alt }: DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>) => (

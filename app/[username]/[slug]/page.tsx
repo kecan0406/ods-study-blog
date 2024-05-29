@@ -5,7 +5,9 @@ import PostFooter from './post-footer'
 import PostHeader, { preloadPostCount } from './post-header'
 import Toc from './toc'
 
+export const experimental_ppr = true
 export const dynamicParams = false
+
 export async function generateStaticParams() {
   const posts = await fetchPosts()
   return posts.map(({ matter }) => ({ username: `@${matter.writer}`, slug: matter.slug }))

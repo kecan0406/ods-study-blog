@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: { ppr: true },
+  experimental: { ppr: 'incremental' },
   logging: { fetches: { fullUrl: true } },
   transpilePackages: ['next-mdx-remote'],
   images: {
@@ -12,19 +12,6 @@ const nextConfig = {
       }
     ],
     deviceSizes: [640, 768, 1024, 1280, 1536]
-  },
-  headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on'
-          }
-        ]
-      }
-    ]
   }
 }
 

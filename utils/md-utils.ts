@@ -3,7 +3,6 @@ import { join } from 'path'
 import { MDXRemoteProps } from 'next-mdx-remote/rsc'
 import rehypePrettyCode from 'rehype-pretty-code'
 import remarkUnwrapImages from 'remark-unwrap-images'
-import RemoveMarkdown from 'remove-markdown'
 import { PostContent, PostMatter } from 'utils/api/post'
 
 const POST_PATH = join(process.cwd(), 'posts')
@@ -69,12 +68,6 @@ const buildTOCStructure = (toc: PostContent[]): PostContent[] => {
     content.children = buildTOCStructure(toc.splice(i + 1, deleteCount))
   })
   return toc
-}
-
-const WORDS_PER_MINUTE = 200
-const readingTime = (context: string) => {
-  const wordCount = RemoveMarkdown(context).match(/\w+/g)?.length ?? 0
-  return Math.ceil(wordCount / WORDS_PER_MINUTE).toString()
 }
 
 // https://github.com/leerob/leerob.io/blob/main/app/components/mdx.tsx#L121 에서 참고했습니다.

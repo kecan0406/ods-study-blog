@@ -57,7 +57,7 @@
   }
 
   html {
-    scrollbar-width: thin;
+    scrollbar-gutter: stable both-edges;
     scrollbar-color: hsl(var(--accent-foreground)) hsl(var(--accent));
   }
 
