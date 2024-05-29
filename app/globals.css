@@ -51,7 +51,14 @@
 
 @layer base {
   * {
+    scrollbar-color: auto;
+    scrollbar-width: auto;
     @apply border-border;
+  }
+
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--accent-foreground)) hsl(var(--accent));
   }
 
   body {
@@ -72,8 +79,35 @@
     @apply h-6 w-6;
   }
 
-  .shadow-effect::after {
-    @apply content-[''] pointer-events-none absolute right-0 bottom-0 block h-6 w-3/5 bg-gradient-to-r from-transparent to-background group-hover:to-accent
+  .shadow-effect {
+    @apply pointer-events-none;
+    mask: linear-gradient(black, transparent);
+  }
+
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--accent-foreground)) transparent;
+  }
+
+  .scroll-mask {
+    animation: scroll-masking both linear;
+    animation-timeline: scroll(self);
+
+    --mask-range: calc(100% - 10px);
+    mask: linear-gradient(black, transparent) 0 0 / var(--mask-range) 1rem,
+    linear-gradient(black, black) 0 50% / 100%,
+    linear-gradient(transparent, black) 0 100% / var(--mask-range) 1rem;
+    mask-composite: exclude;
+    mask-repeat: no-repeat;
+  }
+}
+
+@keyframes scroll-masking {
+  from {
+    mask-size: var(--mask-range) 0, 100%, var(--mask-range) 4rem;
+  }
+  to {
+    mask-size: var(--mask-range) 4em, 100%, var(--mask-range) 0;
   }
 }
 
@@ -118,15 +152,13 @@
 .flashlight {
   @apply fixed top-0 left-0 w-[30rem] h-[30rem] z-30 pointer-events-none outline-[9999px] outline-current outline;
   background: radial-gradient(transparent 35%, currentColor 65%);
-  translate:
-      calc(var(--x) - 50%)
-      calc(var(--y) - 50%);
+  translate: calc(var(--x) - 50%) calc(var(--y) - 50%);
 }
 
 @supports (anchor-name: --a) {
   .toc-anchor::after {
     @apply pointer-events-none absolute -z-10 border-l-2 border-foreground content-[''];
-    transition: inset 1.8s;
+    transition: inset 180ms;
     position-anchor: var(--anchor);
     inset: anchor(top) anchor(right) anchor(bottom) anchor(left);
   }

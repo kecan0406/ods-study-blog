@@ -13,7 +13,7 @@ export default function HeaderNavigation() {
 
   return (
     <nav
-      className='nav-anchor grow items-center gap-1 overflow-x-auto'
+      className='nav-anchor scroll-thin grow items-center gap-1 overflow-x-auto'
       anchor={anchor.startsWith('@') ? 'author' : anchor}
     >
       <ul className='flex font-medium text-primary text-sm'>
