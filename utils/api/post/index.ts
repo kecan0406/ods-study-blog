@@ -1,3 +1,4 @@
+'use server'
 import { POST_SLUGS, getMarkdownFile, parseMarkdown } from 'utils/md-utils'
 
 export type PostMatter = {

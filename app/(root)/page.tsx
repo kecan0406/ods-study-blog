@@ -1,6 +1,7 @@
 import Profile from './profile'
 import WritingPosts from './writing-posts'
 
+export const dynamic = 'force-static'
 export default async function RootPage() {
   return (
     <div className='wrapper py-8'>
