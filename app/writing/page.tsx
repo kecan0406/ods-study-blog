@@ -1,5 +1,8 @@
-import PostExcerpt, { preloadPostsCount } from 'app/components/post-excerpt'
+import PostExcerpt from 'app/components/post-excerpt'
+import { preloadViews } from 'app/components/view-counter'
 import { Post, fetchPosts } from 'utils/api/post'
+
+export const experimental_ppr = true
 
 const getPosts = async (): Promise<Post[]> => {
   const posts = await fetchPosts()
@@ -7,7 +10,7 @@ const getPosts = async (): Promise<Post[]> => {
 }
 
 export default async function WritingPage() {
-  preloadPostsCount()
+  preloadViews()
   const posts = await getPosts()
 
   return (

@@ -3,10 +3,13 @@ import { Avatar, AvatarFallback, AvatarImage } from 'app/components/ui/avatar'
 import { Button } from 'app/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from 'app/components/ui/card'
 import { ScrollArea } from 'app/components/ui/scroll-area'
-import ViewCounter from 'app/components/view-counter'
+import { Views } from 'app/components/view-counter'
+import { Suspense } from 'react'
 import { MdArticle } from 'react-icons/md'
 import { Post, fetchPosts } from 'utils/api/post'
-import { getPostsCount, getUsers } from 'utils/db/querys'
+import { getUsers } from 'utils/db/querys'
+
+export const experimental_ppr = true
 
 export default async function AuthorPage() {
   const users = await getUsers()
@@ -51,7 +54,9 @@ async function AuthorCard({ username, intro }: { username: string; intro: string
                   <PostLink writer={post.matter.writer} slug={post.matter.slug}>
                     <MdArticle className='h-4 w-4' />
                     <span className='ml-1 text-wrap'>{post.matter.title}</span>
-                    <Views slug={post.matter.slug} />
+                    <Suspense fallback={<span className='flex-grow' />}>
+                      <Views slug={post.matter.slug} />
+                    </Suspense>
                   </PostLink>
                 </Button>
               </li>
@@ -61,9 +66,4 @@ async function AuthorCard({ username, intro }: { username: string; intro: string
       </CardContent>
     </Card>
   )
-}
-
-async function Views({ slug }: { slug: string }) {
-  const views = await getPostsCount()
-  return <ViewCounter slug={slug} allViews={views} />
 }

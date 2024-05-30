@@ -1,8 +1,11 @@
-import PostExcerpt, { preloadPostsCount } from 'app/components/post-excerpt'
+import PostExcerpt from 'app/components/post-excerpt'
 import { Post, fetchPosts } from 'utils/api/post'
 import { getUsers } from 'utils/db/querys'
+import { preloadViews } from '../components/view-counter'
 
+export const experimental_ppr = true
 export const dynamicParams = false
+
 export async function generateStaticParams() {
   const users = await getUsers()
   return users.map(({ username }) => ({ username: `@${username}` }))
@@ -16,7 +19,7 @@ const getPosts = async (username: string): Promise<Post[]> => {
 }
 
 export default async function UserPage({ params: { username } }: { params: { username: string } }) {
-  preloadPostsCount()
+  preloadViews()
   const posts = await getPosts(decodeURIComponent(username).replace('@', ''))
 
   return (

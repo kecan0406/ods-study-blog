@@ -1,8 +1,7 @@
 import { Card, CardDescription, CardHeader, CardTitle } from 'app/components/ui/card'
-import ViewCounter from 'app/components/view-counter'
+import { Views } from 'app/components/view-counter'
 import { Suspense } from 'react'
 import { Post, PostMatter } from 'utils/api/post'
-import { getPostsCount } from 'utils/db/querys'
 import { truncate } from 'utils/utils'
 import PostLink from './shared/post-link'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
@@ -40,11 +39,4 @@ function HeaderMeta({ matter: { writer, releaseDate, slug } }: { matter: PostMat
       </Suspense>
     </div>
   )
-}
-
-export const preloadPostsCount = () => void getPostsCount()
-
-async function Views({ slug }: { slug: string }) {
-  const views = await getPostsCount()
-  return <ViewCounter slug={slug} allViews={views} />
 }

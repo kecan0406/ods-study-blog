@@ -1,17 +1,20 @@
 'use server'
 import { unstable_noStore as noStore } from 'next/cache'
+import { unstable_after as after } from 'next/server'
 import { db } from 'utils/db/kysely'
 
 export const incrementView = async (slug: string) => {
   noStore()
-
-  await db
-    .insertInto('posts')
-    .values({ slug, views: 1 })
-    .onConflict((oc) =>
-      oc.column('slug').doUpdateSet({
-        views: (eb) => eb('posts.views', '+', 1)
-      })
-    )
-    .execute()
+  after(
+    async () =>
+      await db
+        .insertInto('posts')
+        .values({ slug, views: 1 })
+        .onConflict((oc) =>
+          oc.column('slug').doUpdateSet({
+            views: (eb) => eb('posts.views', '+', 1)
+          })
+        )
+        .execute()
+  )
 }
