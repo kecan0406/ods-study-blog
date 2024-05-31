@@ -4,7 +4,7 @@ import { Suspense } from 'react'
 import { Post, PostMatter } from 'utils/api/post'
 import { truncate } from 'utils/utils'
 import PostLink from './shared/post-link'
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
+import Avatar from './ui/avatar'
 
 export default function PostExcerpt({ post }: { post: Post }) {
   const { matter, content } = post
@@ -25,10 +25,7 @@ function HeaderMeta({ matter: { writer, releaseDate, slug } }: { matter: PostMat
   return (
     <div className='flex items-center gap-1 font-semibold text-muted-foreground text-sm'>
       <PostLink className='link z-10 flex items-center' writer={writer}>
-        <Avatar className='h-7 w-7'>
-          <AvatarImage src={`https://github.com/${writer}.png?size=28`} alt={writer} />
-          <AvatarFallback>{writer}</AvatarFallback>
-        </Avatar>
+        <Avatar size={28} src={`https://github.com/${writer}.png`} alt={writer} />
         <span className='ml-2 text-foreground'>{writer}</span>
       </PostLink>
       <time className='before:pr-1 before:content-["|"]' dateTime={releaseDate}>

@@ -1,5 +1,5 @@
 import PostLink from 'app/components/shared/post-link'
-import { Avatar, AvatarFallback, AvatarImage } from 'app/components/ui/avatar'
+import Avatar from 'app/components/ui/avatar'
 import { Badge } from 'app/components/ui/badge'
 import { Views } from 'app/components/view-counter'
 import Image from 'next/image'
@@ -16,10 +16,7 @@ export default function PostHeader({ matter }: { matter: PostMatter }) {
       <h1 className='text-balance'>{title}</h1>
       <div className='not-prose mb-2 flex gap-4 font-semibold text-sm'>
         <PostLink writer={writer}>
-          <Avatar>
-            <AvatarImage src={`https://github.com/${writer}.png?size=40`} alt={`@${writer}`} />
-            <AvatarFallback>{writer}</AvatarFallback>
-          </Avatar>
+          <Avatar className='border' size={40} src={`https://github.com/${writer}.png`} alt={writer} />
         </PostLink>
         <div className='w-full flex-col'>
           <div className='flex'>

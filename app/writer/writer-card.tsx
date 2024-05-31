@@ -1,5 +1,5 @@
 import PostLink from 'app/components/shared/post-link'
-import { Avatar, AvatarFallback, AvatarImage } from 'app/components/ui/avatar'
+import Avatar from 'app/components/ui/avatar'
 import { Button } from 'app/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from 'app/components/ui/card'
 import { ScrollArea } from 'app/components/ui/scroll-area'
@@ -13,10 +13,7 @@ export async function WriterCard({ user, posts }: { user: User; posts: Post[] })
   return (
     <Card className='md:flex'>
       <CardHeader className='my-auto min-w-40 items-center border-r md:w-auto'>
-        <Avatar className='h-16 w-16 border'>
-          <AvatarImage src={`https://github.com/${user.id}.png?size=64`} alt={user.id} />
-          <AvatarFallback>{user.id}</AvatarFallback>
-        </Avatar>
+        <Avatar className='border' size={64} src={`https://github.com/${user.id}.png`} alt={user.id} />
         <CardTitle className='pb-1'>{user.id}</CardTitle>
         <CardDescription className='overflow-hidden'>{user.intro}</CardDescription>
       </CardHeader>
