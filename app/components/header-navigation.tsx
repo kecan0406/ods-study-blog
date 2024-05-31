@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const LINKS = [
-  { href: 'author', text: 'Author' },
+  { href: 'writer', text: 'Writer' },
   { href: 'writing', text: 'Writing' },
   { href: 'about', text: 'About' }
 ]
@@ -14,7 +14,7 @@ export default function HeaderNavigation() {
   return (
     <nav
       className='nav-anchor scroll-thin grow items-center gap-1 overflow-x-auto'
-      anchor={anchor.startsWith('@') ? 'author' : anchor}
+      anchor={anchor.startsWith('@') ? 'writer' : anchor}
     >
       <ul className='flex font-medium text-primary text-sm'>
         {LINKS.map(({ href, text }) => (

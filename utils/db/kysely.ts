@@ -7,10 +7,11 @@ interface PostsTable {
 }
 
 interface UsersTable {
-  id: Generated<number>
-  username: string
+  user_id: Generated<number>
+  id: string
   intro: string
 }
+export type User = Omit<UsersTable, 'user_id'>
 
 export interface Database {
   posts: PostsTable
