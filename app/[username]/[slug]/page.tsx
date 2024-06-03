@@ -1,17 +1,11 @@
 import PostMdxRemote from 'app/components/mdx'
-import { fetchPost, fetchPosts } from 'utils/api/post'
+import { fetchPost } from 'utils/api/post'
 import { generateTOC, mdxRemoteOptions } from 'utils/md-utils'
 import PostFooter from './post-footer'
 import PostHeader from './post-header'
 import Toc from './toc'
 
 export const experimental_ppr = true
-export const dynamicParams = false
-
-export async function generateStaticParams() {
-  const posts = await fetchPosts()
-  return posts.map(({ matter }) => ({ username: `@${matter.writer}`, slug: matter.slug }))
-}
 
 export default async function PostPage({ params }: { params: { slug: string } }) {
   const post = await fetchPost(params.slug)

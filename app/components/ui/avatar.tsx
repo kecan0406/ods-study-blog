@@ -1,8 +1,7 @@
 import Image, { ImageProps } from 'next/image'
-import { HTMLProps } from 'react'
 import { cn } from 'utils/utils'
 
-type AvatarProps = { size: number } & Omit<ImageProps, 'href'> & HTMLProps<HTMLImageElement>
+type AvatarProps = { size: number } & ImageProps
 export default function Avatar({ size, src, className, ...props }: AvatarProps) {
   return (
     <Image

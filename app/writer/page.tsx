@@ -1,3 +1,4 @@
+import { preloadViews } from 'app/components/view-counter'
 import { Post, fetchPosts } from 'utils/api/post'
 import { getUsers } from 'utils/db/querys'
 import { WriterCard } from './writer-card'
@@ -10,6 +11,7 @@ const getPosts = async (): Promise<Post[]> => {
 }
 
 export default async function WriterPage() {
+  preloadViews()
   const [users, posts] = await Promise.all([getUsers(), getPosts()])
 
   return (

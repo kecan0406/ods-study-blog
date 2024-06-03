@@ -2,7 +2,6 @@ import PostLink from 'app/components/shared/post-link'
 import Avatar from 'app/components/ui/avatar'
 import { Button } from 'app/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from 'app/components/ui/card'
-import { ScrollArea } from 'app/components/ui/scroll-area'
 import { Views } from 'app/components/view-counter'
 import { Suspense } from 'react'
 import { MdArticle } from 'react-icons/md'
@@ -18,15 +17,13 @@ export async function WriterCard({ user, posts }: { user: User; posts: Post[] })
         <CardDescription className='overflow-hidden'>{user.intro}</CardDescription>
       </CardHeader>
       <CardContent className='my-4 h-40 w-full'>
-        <ScrollArea>
-          <ul className='max-h-40'>
-            {posts.map((post) => (
-              <li key={post.matter.slug} className='mb-2'>
-                <PostCard post={post} />
-              </li>
-            ))}
-          </ul>
-        </ScrollArea>
+        <ul className='max-h-40'>
+          {posts.map((post) => (
+            <li key={post.matter.slug} className='mb-2'>
+              <PostCard post={post} />
+            </li>
+          ))}
+        </ul>
       </CardContent>
     </Card>
   )

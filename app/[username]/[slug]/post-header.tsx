@@ -1,11 +1,10 @@
 import PostLink from 'app/components/shared/post-link'
 import Avatar from 'app/components/ui/avatar'
 import { Badge } from 'app/components/ui/badge'
-import { Views } from 'app/components/view-counter'
+import { IncrementViews } from 'app/components/view-counter'
 import Image from 'next/image'
-import { Suspense, cache } from 'react'
+import { Suspense } from 'react'
 import { PostMatter } from 'utils/api/post'
-import { incrementView } from 'utils/db/actions'
 
 export default function PostHeader({ matter }: { matter: PostMatter }) {
   const { title, releaseDate, writer, image, tags } = matter
@@ -49,9 +48,4 @@ function HeaderImage({ image, title }: { image: string; title: string }) {
       <Image src={image} alt={title} width={768} height={384} sizes='768px' priority className='max-h-96 rounded-xl' />
     </div>
   )
-}
-
-function IncrementViews({ slug }: { slug: string }) {
-  cache(incrementView)(slug)
-  return <Views slug={slug} />
 }
