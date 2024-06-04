@@ -3,10 +3,11 @@ import Avatar from 'app/components/ui/avatar'
 import { Button } from 'app/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from 'app/components/ui/card'
 import { Views } from 'app/components/view-counter'
-import { Suspense } from 'react'
+import { Suspense, cache } from 'react'
 import { MdArticle } from 'react-icons/md'
 import { Post } from 'utils/api/post'
 import { User } from 'utils/db/kysely'
+import { getGithubStatus } from 'utils/db/querys'
 
 export async function WriterCard({ user, posts }: { user: User; posts: Post[] }) {
   return (
@@ -14,7 +15,9 @@ export async function WriterCard({ user, posts }: { user: User; posts: Post[] })
       <CardHeader className='my-auto min-w-40 items-center border-r md:w-auto'>
         <Avatar className='border' size={64} src={`https://github.com/${user.id}.png`} alt={user.id} />
         <CardTitle className='pb-1'>{user.id}</CardTitle>
-        <CardDescription className='overflow-hidden'>{user.intro}</CardDescription>
+        <Suspense fallback={<CardDescription className='overflow-hidden' />}>
+          <WriterStatus id={user.id} />
+        </Suspense>
       </CardHeader>
       <CardContent className='my-4 h-40 w-full'>
         <ul className='max-h-40'>
@@ -40,5 +43,12 @@ function PostCard({ post }: { post: Post }) {
         </Suspense>
       </PostLink>
     </Button>
+  )
+}
+
+async function WriterStatus({ id }: { id: string }) {
+  const status = await cache(getGithubStatus)()
+  return (
+    <CardDescription className='overflow-hidden'>{status && `${status?.emoji} ${status?.message}`}</CardDescription>
   )
 }
