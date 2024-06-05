@@ -9,7 +9,7 @@ interface PostsTable {
 interface UsersTable {
   user_id: Generated<number>
   id: string
-  intro: string
+  node_id: string
 }
 export type User = Omit<UsersTable, 'user_id'>
 
