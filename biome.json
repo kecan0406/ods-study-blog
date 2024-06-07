@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.7.3/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.8.0/schema.json",
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
@@ -35,13 +35,23 @@
     "formatter": {
       "jsxQuoteStyle": "single",
       "quoteProperties": "asNeeded",
-      "trailingComma": "none",
       "semicolons": "asNeeded",
       "arrowParentheses": "always",
       "bracketSpacing": true,
       "bracketSameLine": false,
       "quoteStyle": "single",
       "attributePosition": "auto"
+    }
+  },
+  "css": {
+    "linter": {
+      "enabled": false
+    },
+    "formatter": {
+      "enabled": false
+    },
+    "parser": {
+      "cssModules": true
     }
   }
 }
