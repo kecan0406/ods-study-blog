@@ -2,16 +2,17 @@ import PostExcerpt from 'app/components/post-excerpt'
 import { buttonVariants } from 'app/components/ui/button'
 import { preloadViews } from 'app/components/view-counter'
 import Link from 'next/link'
-import { Post, fetchPosts } from 'utils/api/post'
+import { Discussion } from 'utils/db/graphql'
+import { getEdgePosts } from 'utils/db/querys'
 
-const getPosts = async (): Promise<Post[]> => {
-  const posts = await fetchPosts()
-  return posts.toSorted((a, b) => new Date(b.matter.releaseDate).getTime() - new Date(a.matter.releaseDate).getTime())
+const fetchPosts = async (): Promise<Discussion[]> => {
+  const posts = await getEdgePosts()
+  return posts.map(({ node }) => node)
 }
 
 export default async function WritingPosts() {
   preloadViews()
-  const posts = await getPosts()
+  const posts = await fetchPosts()
 
   return (
     <section className='py-8'>
@@ -22,7 +23,7 @@ export default async function WritingPosts() {
       </div>
       <ul>
         {posts.map((post) => (
-          <li className='mb-4' key={post.matter.slug}>
+          <li className='mb-4' key={post.slug}>
             <PostExcerpt post={post} />
           </li>
         ))}

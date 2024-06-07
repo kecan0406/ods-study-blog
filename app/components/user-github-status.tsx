@@ -1,3 +1,4 @@
+import { unstable_noStore as noStore } from 'next/cache'
 import { cache } from 'react'
 import { UserStatus } from 'utils/db/graphql'
 import { getUserStatuses } from 'utils/db/querys'
@@ -6,6 +7,7 @@ import { Badge } from './ui/badge'
 export const preloadUserStatus = cache(getUserStatuses)
 
 export async function UserGithubStatus({ id }: { id: string }) {
+  noStore()
   const allUserStatus = await preloadUserStatus()
   return <Status id={id} allUserStatus={allUserStatus} />
 }

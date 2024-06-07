@@ -2,7 +2,7 @@ import { createKysely } from '@vercel/postgres-kysely'
 import { Generated } from 'kysely'
 
 interface PostsTable {
-  slug: string
+  slug: number
   views: number
 }
 

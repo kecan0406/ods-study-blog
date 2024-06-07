@@ -2,7 +2,7 @@
 import { unstable_noStore as noStore } from 'next/cache'
 import { db } from 'utils/db/kysely'
 
-export const incrementView = async (slug: string) => {
+export const incrementView = async (slug: number) => {
   noStore()
   await db
     .insertInto('posts')

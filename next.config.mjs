@@ -8,16 +8,16 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'github.com',
-        pathname: '/*'
+        pathname: '/*',
       },
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
-        pathname: '/*'
-      }
+        pathname: '/*',
+      },
     ],
-    deviceSizes: [640, 768, 1024, 1280, 1536]
-  }
+    deviceSizes: [640, 768, 1024, 1280, 1536],
+  },
 }
 
 export default nextConfig

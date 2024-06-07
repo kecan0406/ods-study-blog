@@ -6,23 +6,22 @@ import { UserGithubStatus } from 'app/components/user-github-status'
 import { Views } from 'app/components/view-counter'
 import { Suspense } from 'react'
 import { MdArticle } from 'react-icons/md'
-import { Post } from 'utils/api/post'
-import { User } from 'utils/db/kysely'
+import { Discussion } from 'utils/db/graphql'
 
-export async function WriterCard({ user, posts }: { user: User; posts: Post[] }) {
+export async function WriterCard({ user, posts }: { user: string; posts: Discussion[] }) {
   return (
     <Card className='md:flex'>
       <CardHeader className='my-auto min-w-40 items-center border-r md:w-auto'>
-        <Avatar className='border' size={64} src={`https://github.com/${user.id}.png`} alt={user.id} />
-        <CardTitle className='pb-1'>{user.id}</CardTitle>
+        <Avatar className='border' size={64} src={`https://github.com/${user}.png`} alt={user} />
+        <CardTitle className='pb-1'>{user}</CardTitle>
         <Suspense>
-          <UserGithubStatus id={user.id} />
+          <UserGithubStatus id={user} />
         </Suspense>
       </CardHeader>
       <CardContent className='my-4 h-40 w-full'>
         <ul className='max-h-40'>
           {posts.map((post) => (
-            <li key={post.matter.slug} className='mb-2'>
+            <li key={post.slug} className='mb-2'>
               <PostCard post={post} />
             </li>
           ))}
@@ -32,14 +31,14 @@ export async function WriterCard({ user, posts }: { user: User; posts: Post[] })
   )
 }
 
-function PostCard({ post }: { post: Post }) {
+function PostCard({ post }: { post: Discussion }) {
   return (
     <Button variant='ghost' asChild className='w-full'>
-      <PostLink writer={post.matter.writer} slug={post.matter.slug}>
+      <PostLink writer={post.author.login} slug={post.slug}>
         <MdArticle className='h-4 w-4' />
-        <span className='ml-1 text-wrap'>{post.matter.title}</span>
+        <span className='ml-1 text-wrap'>{post.title}</span>
         <Suspense fallback={<span className='flex-grow' />}>
-          <Views slug={post.matter.slug} />
+          <Views slug={post.slug} />
         </Suspense>
       </PostLink>
     </Button>

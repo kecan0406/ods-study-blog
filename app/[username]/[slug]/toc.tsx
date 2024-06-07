@@ -1,7 +1,7 @@
 'use client'
 import { clsx } from 'clsx'
 import { useEffect, useState } from 'react'
-import { PostContent } from 'utils/api/post'
+import { PostContent } from 'utils/md-utils'
 
 type TocContent = { id: string; y: number }
 export default function Toc({ toc }: { toc: PostContent[] }) {
@@ -14,7 +14,7 @@ export default function Toc({ toc }: { toc: PostContent[] }) {
     const tocInfo = toc.map(({ id, children }) => ({
       id,
       y: document.getElementById(id)!.offsetTop,
-      children: parseChildren(children)
+      children: parseChildren(children),
     }))
 
     const findClosestId = (toc: TocContent[]) => toc.findLast((content) => content.y - 114 < window.scrollY)?.id ?? ''
@@ -40,7 +40,7 @@ export default function Toc({ toc }: { toc: PostContent[] }) {
                   href={`#${id}`}
                   className={clsx(
                     'p-2 text-lg hover:font-bold hover:text-foreground',
-                    parentClosestId === id && 'font-bold text-foreground'
+                    parentClosestId === id && 'font-bold text-foreground',
                   )}
                 >
                   {content}
@@ -66,7 +66,7 @@ function TocHeader({ toc, closestId }: { toc: PostContent[]; closestId: string }
               href={`#${id}`}
               className={clsx(
                 'p-2 text-base hover:font-semibold hover:text-foreground',
-                closestId === id && 'font-semibold text-foreground'
+                closestId === id && 'font-semibold text-foreground',
               )}
             >
               {content}

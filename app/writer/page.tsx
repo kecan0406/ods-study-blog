@@ -1,25 +1,25 @@
 import { preloadViews } from 'app/components/view-counter'
-import { Post, fetchPosts } from 'utils/api/post'
-import { getUsers } from 'utils/db/querys'
+import { Discussion } from 'utils/db/graphql'
+import { getEdgePosts, getUserStatuses } from 'utils/db/querys'
 import { WriterCard } from './writer-card'
 
 export const experimental_ppr = true
 
-const getPosts = async (): Promise<Post[]> => {
-  const posts = await fetchPosts()
-  return posts.toSorted((a, b) => new Date(b.matter.releaseDate).getTime() - new Date(a.matter.releaseDate).getTime())
+const fetchPosts = async (): Promise<Discussion[]> => {
+  const posts = await getEdgePosts()
+  return posts.map(({ node }) => node)
 }
 
 export default async function WriterPage() {
   preloadViews()
-  const [users, posts] = await Promise.all([getUsers(), getPosts()])
+  const [users, posts] = await Promise.all([getUserStatuses(), fetchPosts()])
 
   return (
     <div className='wrapper py-8'>
       <ul>
-        {users.map((user) => (
-          <li key={user.id} className='mb-4'>
-            <WriterCard user={user} posts={posts.filter((post) => post.matter.writer === user.id)} />
+        {users.map(({ user }) => (
+          <li key={user.login} className='mb-4'>
+            <WriterCard user={user.login} posts={posts.filter((post) => post.author.login === user.login)} />
           </li>
         ))}
       </ul>

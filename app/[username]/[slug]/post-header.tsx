@@ -1,17 +1,21 @@
+import IntlTime from 'app/components/intl-time'
 import PostLink from 'app/components/shared/post-link'
 import Avatar from 'app/components/ui/avatar'
 import { Badge } from 'app/components/ui/badge'
 import { IncrementViews } from 'app/components/view-counter'
 import Image from 'next/image'
 import { Suspense } from 'react'
-import { PostMatter } from 'utils/api/post'
+import { Discussion } from 'utils/db/graphql'
 
-export default function PostHeader({ matter }: { matter: PostMatter }) {
-  const { title, releaseDate, writer, image, tags } = matter
+export default function PostHeader({ post }: { post: Discussion }) {
+  const {
+    title,
+    author: { login: writer },
+    labels,
+  } = post
 
   return (
     <header className='flex flex-col justify-center'>
-      {image && <HeaderImage image={image} title={title} />}
       <h1 className='text-balance'>{title}</h1>
       <div className='not-prose mb-2 flex gap-4 font-semibold text-sm'>
         <PostLink writer={writer}>
@@ -22,19 +26,19 @@ export default function PostHeader({ matter }: { matter: PostMatter }) {
             <PostLink className='link' writer={writer}>
               {writer}
             </PostLink>
-            <Suspense fallback={<span className='flex-grow' />}>
-              <IncrementViews slug={matter.slug} />
-            </Suspense>
           </div>
           <div className='mt-0.5 flex text-muted-foreground'>
-            <time dateTime={releaseDate}>{releaseDate}</time>
+            <IntlTime date={post.createdAt} />
+            <Suspense fallback={<span className='flex-grow' />}>
+              <IncrementViews slug={post.slug} />
+            </Suspense>
           </div>
         </div>
       </div>
       <div className='my-2 flex gap-2 overflow-x-auto'>
-        {tags.map((tag) => (
-          <Badge className='before:content-["#"]' variant='secondary' key={tag}>
-            {tag}
+        {labels.nodes.map((label) => (
+          <Badge className='before:content-["#"]' variant='secondary' key={label.name}>
+            {label.name}
           </Badge>
         ))}
       </div>

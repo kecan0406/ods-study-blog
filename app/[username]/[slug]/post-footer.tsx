@@ -1,45 +1,45 @@
 import PostLink from 'app/components/shared/post-link'
-import { Post, fetchPosts } from 'utils/api/post'
+import { Card } from 'app/components/ui/card'
+import { DiscussionInfo } from 'utils/db/graphql'
+import { getNearPosts } from 'utils/db/querys'
 import Comments from './comments'
 
-const getPosts = async (): Promise<Post[]> => {
-  const posts = await fetchPosts()
-  return posts.toSorted((a, b) => new Date(b.matter.releaseDate).getTime() - new Date(a.matter.releaseDate).getTime())
-}
-
-export default async function PostFooter({ slug }: { slug: string }) {
+export default async function PostFooter({ cursor }: { cursor: string }) {
   return (
     <div className='not-prose'>
-      <NavPost slug={slug} />
+      <NavPosts cursor={cursor} />
       <Comments />
     </div>
   )
 }
 
-async function NavPost({ slug }: { slug: string }) {
-  const posts = await getPosts()
-  const curIdx = posts.findIndex((post) => post.matter.slug === slug)
-  const prev = posts[curIdx - 1]
-  const next = posts[curIdx + 1]
+async function NavPosts({ cursor }: { cursor: string }) {
+  const { repository } = await getNearPosts(cursor)
 
   return (
-    <div className='grid grid-cols-2 py-4 text-center'>
-      <div>
-        <p className='font-bold'>이전 글</p>
-        {prev && (
-          <PostLink className='p-3 opacity-50 hover:opacity-100' writer={prev.matter.writer} slug={prev.matter.slug}>
-            {prev.matter.title}
-          </PostLink>
-        )}
-      </div>
-      <div>
-        <p className='font-bold'>다음 글</p>
-        {next && (
-          <PostLink className='p-3 opacity-50 hover:opacity-100' writer={next.matter.writer} slug={next.matter.slug}>
-            {next.matter.title}
-          </PostLink>
-        )}
-      </div>
+    <div className='grid grid-cols-2 gap-4 py-6 text-center'>
+      <NavPost post={repository.prev.nodes[0]} description='이전 글' />
+      <NavPost post={repository.next.nodes[0]} description='다음 글' />
     </div>
+  )
+}
+
+function NavPost({ post, description }: { post?: DiscussionInfo; description: string }) {
+  if (!post) {
+    return (
+      <Card className='cursor-no-drop rounded-none p-4 shadow-none'>
+        <p>{description}</p>
+        <span>-</span>
+      </Card>
+    )
+  }
+
+  return (
+    <PostLink writer={post.author.login} slug={post.slug}>
+      <Card className='rounded-none p-4 shadow-none transition-colors hover:bg-accent'>
+        <p>{description}</p>
+        <span>{post.title}</span>
+      </Card>
+    </PostLink>
   )
 }
