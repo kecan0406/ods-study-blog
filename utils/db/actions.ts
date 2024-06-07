@@ -9,8 +9,8 @@ export const incrementView = async (slug: string) => {
     .values({ slug, views: 1 })
     .onConflict((oc) =>
       oc.column('slug').doUpdateSet({
-        views: (eb) => eb('posts.views', '+', 1)
-      })
+        views: (eb) => eb('posts.views', '+', 1),
+      }),
     )
     .execute()
 }

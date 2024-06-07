@@ -1,16 +1,17 @@
 import { cache } from 'react'
-import { GithubStatus, getGithubStatus } from 'utils/db/querys'
+import { UserStatus } from 'utils/db/graphql'
+import { getUserStatuses } from 'utils/db/querys'
 import { Badge } from './ui/badge'
 
-export const preloadUserStatus = cache(getGithubStatus)
+export const preloadUserStatus = cache(getUserStatuses)
 
 export async function UserGithubStatus({ id }: { id: string }) {
-  const allGithubStatus = await preloadUserStatus()
-  return <Status id={id} allGithubStatus={allGithubStatus} />
+  const allUserStatus = await preloadUserStatus()
+  return <Status id={id} allUserStatus={allUserStatus} />
 }
 
-async function Status({ id, allGithubStatus }: { id: string; allGithubStatus: GithubStatus[] }) {
-  const { status } = allGithubStatus.find(({ login }) => login === id)!
+async function Status({ id, allUserStatus }: { id: string; allUserStatus: UserStatus[] }) {
+  const status = allUserStatus.find(({ user }) => user.login === id)
 
   return (
     <div className='group font-semibold text-xs'>
