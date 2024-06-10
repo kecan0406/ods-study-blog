@@ -94,9 +94,9 @@
     animation-timeline: scroll(self);
 
     --mask-range: calc(100% - 10px);
-    mask: linear-gradient(black, transparent) 0 0 / var(--mask-range) 1rem,
+    mask: linear-gradient(black, transparent) 0 0 / var(--mask-range) 0,
     linear-gradient(black, black) 0 50% / 100%,
-    linear-gradient(transparent, black) 0 100% / var(--mask-range) 1rem;
+    linear-gradient(transparent, black) 0 100% / var(--mask-range) 0;
     mask-composite: exclude;
     mask-repeat: no-repeat;
   }

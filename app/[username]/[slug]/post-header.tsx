@@ -11,7 +11,7 @@ export default function PostHeader({ post }: { post: Discussion }) {
   const {
     title,
     author: { login: writer },
-    labels,
+    labels
   } = post
 
   return (

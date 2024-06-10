@@ -11,12 +11,12 @@ export const mdxRemoteOptions: MDXRemoteProps['options'] = {
         {
           theme: {
             dark: 'one-dark-pro',
-            light: 'one-light',
-          },
-        } as import('rehype-pretty-code').Options,
-      ],
-    ],
-  },
+            light: 'one-light'
+          }
+        } as import('rehype-pretty-code').Options
+      ]
+    ]
+  }
 }
 
 export type PostContent = {
@@ -31,7 +31,7 @@ export const generateTOC = (content: string): PostContent[] => {
     id: slugify(groups!.content),
     depth: groups!.flag.length,
     content: groups!.content,
-    children: [],
+    children: []
   }))
   return buildTOCStructure(toc)
 }

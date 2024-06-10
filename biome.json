@@ -38,6 +38,7 @@
       "semicolons": "asNeeded",
       "arrowParentheses": "always",
       "bracketSpacing": true,
+      "trailingCommas": "none",
       "bracketSameLine": false,
       "quoteStyle": "single",
       "attributePosition": "auto"

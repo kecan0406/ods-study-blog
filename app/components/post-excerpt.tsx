@@ -12,7 +12,7 @@ export default function PostExcerpt({ post }: { post: Discussion }) {
     slug,
     author: { login: writer },
     body,
-    title,
+    title
   } = post
 
   return (
@@ -31,8 +31,8 @@ function HeaderMeta({
   post: {
     author: { login: writer },
     createdAt,
-    slug,
-  },
+    slug
+  }
 }: { post: Discussion }) {
   return (
     <div className='flex items-center gap-1 font-semibold text-muted-foreground text-sm'>

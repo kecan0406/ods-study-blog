@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation'
 
 const LINKS = [
   { href: 'writer', text: 'Writer' },
-  { href: 'writing', text: 'Writing' },
+  { href: 'writing', text: 'Writing' }
 ]
 
 export default function HeaderNavigation() {

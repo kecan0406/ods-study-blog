@@ -5,8 +5,8 @@ export const githubClient = registerUrql(() =>
   createClient({
     url: 'https://api.github.com/graphql',
     exchanges: [cacheExchange, fetchExchange],
-    fetchOptions: () => ({ headers: { Authorization: `Bearer ${process.env.GITHUB_AUTH}` } }),
-  }),
+    fetchOptions: () => ({ headers: { Authorization: `Bearer ${process.env.GITHUB_AUTH}` } })
+  })
 ).getClient()
 
 export type UserStatus = { user: { login: string }; emojiHTML: string; message: string }

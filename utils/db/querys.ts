@@ -9,7 +9,7 @@ import {
   NearDiscussionsQuery,
   RepositoryDiscussions,
   UserStatus,
-  githubClient,
+  githubClient
 } from 'utils/db/graphql'
 import { db } from 'utils/db/kysely'
 

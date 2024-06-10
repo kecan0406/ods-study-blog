@@ -6,7 +6,6 @@ import { ThemeProvider } from 'next-themes'
 import localFont from 'next/font/local'
 import { ReactNode } from 'react'
 import { cn } from 'utils/utils'
-import { PreloadResources } from './preload-resources'
 
 export const metadata: Metadata = {
   title: 'ODS STUDY',
@@ -23,10 +22,9 @@ const fontSans = localFont({
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <PreloadResources />
-      <body className={cn('min-h-screen font-sans antialiased', fontSans.variable)}>
+      <body className={cn('font-sans antialiased', fontSans.variable)}>
         <ThemeProvider attribute='class' defaultTheme='dark' disableTransitionOnChange enableSystem>
-          <div className='flex h-screen flex-col'>
+          <div className='flex min-h-screen flex-col'>
             <Header />
             <main className='flex-1 pt-16'>{children}</main>
             <Footer />
