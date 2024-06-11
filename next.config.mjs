@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: { ppr: 'incremental', after: true, reactCompiler: true },
+  experimental: { ppr: 'incremental', after: true },
   logging: { fetches: { fullUrl: true } },
   transpilePackages: ['next-mdx-remote'],
   images: {
