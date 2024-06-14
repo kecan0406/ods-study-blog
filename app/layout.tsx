@@ -6,7 +6,6 @@ import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 import localFont from 'next/font/local'
 import { ReactNode } from 'react'
-import { cn } from 'utils/utils'
 
 export const metadata: Metadata = {
   title: 'ODS STUDY',
@@ -23,8 +22,7 @@ const fontSans = localFont({
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <SpeedInsights />
-      <body className={cn('font-sans antialiased', fontSans.variable)}>
+      <body className={`font-sans antialiased ${fontSans.variable}`}>
         <ThemeProvider attribute='class' defaultTheme='dark' disableTransitionOnChange enableSystem>
           <div className='flex min-h-screen flex-col'>
             <Header />
@@ -32,6 +30,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
             <Footer />
           </div>
         </ThemeProvider>
+        <SpeedInsights debug />
       </body>
     </html>
   )
