@@ -4,20 +4,13 @@ import Footer from 'app/components/shared/footer'
 import Header from 'app/components/shared/header'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
-import localFont from 'next/font/local'
 import { ReactNode } from 'react'
+import fontSans from 'utils/font'
 
 export const metadata: Metadata = {
   title: 'ODS STUDY',
   description: 'ods study'
 }
-
-const fontSans = localFont({
-  src: '../public/fonts/PretendardVariable.subset.woff2',
-  weight: '45 920',
-  variable: '--font-sans',
-  display: 'swap'
-})
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
