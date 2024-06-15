@@ -3,10 +3,10 @@ import { buttonVariants } from 'app/components/ui/button'
 import { preloadViews } from 'app/components/view-counter'
 import Link from 'next/link'
 import { Discussion } from 'utils/db/graphql'
-import { getEdgePosts } from 'utils/db/querys'
+import { getDiscussions } from 'utils/db/querys'
 
 const fetchPosts = async (): Promise<Discussion[]> => {
-  const posts = await getEdgePosts()
+  const posts = await getDiscussions()
   return posts.map(({ node }) => node)
 }
 

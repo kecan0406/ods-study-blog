@@ -1,6 +1,6 @@
 import PostMdxRemote from 'app/components/mdx'
 import { EdgeDiscussion } from 'utils/db/graphql'
-import { getEdgePosts } from 'utils/db/querys'
+import { getDiscussions } from 'utils/db/querys'
 import { generateTOC, mdxRemoteOptions } from 'utils/md-utils'
 import PostFooter from './post-footer'
 import PostHeader from './post-header'
@@ -9,7 +9,7 @@ import Toc from './toc'
 export const experimental_ppr = true
 
 const fetchPost = async (slug: number): Promise<EdgeDiscussion> => {
-  const posts = await getEdgePosts()
+  const posts = await getDiscussions()
   return posts.find((post) => post.node.slug === slug)!
 }
 

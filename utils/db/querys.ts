@@ -1,13 +1,13 @@
 'use server'
 import { unstable_noStore as noStore } from 'next/cache'
 import {
+  CategoriesQuery,
+  Category,
   DiscussionsQuery,
   EdgeDiscussion,
   MemberStatusQuery,
-  MemberStatuses,
   NearDiscussions,
   NearDiscussionsQuery,
-  RepositoryDiscussions,
   UserStatus,
   githubClient
 } from 'utils/db/graphql'
@@ -19,16 +19,21 @@ export const getPostsViews = async (): Promise<{ slug: number; views: number }[]
 }
 
 export const getUserStatuses = async (): Promise<UserStatus[]> => {
-  const { data } = await githubClient.query<MemberStatuses>(MemberStatusQuery, { cursor: '' })
+  const { data } = await githubClient.query(MemberStatusQuery, { cursor: '' })
   return data!.organization.memberStatuses.nodes
 }
 
-export const getEdgePosts = async (): Promise<EdgeDiscussion[]> => {
-  const { data } = await githubClient.query<RepositoryDiscussions>(DiscussionsQuery, { cursor: '' })
+export const getDiscussions = async (categoryId: string | null = null): Promise<EdgeDiscussion[]> => {
+  const { data } = await githubClient.query(DiscussionsQuery, { cursor: '', categoryId })
   return data!.repository.discussions.edges
 }
 
 export const getNearPosts = async (cursor: string): Promise<NearDiscussions> => {
-  const { data } = await githubClient.query<NearDiscussions>(NearDiscussionsQuery, { cursor })
+  const { data } = await githubClient.query(NearDiscussionsQuery, { cursor })
   return data!
+}
+
+export const getCategories = async (): Promise<Category[]> => {
+  const { data } = await githubClient.query(CategoriesQuery, { cursor: '' })
+  return data!.repository.discussionCategories.edges.map(({ node }) => node)
 }

@@ -11,7 +11,7 @@ export const githubClient = registerUrql(() =>
 
 export type UserStatus = { user: { login: string }; emojiHTML: string; message: string }
 export type MemberStatuses = { organization: { memberStatuses: { nodes: UserStatus[] } } }
-export const MemberStatusQuery = gql`
+export const MemberStatusQuery = gql<MemberStatuses>`
 query ($cursor: String) {
   organization(login: "ODS-GARAGE") {
     memberStatuses(first: 10, after: $cursor) {
@@ -32,7 +32,7 @@ query ($cursor: String) {
 `
 
 export type Author = { login: string }
-export type Category = { emojiHTML: string; name: string }
+export type Category = { emoji: string; slug: string; id: string }
 export type Label = { name: string }
 export type Discussion = {
   author: Author
@@ -45,10 +45,10 @@ export type Discussion = {
 }
 export type EdgeDiscussion = { cursor: string; node: Discussion }
 export type RepositoryDiscussions = { repository: { discussions: { edges: EdgeDiscussion[] } } }
-export const DiscussionsQuery = gql`
-query ($cursor: String) {
+export const DiscussionsQuery = gql<RepositoryDiscussions>`
+query ($cursor: String, $categoryId: ID) {
   repository(owner: "ODS-GARAGE", name: "posts") {
-    discussions(first: 10, after: $cursor) {
+    discussions(first: 10, after: $cursor, categoryId: $categoryId) {
       pageInfo {
         hasNextPage
         endCursor
@@ -63,8 +63,9 @@ query ($cursor: String) {
           createdAt
           title
           category {
-            emojiHTML
-            name
+            emoji: emojiHTML
+            slug
+            id
           }
           labels(first: 10) {
             nodes {
@@ -86,7 +87,7 @@ export type NearDiscussions = {
   }
 }
 export type DiscussionInfo = { author: Author; title: string; slug: number }
-export const NearDiscussionsQuery = gql`
+export const NearDiscussionsQuery = gql<NearDiscussions>`
 query ($cursor: String) {
   repository(owner: "ODS-GARAGE", name: "posts") {
     next: discussions(last: 1, before: $cursor) {
@@ -105,6 +106,31 @@ query ($cursor: String) {
         }
         title
         slug: number
+      }
+    }
+  }
+}`
+
+export type CategoriesInfo = {
+  repository: {
+    discussionCategories: { edges: { cursor: string; node: Category }[] }
+  }
+}
+export const CategoriesQuery = gql<CategoriesInfo>`
+query ($cursor: String) {
+  repository(owner: "ODS-GARAGE", name: "posts") {
+    discussionCategories(first: 10, after: $cursor) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        cursor
+        node {
+          emoji: emojiHTML
+          slug
+          id
+        }
       }
     }
   }

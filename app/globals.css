@@ -156,6 +156,33 @@
 }
 
 @supports (anchor-name: --a) {
+  .category-anchor {
+    --target: --anchor;
+
+    &::before {
+      @apply content-[''] absolute pointer-events-none bg-accent rounded-md -z-10;
+      position-anchor: var(--target);
+      inset: anchor(top) anchor(right) anchor(bottom) anchor(left);
+      transition: inset 180ms;
+    }
+
+    li[data-current=true] {
+      anchor-name: --anchor;
+    }
+
+    &:has(li[data-current=false]:hover) {
+      li[data-current=true] {
+        anchor-name: --no;
+      }
+
+      & > :hover {
+        anchor-name: --anchor;
+      }
+
+      --target: --anchor;
+    }
+  }
+
   .toc-anchor::after {
     @apply pointer-events-none absolute -z-10 border-l-2 border-foreground content-[''];
     transition: inset 180ms;
