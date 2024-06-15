@@ -2,17 +2,19 @@
 
 import Giscus from '@giscus/react'
 import { useTheme } from 'next-themes'
+import { useParams } from 'next/navigation'
 
 export default function Comments() {
+  const { slug } = useParams()
   const { resolvedTheme } = useTheme()
+
   return (
     <Giscus
       id='comment'
-      repo='kecan0406/ods-study-blog'
-      repoId='R_kgDOLcAF6g'
-      category='Comments'
-      categoryId='DIC_kwDOLcAF6s4Ce2Db'
-      mapping='pathname'
+      repo='ODS-GARAGE/posts'
+      repoId='R_kgDOMGEK4Q'
+      mapping='number'
+      term={slug as string}
       theme={`${process.env.NEXT_PUBLIC_URL}/themes/${resolvedTheme}.css`}
       emitMetadata='0'
       reactionsEnabled='0'
