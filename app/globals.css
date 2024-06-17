@@ -111,6 +111,11 @@
   }
 }
 
+.dark [data-hide-on-theme='dark'],
+.light [data-hide-on-theme='light'] {
+  display: none;
+}
+
 .anchor {
   @apply invisible absolute -ms-8 w-full max-w-3xl text-muted-foreground no-underline md:inline-block hover:visible;
 }

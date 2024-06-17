@@ -43,17 +43,12 @@ export default function ThemeToggleButton() {
         className='h-10 w-10 rounded-full'
         onClick={handleTheme}
       >
-        {isPrevFL ? (
-          isFL ? (
-            <MdFlashlightOff className='theme-icon' />
-          ) : (
-            <MdFlashlightOn className='theme-icon' />
-          )
-        ) : isDark ? (
-          <MdDarkMode className='theme-icon' />
-        ) : (
-          <MdLightMode className='theme-icon' />
-        )}
+        <div data-hide-on-theme='dark'>
+          {isFL ? <MdFlashlightOff className='theme-icon' /> : <MdLightMode className='theme-icon' />}
+        </div>
+        <div data-hide-on-theme='light'>
+          {isPrevFL ? <MdFlashlightOn className='theme-icon' /> : <MdDarkMode className='theme-icon' />}
+        </div>
       </Button>
       <div ref={flashlightRef} className={clsx('flashlight', { hidden: !isFL })} />
     </>

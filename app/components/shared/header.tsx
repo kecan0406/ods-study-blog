@@ -1,5 +1,5 @@
 import HeaderNavigation from 'app/components/header-navigation'
-import dynamic from 'next/dynamic'
+import ThemeToggleButton from 'app/components/theme-toggle-button'
 import Link from 'next/link'
 
 export default function Header() {
@@ -23,5 +23,3 @@ function Logo() {
     </Link>
   )
 }
-
-const ThemeToggleButton = dynamic(() => import('app/components/theme-toggle-button'), { ssr: false })
