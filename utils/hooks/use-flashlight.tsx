@@ -1,12 +1,12 @@
 'use client'
 
-import { RefObject, useCallback, useEffect, useRef } from 'react'
+import { ComponentRef, RefObject, useCallback, useEffect, useRef } from 'react'
 
 type MoveFn = (x: number, y: number) => void
 type UseFlashlightProps = (isFL: boolean) => { flashlightRef: RefObject<HTMLDivElement | null>; moveLight: MoveFn }
 
 export const useFlashlight: UseFlashlightProps = (isFL) => {
-  const flashlightRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null)
+  const flashlightRef = useRef<ComponentRef<'div'>>(null)
 
   useEffect(() => {
     if (!isFL) return
