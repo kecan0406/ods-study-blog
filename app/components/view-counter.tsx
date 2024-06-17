@@ -1,19 +1,19 @@
 import { unstable_after as after } from 'next/server'
-import { cache } from 'react'
+import { cache, use } from 'react'
 import { incrementView } from 'utils/db/actions'
 import { getPostsViews } from 'utils/db/querys'
 
 export const preloadViews = cache(getPostsViews)
 
-export async function Views({ slug }: { slug: number }) {
-  const views = await preloadViews()
+export function Views({ slug }: { slug: number }) {
+  const views = use(preloadViews())
   return <ViewCounter slug={slug} allViews={views} />
 }
 
 const increment = cache(incrementView)
-export async function IncrementViews({ slug }: { slug: number }) {
-  const views = await preloadViews()
+export function IncrementViews({ slug }: { slug: number }) {
   after(() => increment(slug))
+  const views = use(preloadViews())
   return <ViewCounter slug={slug} allViews={views} />
 }
 
