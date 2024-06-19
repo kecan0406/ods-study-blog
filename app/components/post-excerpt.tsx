@@ -21,7 +21,7 @@ export default function PostExcerpt({ post }: { post: Discussion }) {
       <CardHeader>
         <HeaderMeta post={post} />
         <CardTitle className='text-2xl group-hover:underline'>{title}</CardTitle>
-        <CardDescription className='m-2 line-clamp-3 shadow-effect'>{truncate(body)}</CardDescription>
+        <CardDescription className='m-2 line-clamp-3'>{truncate(body)}</CardDescription>
       </CardHeader>
     </Card>
   )

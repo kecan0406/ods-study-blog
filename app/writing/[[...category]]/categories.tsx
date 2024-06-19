@@ -9,7 +9,7 @@ export function Categories({ category, categories }: { category: string; categor
     <nav className='py-2 uppercase'>
       <ul className='category-anchor flex'>
         {categoryLinks.map(({ slug, emoji }) => (
-          <li key={slug} data-current={category === slug}>
+          <li key={slug} aria-checked={category === slug}>
             <Link className={buttonVariants({ variant: 'ghost' })} href={`/writing/${slug === 'all' ? '' : slug}`}>
               <span className='mr-1' dangerouslySetInnerHTML={{ __html: emoji ?? '' }} />
               {slug}
