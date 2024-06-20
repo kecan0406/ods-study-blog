@@ -7,6 +7,6 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ username: `@${post.node.author.login}`, slug: String(post.node.slug) }))
 }
 
-export default function PostLayout({ children }: Readonly<{ children: ReactNode }>) {
+export default function UserLayout({ children }: Readonly<{ children: ReactNode }>) {
   return <>{children}</>
 }
