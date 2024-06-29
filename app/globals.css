@@ -197,9 +197,8 @@
   .nav-anchor::after {
     @apply content-[''] fixed pointer-events-none -z-10 border-b-2 border-b-current opacity-[--active,0];
     position-anchor: var(--anchor);
-    left: calc(anchor(left) + 1.25rem);
-    top: anchor(top);
-    width: calc(anchor-size(width) - 2.5rem);
+    inset: anchor(top) anchor(right) anchor(bottom) anchor(left);
+    width: anchor-size(width);
     height: anchor-size(height);
     transition: all 0.18s allow-discrete;
   }

@@ -4,11 +4,9 @@ import Link from 'next/link'
 
 export default function Header() {
   return (
-    <header className='sticky top-0 z-20 w-full border-foreground border-b bg-background shadow-inner'>
-      <div className='wrapper flex items-center justify-between p-2'>
-        <div className='mr-4 flex items-center'>
-          <Logo />
-        </div>
+    <header className='z-20 h-12 border-muted border-b bg-background'>
+      <div className='wrapper flex h-full items-center justify-between'>
+        <Logo />
         <HeaderNavigation />
         <ThemeToggleButton />
       </div>
@@ -18,8 +16,10 @@ export default function Header() {
 
 function Logo() {
   return (
-    <Link href='/'>
-      <span className='notranslate inline-flex h-10 items-center text-nowrap px-2 font-bold text-lg'>ODS Study</span>
-    </Link>
+    <div className='mr-4 flex items-center'>
+      <Link href='/'>
+        <span className='notranslate inline-flex h-10 items-center text-nowrap px-2 font-bold text-lg'>ODS Study</span>
+      </Link>
+    </div>
   )
 }
