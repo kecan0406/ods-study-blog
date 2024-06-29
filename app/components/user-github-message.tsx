@@ -6,7 +6,7 @@ import { Badge } from './ui/badge'
 
 const userMessages = cache(getUserMessages)
 
-export function UserGithubStatus({ id }: { id: string }) {
+export function UserGithubMessage({ id }: { id: string }) {
   noStore()
   const allUserStatus = use(userMessages())
   return <Status id={id} allUserStatus={allUserStatus} />

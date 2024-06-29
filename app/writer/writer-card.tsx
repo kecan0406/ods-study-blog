@@ -2,7 +2,7 @@ import PostLink from 'app/components/shared/post-link'
 import Avatar from 'app/components/ui/avatar'
 import { Button } from 'app/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from 'app/components/ui/card'
-import { UserGithubStatus } from 'app/components/user-github-status'
+import { UserGithubMessage } from 'app/components/user-github-message'
 import { Views } from 'app/components/view-counter'
 import { Suspense } from 'react'
 import { MdArticle } from 'react-icons/md'
@@ -15,7 +15,7 @@ export async function WriterCard({ user, posts }: { user: string; posts: Post[] 
         <Avatar className='border' size={64} src={`https://github.com/${user}.png`} alt={user} />
         <CardTitle className='pb-1'>{user}</CardTitle>
         <Suspense>
-          <UserGithubStatus id={user} />
+          <UserGithubMessage id={user} />
         </Suspense>
       </CardHeader>
       <CardContent className='my-4 h-40 w-full'>
