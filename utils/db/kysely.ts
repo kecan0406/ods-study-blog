@@ -11,6 +11,7 @@ interface UsersTable {
   id: string
   node_id: string
 }
+
 export type User = Omit<UsersTable, 'user_id'>
 
 export interface Database {

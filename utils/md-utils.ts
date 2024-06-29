@@ -9,10 +9,7 @@ export const mdxRemoteOptions: MDXRemoteProps['options'] = {
       [
         rehypePrettyCode,
         {
-          theme: {
-            dark: 'one-dark-pro',
-            light: 'one-light'
-          }
+          theme: { dark: 'one-dark-pro', light: 'one-light' }
         } as import('rehype-pretty-code').Options
       ]
     ]
@@ -35,10 +32,10 @@ export const generateTOC = (content: string): PostContent[] => {
   }))
   return buildTOCStructure(toc)
 }
+
 const buildTOCStructure = (toc: PostContent[]): PostContent[] => {
   toc.forEach((content, i) => {
     if (content.depth > toc[i + 1]?.depth) return
-
     const idx = toc.slice(i + 1).findIndex((sliceContent) => content.depth >= sliceContent.depth)
     const deleteCount = idx === -1 ? Infinity : idx
     content.children = buildTOCStructure(toc.splice(i + 1, deleteCount))

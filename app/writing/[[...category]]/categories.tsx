@@ -1,6 +1,7 @@
 import { buttonVariants } from 'app/components/ui/button'
 import Link from 'next/link'
-import { Category } from 'utils/db/graphql'
+
+import { Category } from '../../../utils/gql/query'
 
 export function Categories({ category, categories }: { category: string; categories: Category[] }) {
   const categoryLinks = [{ slug: 'all', emoji: '' }, ...categories]

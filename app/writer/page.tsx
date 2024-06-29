@@ -1,18 +1,10 @@
-import { preloadViews } from 'app/components/view-counter'
-import { Discussion } from 'utils/db/graphql'
-import { getDiscussions, getUserStatuses } from 'utils/db/querys'
+import { getPosts, getUserStatuses } from 'utils/db/querys'
 import { WriterCard } from './writer-card'
 
 export const experimental_ppr = true
 
-const fetchPosts = async (): Promise<Discussion[]> => {
-  const posts = await getDiscussions()
-  return posts.map(({ node }) => node)
-}
-
 export default async function WriterPage() {
-  preloadViews()
-  const [users, posts] = await Promise.all([getUserStatuses(), fetchPosts()])
+  const [users, posts] = await Promise.all([getUserStatuses(), getPosts()])
 
   return (
     <div className='wrapper py-4'>

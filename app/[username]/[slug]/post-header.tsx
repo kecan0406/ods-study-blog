@@ -5,9 +5,10 @@ import { Badge } from 'app/components/ui/badge'
 import { IncrementViews } from 'app/components/view-counter'
 import Image from 'next/image'
 import { Suspense } from 'react'
-import { Discussion } from 'utils/db/graphql'
 
-export default function PostHeader({ post }: { post: Discussion }) {
+import { Post } from '../../../utils/gql/query'
+
+export default function PostHeader({ post }: { post: Post }) {
   const {
     title,
     author: { login: writer },

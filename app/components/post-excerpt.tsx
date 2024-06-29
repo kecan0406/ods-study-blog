@@ -1,13 +1,13 @@
 import { Card, CardDescription, CardHeader, CardTitle } from 'app/components/ui/card'
 import { Views } from 'app/components/view-counter'
 import { Suspense } from 'react'
-import { Discussion } from 'utils/db/graphql'
 import { truncate } from 'utils/utils'
+import { Post } from '../../utils/gql/query'
 import IntlTime from './intl-time'
 import PostLink from './shared/post-link'
 import Avatar from './ui/avatar'
 
-export default function PostExcerpt({ post }: { post: Discussion }) {
+export default function PostExcerpt({ post }: { post: Post }) {
   const {
     slug,
     author: { login: writer },
@@ -33,7 +33,7 @@ function HeaderMeta({
     createdAt,
     slug
   }
-}: { post: Discussion }) {
+}: { post: Post }) {
   return (
     <div className='flex items-center gap-1 font-semibold text-muted-foreground text-sm'>
       <PostLink className='link z-10 flex items-center' writer={writer}>

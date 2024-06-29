@@ -1,39 +1,30 @@
 'use server'
 import { unstable_noStore as noStore } from 'next/cache'
-import {
-  CategoriesQuery,
-  Category,
-  DiscussionsQuery,
-  EdgeDiscussion,
-  MemberStatusQuery,
-  NearDiscussions,
-  NearDiscussionsQuery,
-  UserStatus,
-  githubClient
-} from 'utils/db/graphql'
 import { db } from 'utils/db/kysely'
+import gqlClient from 'utils/gql/client'
+import { CategoriesQuery, Category, Post, PostQuery, PostsQuery, UserMessage, UserMessagesQuery } from '../gql/query'
 
 export const getPostsViews = async (): Promise<{ slug: number; views: number }[]> => {
   noStore()
   return await db.selectFrom('posts').select(['slug', 'views']).execute()
 }
 
-export const getUserStatuses = async (): Promise<UserStatus[]> => {
-  const { data } = await githubClient.query(MemberStatusQuery, { cursor: '' })
+export const getUserStatuses = async (): Promise<UserMessage[]> => {
+  const { data } = await gqlClient.query(UserMessagesQuery, {})
   return data!.organization.memberStatuses.nodes
 }
 
-export const getDiscussions = async (categoryId: string | null = null): Promise<EdgeDiscussion[]> => {
-  const { data } = await githubClient.query(DiscussionsQuery, { cursor: '', categoryId })
-  return data!.repository.discussions.edges
+export const getPosts = async (categoryId: string | null = null): Promise<Post[]> => {
+  const { data } = await gqlClient.query(PostsQuery, { categoryId })
+  return data!.repository.discussions.nodes
 }
 
-export const getNearPosts = async (cursor: string): Promise<NearDiscussions> => {
-  const { data } = await githubClient.query(NearDiscussionsQuery, { cursor })
-  return data!
+export const getPost = async (slug: string | number): Promise<Post> => {
+  const { data } = await gqlClient.query(PostQuery, { slug: Number(slug) })
+  return data!.repository.discussion
 }
 
 export const getCategories = async (): Promise<Category[]> => {
-  const { data } = await githubClient.query(CategoriesQuery, { cursor: '' })
-  return data!.repository.discussionCategories.edges.map(({ node }) => node)
+  const { data } = await gqlClient.query(CategoriesQuery, {})
+  return data!.repository.discussionCategories.nodes
 }

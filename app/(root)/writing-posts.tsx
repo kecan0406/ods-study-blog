@@ -1,18 +1,10 @@
 import PostExcerpt from 'app/components/post-excerpt'
 import { buttonVariants } from 'app/components/ui/button'
-import { preloadViews } from 'app/components/view-counter'
 import Link from 'next/link'
-import { Discussion } from 'utils/db/graphql'
-import { getDiscussions } from 'utils/db/querys'
-
-const fetchPosts = async (): Promise<Discussion[]> => {
-  const posts = await getDiscussions()
-  return posts.map(({ node }) => node)
-}
+import { getPosts } from 'utils/db/querys'
 
 export default async function WritingPosts() {
-  preloadViews()
-  const posts = await fetchPosts()
+  const posts = await getPosts()
 
   return (
     <section className='py-8'>

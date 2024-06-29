@@ -1,7 +1,7 @@
 import PostExcerpt from 'app/components/post-excerpt'
-import { preloadViews } from 'app/components/view-counter'
-import { Discussion } from 'utils/db/graphql'
-import { getDiscussions, getUserStatuses } from 'utils/db/querys'
+import { getPosts, getUserStatuses } from 'utils/db/querys'
+
+import { Post } from '../../utils/gql/query'
 
 export const experimental_ppr = true
 export const dynamicParams = false
@@ -11,13 +11,12 @@ export async function generateStaticParams() {
   return users.map((user) => ({ username: `@${user.user.login}` }))
 }
 
-const fetchPosts = async (userId: string): Promise<Discussion[]> => {
-  const posts = await getDiscussions()
-  return posts.filter((post) => post.node.author.login === userId).map(({ node }) => node)
+const fetchPosts = async (userId: string): Promise<Post[]> => {
+  const posts = await getPosts()
+  return posts.filter((post) => post.author.login === userId)
 }
 
 export default async function UserPage({ params: { username } }: { params: { username: string } }) {
-  preloadViews()
   const userId = decodeURIComponent(username).replace('@', '')
   const posts = await fetchPosts(userId)
 

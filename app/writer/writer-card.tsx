@@ -6,9 +6,10 @@ import { UserGithubStatus } from 'app/components/user-github-status'
 import { Views } from 'app/components/view-counter'
 import { Suspense } from 'react'
 import { MdArticle } from 'react-icons/md'
-import { Discussion } from 'utils/db/graphql'
 
-export async function WriterCard({ user, posts }: { user: string; posts: Discussion[] }) {
+import { Post } from '../../utils/gql/query'
+
+export async function WriterCard({ user, posts }: { user: string; posts: Post[] }) {
   return (
     <Card className='md:flex'>
       <CardHeader className='my-auto min-w-40 items-center border-r md:w-auto'>
@@ -31,7 +32,7 @@ export async function WriterCard({ user, posts }: { user: string; posts: Discuss
   )
 }
 
-function PostCard({ post }: { post: Discussion }) {
+function PostCard({ post }: { post: Post }) {
   return (
     <Button variant='ghost' asChild className='w-full'>
       <PostLink writer={post.author.login} slug={post.slug}>

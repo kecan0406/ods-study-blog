@@ -1,17 +1,12 @@
 import PostExcerpt from 'app/components/post-excerpt'
-import { Discussion } from 'utils/db/graphql'
-import { getCategories, getDiscussions } from 'utils/db/querys'
+import { getCategories, getPosts } from 'utils/db/querys'
 
 export const experimental_ppr = true
 
-const fetchPosts = async (categoryId: string | null): Promise<Discussion[]> => {
-  const posts = await getDiscussions(categoryId)
-  return posts.map(({ node }) => node)
-}
-
 export default async function CategoryPage({ params }: { params: { category?: string[] } }) {
   const categories = await getCategories()
-  const posts = await fetchPosts(categories.find((category) => category.slug === params.category?.at(0))?.id ?? null)
+  const categoryId = categories.find((category) => category.slug === params.category?.at(0))?.id ?? null
+  const posts = await getPosts(categoryId)
 
   return (
     <ul>
