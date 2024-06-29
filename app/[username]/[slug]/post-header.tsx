@@ -2,7 +2,7 @@ import IntlTime from 'app/components/intl-time'
 import PostLink from 'app/components/shared/post-link'
 import Avatar from 'app/components/ui/avatar'
 import { Badge } from 'app/components/ui/badge'
-import { IncrementViews } from 'app/components/view-counter'
+import { Views } from 'app/components/view-counter'
 import Image from 'next/image'
 import { Suspense } from 'react'
 import { Post } from 'utils/gql/query'
@@ -30,7 +30,7 @@ export default function PostHeader({ post }: { post: Post }) {
           <div className='mt-0.5 flex text-muted-foreground'>
             <IntlTime date={post.createdAt} />
             <Suspense fallback={<span className='flex-grow' />}>
-              <IncrementViews slug={post.slug} />
+              <Views slug={post.slug} increment />
             </Suspense>
           </div>
         </div>
