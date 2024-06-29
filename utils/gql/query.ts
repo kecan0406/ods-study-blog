@@ -38,17 +38,36 @@ const Post_Fragment = graphql<Post>`
     }
 `
 
-export type UserMessage = { user: { login: string }; emoji: string; message: string }
+export type UserMessage = { user: { login: string; name: string; bio: string }; emoji: string; message: string }
+
+const UserMessage_Fragment = graphql<UserMessage>`
+    fragment UserMessage on UserStatus {
+        user {
+            login
+            name
+            bio
+        }
+        emoji: emojiHTML
+        message
+    }
+`
+
+export const UserMessage_Query = graphql<{ user: { status: UserMessage } }>`
+    query UserMessageQuery($user:String!) {
+        user(login: $user) {
+            status {
+                ${UserMessage_Fragment}
+            }
+        }
+    }
+`
+
 export const UserMessages_Query = graphql<{ organization: { memberStatuses: { nodes: UserMessage[] } } }>`
     query UserMessagesQuery {
         organization(login: "ODS-GARAGE") {
             memberStatuses(first: 10) {
                 nodes {
-                    user {
-                        login
-                    }
-                    emoji: emojiHTML
-                    message
+                    ${UserMessage_Fragment}
                 }
             }
         }

@@ -16,10 +16,10 @@ function Status({ id, allUserStatus }: { id: string; allUserStatus: UserMessage[
   const status = allUserStatus.find(({ user }) => user.login === id)
 
   return (
-    <div className='group font-semibold text-xs'>
+    <div className='group -right-3 absolute bottom-0 drop-shadow-md'>
       <div
         anchor={`${id}-message`}
-        className='status-anchor -ms-px invisible opacity-0 transition-opacity group-hover:visible group-hover:opacity-100'
+        className='status-anchor -ms-px invisible rounded-r-full border border-l-0 bg-background font-semibold text-xs opacity-0 transition-opacity group-hover:visible group-hover:opacity-100'
       >
         {status?.message}
       </div>

@@ -205,7 +205,7 @@
   }
 
   .status-anchor {
-    @apply absolute content-center text-nowrap rounded-r-full border border-l-0 bg-background px-2 drop-shadow;
+    @apply absolute content-center text-nowrap px-2;
     position-anchor: var(--anchor);
     left: anchor(right);
     height: anchor-size(height);

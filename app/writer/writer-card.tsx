@@ -1,9 +1,10 @@
 import PostLink from 'app/components/shared/post-link'
 import Avatar from 'app/components/ui/avatar'
-import { Button } from 'app/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from 'app/components/ui/card'
+import { Button, buttonVariants } from 'app/components/ui/button'
+import { Card, CardContent, CardHeader } from 'app/components/ui/card'
 import { UserGithubMessage } from 'app/components/user-github-message'
 import { Views } from 'app/components/view-counter'
+import Link from 'next/link'
 import { Suspense } from 'react'
 import { MdArticle } from 'react-icons/md'
 import { Post } from 'utils/gql/query'
@@ -12,11 +13,20 @@ export async function WriterCard({ user, posts }: { user: string; posts: Post[] 
   return (
     <Card className='md:flex'>
       <CardHeader className='my-auto min-w-40 items-center border-r md:w-auto'>
-        <Avatar className='border' size={64} src={`https://github.com/${user}.png`} alt={user} />
-        <CardTitle className='pb-1'>{user}</CardTitle>
-        <Suspense>
-          <UserGithubMessage id={user} />
-        </Suspense>
+        <div className='peer relative'>
+          <Link href={`/@${user}`}>
+            <Avatar className='border' size={64} src={`https://github.com/${user}.png`} alt={user} />
+          </Link>
+          <Suspense>
+            <UserGithubMessage id={user} />
+          </Suspense>
+        </div>
+        <Link
+          className={buttonVariants({ variant: 'link', className: 'font-semibold peer-has-[:hover]:underline' })}
+          href={`/@${user}`}
+        >
+          {user}
+        </Link>
       </CardHeader>
       <CardContent className='my-4 h-40 w-full'>
         <ul className='max-h-40'>

@@ -37,7 +37,7 @@ function HeaderMeta({
   return (
     <div className='flex items-center gap-1 font-semibold text-muted-foreground text-sm'>
       <PostLink className='link z-10 flex items-center' writer={writer}>
-        <Avatar size={28} src={`https://github.com/${writer}.png`} alt={writer} />
+        <Avatar className='border border-accent' size={28} src={`https://github.com/${writer}.png`} alt={writer} />
         <span className='ml-2 text-foreground'>{writer}</span>
       </PostLink>
       <IntlTime className='before:pr-1 before:content-["|"]' date={createdAt} />
