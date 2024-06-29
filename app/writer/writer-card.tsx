@@ -6,8 +6,7 @@ import { UserGithubStatus } from 'app/components/user-github-status'
 import { Views } from 'app/components/view-counter'
 import { Suspense } from 'react'
 import { MdArticle } from 'react-icons/md'
-
-import { Post } from '../../utils/gql/query'
+import { Post } from 'utils/gql/query'
 
 export async function WriterCard({ user, posts }: { user: string; posts: Post[] }) {
   return (

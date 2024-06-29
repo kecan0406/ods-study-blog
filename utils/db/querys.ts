@@ -1,30 +1,39 @@
 'use server'
+import { PostView } from 'app/components/view-counter'
 import { unstable_noStore as noStore } from 'next/cache'
 import { db } from 'utils/db/kysely'
-import gqlClient from 'utils/gql/client'
-import { CategoriesQuery, Category, Post, PostQuery, PostsQuery, UserMessage, UserMessagesQuery } from '../gql/query'
+import { gqlClient } from 'utils/gql/client'
+import {
+  Categories_Query,
+  Post,
+  PostCategory,
+  Post_Query,
+  Posts_Query,
+  UserMessage,
+  UserMessages_Query
+} from 'utils/gql/query'
 
-export const getPostsViews = async (): Promise<{ slug: number; views: number }[]> => {
+export const getPostViews = async (): Promise<PostView[]> => {
   noStore()
   return await db.selectFrom('posts').select(['slug', 'views']).execute()
 }
 
-export const getUserStatuses = async (): Promise<UserMessage[]> => {
-  const { data } = await gqlClient.query(UserMessagesQuery, {})
+export const getUserMessages = async (): Promise<UserMessage[]> => {
+  const { data } = await gqlClient.query(UserMessages_Query, {})
   return data!.organization.memberStatuses.nodes
 }
 
 export const getPosts = async (categoryId: string | null = null): Promise<Post[]> => {
-  const { data } = await gqlClient.query(PostsQuery, { categoryId })
+  const { data } = await gqlClient.query(Posts_Query, { categoryId })
   return data!.repository.discussions.nodes
 }
 
 export const getPost = async (slug: string | number): Promise<Post> => {
-  const { data } = await gqlClient.query(PostQuery, { slug: Number(slug) })
+  const { data } = await gqlClient.query(Post_Query, { slug: Number(slug) })
   return data!.repository.discussion
 }
 
-export const getCategories = async (): Promise<Category[]> => {
-  const { data } = await gqlClient.query(CategoriesQuery, {})
+export const getCategories = async (): Promise<PostCategory[]> => {
+  const { data } = await gqlClient.query(Categories_Query, {})
   return data!.repository.discussionCategories.nodes
 }

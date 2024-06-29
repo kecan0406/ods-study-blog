@@ -1,10 +1,10 @@
-import { getPosts, getUserStatuses } from 'utils/db/querys'
+import { getPosts, getUserMessages } from 'utils/db/querys'
 import { WriterCard } from './writer-card'
 
 export const experimental_ppr = true
 
 export default async function WriterPage() {
-  const [users, posts] = await Promise.all([getUserStatuses(), getPosts()])
+  const [users, posts] = await Promise.all([getUserMessages(), getPosts()])
 
   return (
     <div className='wrapper py-4'>

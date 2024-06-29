@@ -5,8 +5,7 @@ import { Badge } from 'app/components/ui/badge'
 import { IncrementViews } from 'app/components/view-counter'
 import Image from 'next/image'
 import { Suspense } from 'react'
-
-import { Post } from '../../../utils/gql/query'
+import { Post } from 'utils/gql/query'
 
 export default function PostHeader({ post }: { post: Post }) {
   const {

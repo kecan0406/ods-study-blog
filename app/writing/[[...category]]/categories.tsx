@@ -1,9 +1,8 @@
 import { buttonVariants } from 'app/components/ui/button'
 import Link from 'next/link'
+import { PostCategory } from 'utils/gql/query'
 
-import { Category } from '../../../utils/gql/query'
-
-export function Categories({ category, categories }: { category: string; categories: Category[] }) {
+export function Categories({ category, categories }: { category: string; categories: PostCategory[] }) {
   const categoryLinks = [{ slug: 'all', emoji: '' }, ...categories]
 
   return (

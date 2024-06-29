@@ -1,25 +1,7 @@
-import { TypedDocumentNode } from '@urql/core/dist/urql-core-chunk'
-import { gql } from '@urql/next'
+import { graphql } from './client'
 
-const graphql = <T>(strings: TemplateStringsArray, ...fragments: TypedDocumentNode[]) => {
-  const combineFragments = fragments.map((fragment) => fragment.loc?.source.body).join('')
-  const query = strings
-    .map((line, i) => {
-      if (!!fragments[i]) {
-        return line + `...${fragments[i].definitions.at(-1)!.name.value}`
-      }
-      return line
-    })
-    .join('')
-
-  return gql<T>`
-        ${combineFragments}
-        ${query}
-    `
-}
-
-export type Category = { emoji: string; slug: string; id: string }
-const PostCategoryFragment = graphql<Category>`
+export type PostCategory = { emoji: string; slug: string; id: string }
+const PostCategory_Fragment = graphql<PostCategory>`
     fragment PostCategoryFragment on DiscussionCategory {
         emoji: emojiHTML
         slug
@@ -32,11 +14,11 @@ export type Post = {
   slug: number
   createdAt: string
   title: string
-  category: Category
+  category: PostCategory
   labels: { nodes: { name: string }[] }
   body: string
 }
-const PostFragment = graphql<Post>`
+const Post_Fragment = graphql<Post>`
     fragment PostFragment on Discussion {
         author {
             login
@@ -45,7 +27,7 @@ const PostFragment = graphql<Post>`
         createdAt
         title
         category {
-            ${PostCategoryFragment}
+            ${PostCategory_Fragment}
         }
         labels(first: 10) {
             nodes {
@@ -57,7 +39,7 @@ const PostFragment = graphql<Post>`
 `
 
 export type UserMessage = { user: { login: string }; emoji: string; message: string }
-export const UserMessagesQuery = graphql<{ organization: { memberStatuses: { nodes: UserMessage[] } } }>`
+export const UserMessages_Query = graphql<{ organization: { memberStatuses: { nodes: UserMessage[] } } }>`
     query UserMessagesQuery {
         organization(login: "ODS-GARAGE") {
             memberStatuses(first: 10) {
@@ -73,34 +55,34 @@ export const UserMessagesQuery = graphql<{ organization: { memberStatuses: { nod
     }
 `
 
-export const PostsQuery = graphql<{ repository: { discussions: { nodes: Post[] } } }>`
+export const Posts_Query = graphql<{ repository: { discussions: { nodes: Post[] } } }>`
     query PostsQuery($categoryId: ID) {
         repository(owner: "ODS-GARAGE", name: "posts") {
             discussions(first: 10, categoryId: $categoryId) {
                 nodes {
-                    ${PostFragment}
+                    ${Post_Fragment}
                 }
             }
         }
     }
 `
 
-export const PostQuery = graphql<{ repository: { discussion: Post } }>`
+export const Post_Query = graphql<{ repository: { discussion: Post } }>`
     query PostQuery($slug: Int!) {
         repository(owner: "ODS-GARAGE", name: "posts") {
             discussion(number: $slug) {
-                ${PostFragment}
+                ${Post_Fragment}
             }
         }
     }
 `
 
-export const CategoriesQuery = graphql<{ repository: { discussionCategories: { nodes: Category[] } } }>`
+export const Categories_Query = graphql<{ repository: { discussionCategories: { nodes: PostCategory[] } } }>`
     query CategoriesQuery {
         repository(owner: "ODS-GARAGE", name: "posts") {
             discussionCategories(first: 10) {
                 nodes {
-                    ${PostCategoryFragment}
+                    ${PostCategory_Fragment}
                 }
             }
         }

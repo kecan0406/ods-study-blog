@@ -1,14 +1,14 @@
 import { unstable_noStore as noStore } from 'next/cache'
 import { cache, use } from 'react'
-import { getUserStatuses } from 'utils/db/querys'
-import { UserMessage } from '../../utils/gql/query'
+import { getUserMessages } from 'utils/db/querys'
+import { UserMessage } from 'utils/gql/query'
 import { Badge } from './ui/badge'
 
-export const preloadUserStatus = cache(getUserStatuses)
+const userMessages = cache(getUserMessages)
 
 export function UserGithubStatus({ id }: { id: string }) {
   noStore()
-  const allUserStatus = use(preloadUserStatus())
+  const allUserStatus = use(userMessages())
   return <Status id={id} allUserStatus={allUserStatus} />
 }
 
