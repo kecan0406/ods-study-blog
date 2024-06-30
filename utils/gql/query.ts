@@ -52,8 +52,33 @@ const UserMessage_Fragment = graphql<UserMessage>`
     }
 `
 
+export type SocialProvider =
+  | 'GENERIC'
+  | 'FACEBOOK'
+  | 'INSTAGRAM'
+  | 'LINKEDIN'
+  | 'MASTODON'
+  | 'REDDIT'
+  | 'TWITCH'
+  | 'TWITTER'
+  | 'YOUTUBE'
+  | 'NPM'
+export type UserSocial = { url: string; provider: SocialProvider }
+export const UserSocialList_Query = graphql<{ user: { socialAccounts: { nodes: UserSocial[] } } }>`
+    query UserSocialList($user: String!) {
+        user(login: $user) {
+            socialAccounts(first: 10) {
+                nodes {
+                    provider
+                    url
+                }
+            }
+        }
+    }
+`
+
 export const UserMessage_Query = graphql<{ user: { status: UserMessage } }>`
-    query UserMessageQuery($user:String!) {
+    query UserMessageQuery($user: String!) {
         user(login: $user) {
             status {
                 ${UserMessage_Fragment}

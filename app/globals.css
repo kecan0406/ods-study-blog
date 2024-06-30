@@ -76,7 +76,7 @@
   }
 
   .theme-icon {
-    @apply h-6 w-6;
+    @apply size-6;
   }
 
   .scroll-thin {

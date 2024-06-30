@@ -11,7 +11,9 @@ import {
   Posts_Query,
   UserMessage,
   UserMessage_Query,
-  UserMessages_Query
+  UserMessages_Query,
+  UserSocial,
+  UserSocialList_Query
 } from 'utils/gql/query'
 
 export const getPostViews = async (): Promise<PostView[]> => {
@@ -27,6 +29,11 @@ export const getUserMessages = async (): Promise<UserMessage[]> => {
 export const getUserMessage = async (username: string): Promise<UserMessage> => {
   const { data } = await gqlClient.query(UserMessage_Query, { user: username })
   return data!.user.status
+}
+
+export const getUserSocialList = async (username: string): Promise<UserSocial[]> => {
+  const { data } = await gqlClient.query(UserSocialList_Query, { user: username })
+  return data!.user.socialAccounts.nodes
 }
 
 export const getPosts = async (categoryId: string | null = null): Promise<Post[]> => {
