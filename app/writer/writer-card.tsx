@@ -44,7 +44,7 @@ export async function WriterCard({ user, posts }: { user: string; posts: Post[] 
 function PostCard({ post }: { post: Post }) {
   return (
     <Button variant='ghost' asChild className='w-full'>
-      <PostLink writer={post.author.login} slug={post.slug}>
+      <PostLink category={post.category.slug} slug={post.slug}>
         <MdArticle className='h-4 w-4' />
         <span className='ml-1 text-wrap'>{post.title}</span>
         <Suspense fallback={<span className='flex-grow' />}>

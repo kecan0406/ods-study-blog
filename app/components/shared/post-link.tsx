@@ -1,10 +1,10 @@
 import Link, { LinkProps } from 'next/link'
 import { HTMLProps } from 'react'
 
-type PostLinkProps = { writer: string; slug?: number } & Omit<LinkProps, 'href'> & HTMLProps<HTMLAnchorElement>
-export default function PostLink({ writer, slug, children, ...props }: PostLinkProps) {
+type PostLinkProps = { category: string; slug?: number } & Omit<LinkProps, 'href'> & HTMLProps<HTMLAnchorElement>
+export default function PostLink({ category, slug, children, ...props }: PostLinkProps) {
   return (
-    <Link {...props} href={`/@${writer}/${slug ?? ''}`} aria-label={`${writer} ${slug ?? ''}`}>
+    <Link {...props} href={`/writing/${category}/${slug ?? ''}`} aria-label={`${category} ${slug ?? ''}`}>
       {children}
     </Link>
   )

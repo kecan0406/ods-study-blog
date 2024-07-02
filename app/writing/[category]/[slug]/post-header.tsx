@@ -9,6 +9,7 @@ import { Post } from 'utils/gql/query'
 
 export default function PostHeader({ post }: { post: Post }) {
   const {
+    category,
     title,
     author: { login: writer },
     labels
@@ -18,12 +19,12 @@ export default function PostHeader({ post }: { post: Post }) {
     <header className='flex flex-col justify-center'>
       <h1 className='text-balance'>{title}</h1>
       <div className='not-prose mb-2 flex gap-4 font-semibold text-sm'>
-        <PostLink writer={writer}>
+        <PostLink category={category.slug}>
           <Avatar className='border' size={40} src={`https://github.com/${writer}.png`} alt={writer} />
         </PostLink>
         <div className='w-full flex-col'>
           <div className='flex'>
-            <PostLink className='link' writer={writer}>
+            <PostLink className='link' category={category.slug}>
               {writer}
             </PostLink>
           </div>

@@ -11,6 +11,7 @@ import { Badge } from './ui/badge'
 export default function PostExcerpt({ post }: { post: Post }) {
   const {
     slug,
+    category,
     author: { login: writer },
     body,
     title,
@@ -19,7 +20,7 @@ export default function PostExcerpt({ post }: { post: Post }) {
 
   return (
     <Card as='article' className='group relative h-44 border-none hover:bg-accent'>
-      <PostLink className='absolute inset-0 size-full' writer={writer} slug={slug} />
+      <PostLink className='absolute inset-0 size-full' category={category.slug} slug={slug} />
       <CardHeader>
         <HeaderMeta post={post} />
         <CardTitle className='text-2xl group-hover:underline'>{title}</CardTitle>
@@ -38,13 +39,14 @@ export default function PostExcerpt({ post }: { post: Post }) {
 
 function HeaderMeta({ post }: { post: Post }) {
   const {
+    category,
     author: { login: writer },
     createdAt,
     slug
   } = post
   return (
     <div className='flex items-center gap-1 font-semibold text-muted-foreground text-sm'>
-      <PostLink className='link z-10 flex items-center' writer={writer}>
+      <PostLink className='link z-10 flex items-center' category={category.slug}>
         <Avatar className='border border-accent' size={28} src={`https://github.com/${writer}.png`} alt={writer} />
         <span className='ml-2 text-foreground'>{writer}</span>
       </PostLink>
