@@ -1,5 +1,6 @@
 import { Card, CardDescription, CardHeader, CardTitle } from 'app/components/ui/card'
 import { Views } from 'app/components/view-counter'
+import Link from 'next/link'
 import { Suspense } from 'react'
 import { Post } from 'utils/gql/query'
 import { truncate } from 'utils/utils'
@@ -46,10 +47,10 @@ function HeaderMeta({ post }: { post: Post }) {
   } = post
   return (
     <div className='flex items-center gap-1 font-semibold text-muted-foreground text-sm'>
-      <PostLink className='link z-10 flex items-center' category={category.slug}>
+      <Link className='link z-10 flex items-center' href={`/@${post.author.login}`}>
         <Avatar className='border border-accent' size={28} src={`https://github.com/${writer}.png`} alt={writer} />
         <span className='ml-2 text-foreground'>{writer}</span>
-      </PostLink>
+      </Link>
       <IntlTime className='mr-1 before:pr-1 before:content-["|"]' date={createdAt} />
       <Suspense fallback={<span className='grow' />}>
         <Views slug={slug} />
