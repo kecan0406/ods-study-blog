@@ -11,7 +11,10 @@ export default function HeaderNavigation() {
   const anchor = usePathname().split('/')[1]
 
   return (
-    <nav className='nav-anchor scroll-thin grow items-center gap-1' anchor={anchor.startsWith('@') ? 'writer' : anchor}>
+    <nav
+      className='nav-anchor scroll-thin hidden items-center gap-1 md:block'
+      anchor={anchor.startsWith('@') ? 'writer' : anchor}
+    >
       <ul className='flex font-medium text-primary text-sm'>
         {LINKS.map(({ href, text }) => (
           <li key={href}>
