@@ -6,42 +6,50 @@ import { truncate } from 'utils/utils'
 import IntlTime from './intl-time'
 import PostLink from './shared/post-link'
 import Avatar from './ui/avatar'
+import { Badge } from './ui/badge'
 
 export default function PostExcerpt({ post }: { post: Post }) {
   const {
     slug,
     author: { login: writer },
     body,
-    title
+    title,
+    labels
   } = post
 
   return (
-    <Card as='article' className='group relative h-36 border-none hover:bg-accent'>
+    <Card as='article' className='group relative h-44 border-none hover:bg-accent'>
       <PostLink className='absolute inset-0 size-full' writer={writer} slug={slug} />
       <CardHeader>
         <HeaderMeta post={post} />
         <CardTitle className='text-2xl group-hover:underline'>{title}</CardTitle>
         <CardDescription className='m-2 line-clamp-3'>{truncate(body)}</CardDescription>
+        <div className='mt-1 flex justify-end gap-2'>
+          {labels.nodes.map((label) => (
+            <Badge style={{ borderColor: `#${label.color}` }} variant='secondary' key={label.name}>
+              {label.name}
+            </Badge>
+          ))}
+        </div>
       </CardHeader>
     </Card>
   )
 }
 
-function HeaderMeta({
-  post: {
+function HeaderMeta({ post }: { post: Post }) {
+  const {
     author: { login: writer },
     createdAt,
     slug
-  }
-}: { post: Post }) {
+  } = post
   return (
     <div className='flex items-center gap-1 font-semibold text-muted-foreground text-sm'>
       <PostLink className='link z-10 flex items-center' writer={writer}>
         <Avatar className='border border-accent' size={28} src={`https://github.com/${writer}.png`} alt={writer} />
         <span className='ml-2 text-foreground'>{writer}</span>
       </PostLink>
-      <IntlTime className='before:pr-1 before:content-["|"]' date={createdAt} />
-      <Suspense fallback={<span className='flex-grow' />}>
+      <IntlTime className='mr-1 before:pr-1 before:content-["|"]' date={createdAt} />
+      <Suspense fallback={<span className='grow' />}>
         <Views slug={slug} />
       </Suspense>
     </div>

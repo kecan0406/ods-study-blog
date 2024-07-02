@@ -9,13 +9,14 @@ const PostCategory_Fragment = graphql<PostCategory>`
     }
 `
 
+export type PostLabel = { name: string; color: string }
 export type Post = {
   author: { login: string }
   slug: number
   createdAt: string
   title: string
   category: PostCategory
-  labels: { nodes: { name: string }[] }
+  labels: { nodes: PostLabel[] }
   body: string
 }
 const Post_Fragment = graphql<Post>`
@@ -32,6 +33,7 @@ const Post_Fragment = graphql<Post>`
         labels(first: 10) {
             nodes {
                 name
+                color
             }
         }
         body

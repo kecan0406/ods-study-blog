@@ -1,11 +1,11 @@
-import HeaderNavigation from 'app/components/header-navigation'
-import ThemeToggleButton from 'app/components/theme-toggle-button'
 import Link from 'next/link'
+import HeaderNavigation from '../header-navigation'
+import ThemeToggleButton from '../theme-toggle-button'
 
 export default function Header() {
   return (
-    <header className='z-20 h-12 border-muted border-b bg-background'>
-      <div className='wrapper flex h-full items-center justify-between'>
+    <header className='z-20 h-12 bg-background'>
+      <div className='wrapper flex h-full items-center'>
         <Logo />
         <HeaderNavigation />
         <ThemeToggleButton />

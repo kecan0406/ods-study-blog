@@ -37,7 +37,7 @@ export default function PostHeader({ post }: { post: Post }) {
       </div>
       <div className='my-2 flex gap-2 overflow-x-auto'>
         {labels.nodes.map((label) => (
-          <Badge className='before:content-["#"]' variant='secondary' key={label.name}>
+          <Badge style={{ borderColor: `#${label.color}` }} variant='secondary' key={label.name}>
             {label.name}
           </Badge>
         ))}
