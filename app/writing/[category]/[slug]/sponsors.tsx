@@ -4,9 +4,14 @@ import { FaRegHeart } from 'react-icons/fa6'
 
 export default async function Sponsors() {
   return (
-    <div className='mx-6 box-border flex gap-5 pb-8'>
+    <div className='flex w-full justify-center gap-4 pb-8'>
       <a href='https://github.com/ODS-GARAGE' className='size-32' target='_blank'>
-        <Avatar className='object-contain' alt='ODS-GARAGE' size={128} src='https://github.com/ODS-GARAGE.png' />
+        <Avatar
+          className='border-2 border-accent-foreground object-contain'
+          alt='ODS-GARAGE'
+          size={128}
+          src='https://github.com/ODS-GARAGE.png'
+        />
       </a>
       <div className='flex flex-col gap-2'>
         <div className='font-bold text-2xl text-foreground'>읽어주셔서 감사합니다!</div>
