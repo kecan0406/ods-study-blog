@@ -41,7 +41,6 @@ const Post_Fragment = graphql<Post>`
 `
 
 export type UserMessage = { user: { login: string; name: string; bio: string }; emoji: string; message: string }
-
 const UserMessage_Fragment = graphql<UserMessage>`
     fragment UserMessage on UserStatus {
         user {
@@ -129,6 +128,24 @@ export const Categories_Query = graphql<{ repository: { discussionCategories: { 
             discussionCategories(first: 10) {
                 nodes {
                     ${PostCategory_Fragment}
+                }
+            }
+        }
+    }
+`
+
+export type Sponsor = { login: string }
+export const Sponsors_Query = graphql<{ organization: { sponsors: { nodes: Sponsor[] } } }>`
+    query SponsorsQuery {
+        organization(login: "ODS-GARAGE") {
+            sponsors(first: 100) {
+                nodes {
+                    ... on User {
+                        login
+                    }
+                    ... on Organization {
+                        login
+                    }
                 }
             }
         }

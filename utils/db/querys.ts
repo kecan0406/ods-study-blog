@@ -9,6 +9,8 @@ import {
   PostCategory,
   Post_Query,
   Posts_Query,
+  Sponsor,
+  Sponsors_Query,
   UserMessage,
   UserMessage_Query,
   UserMessages_Query,
@@ -49,4 +51,9 @@ export const getPost = async (slug: string | number): Promise<Post> => {
 export const getCategories = async (): Promise<PostCategory[]> => {
   const { data } = await gqlClient.query(Categories_Query, {})
   return data!.repository.discussionCategories.nodes
+}
+
+export const getSponsors = async (): Promise<Sponsor[]> => {
+  const { data } = await gqlClient.query(Sponsors_Query, {})
+  return data!.organization.sponsors.nodes
 }
